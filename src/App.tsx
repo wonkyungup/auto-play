@@ -1,6 +1,9 @@
 import * as React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 
 const App = () => {
   return (
@@ -18,6 +21,12 @@ const App = () => {
         >
           Learn React
         </a>
+        <AccountCircleSharpIcon />
+        <Stack spacing={2} direction="row">
+          <Button variant="text">Text</Button>
+          <Button variant="contained">Contained</Button>
+          <Button variant="outlined">Outlined</Button>
+        </Stack>
       </header>
     </div>
   );
