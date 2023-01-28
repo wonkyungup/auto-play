@@ -1,8 +1,8 @@
 {
-  "name": "Chrome Extension Boilerplate",
-  "description": "Chrome Extension boilerplate created with React Typescript.",
+  "name": "Auto Play",
+  "description": "youtube shorts & tiktok video auto next play",
   "manifest_version": 2,
-  "version": "1.0.0",
+  "version": "0.0.1",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",

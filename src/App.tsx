@@ -1,35 +1,65 @@
-import * as React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
+import * as React from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Typography from '@mui/material/Typography';
+import ToggleSwitch from "./components/ToggleSwitch";
 
 const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <AccountCircleSharpIcon />
-        <Stack spacing={2} direction="row">
-          <Button variant="text">Text</Button>
-          <Button variant="contained">Contained</Button>
-          <Button variant="outlined">Outlined</Button>
-        </Stack>
-      </header>
-    </div>
-  );
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const theme = React.useMemo(
+        () =>
+            createTheme({
+                palette: {
+                    mode: prefersDarkMode ? 'dark' : 'light',
+                },
+            }),
+        [prefersDarkMode],
+    );
+    const [isSwitchState, setIsSwitchState] = React.useState(false)
+
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Card sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                minWidth: 275,
+                textAlign: 'center',
+                alignItems: 'center'
+            }}>
+                <CardContent>
+                    <Typography variant="h5" gutterBottom>
+                        Auto Play
+                    </Typography>
+                    <Typography
+                        sx={{ mb: 1.5, fontSize: 10 }}
+                        color="text.secondary"
+                        gutterBottom
+                    >
+                        wonko93@naver.com
+                    </Typography>
+                    <Typography
+                        variant="caption"
+                        display="block"
+                        gutterBottom
+                    >
+                        {"It is made to automatically skip videos like YouTube Shorts or TikTok."}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <ToggleSwitch
+                        state={isSwitchState}
+                        onChange={setIsSwitchState}
+                    />
+                </CardActions>
+            </Card>
+        </ThemeProvider>
+    );
 };
 
 export default App;
