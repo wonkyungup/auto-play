@@ -1,5 +1,8 @@
 {
   "name": "Auto Play",
+  "permissions": [
+    "storage"
+  ],
   "description": "youtube shorts & tiktok video auto next play",
   "manifest_version": 2,
   "version": "0.0.1",
