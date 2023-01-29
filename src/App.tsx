@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import ToggleSwitch from "./components/ToggleSwitch";
+import { useChromeStorageSync } from 'use-chrome-storage';
 
 const App = () => {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -20,7 +21,7 @@ const App = () => {
             }),
         [prefersDarkMode],
     );
-    const [isSwitchState, setIsSwitchState] = React.useState(false)
+    const [isSwitchState, setIsSwitchState] = useChromeStorageSync('isSwitchState', false);
 
     return (
         <ThemeProvider theme={theme}>
