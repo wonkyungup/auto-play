@@ -61,7 +61,7 @@ const IOSSwitch = styled((props: SwitchProps) => (
     },
 }));
 
-const ToggleSwitch = ({ state, onChange }: { state: Boolean, onChange: Function }) => {
+const ToggleSwitch = (props: { state: any; onChange: (arg0: boolean) => void; }) => {
     return (
         <FormGroup>
             <FormControl>
@@ -73,8 +73,12 @@ const ToggleSwitch = ({ state, onChange }: { state: Boolean, onChange: Function 
                     <Typography sx={{ fontSize: 13, fontWeight: 'bold' }}>off</Typography>
                     <IOSSwitch
                         sx={{ m: 1}}
-                        checked={state ? true : false}
-                        onChange={(event) => onChange(event.target.checked)}
+                        checked={!!props.state}
+                        onChange={async (event) => {
+                                props.onChange(event.target.checked)
+                                await chrome.runtime.sendMessage({ state: event.target.checked })
+                            }
+                        }
                     />
                     <Typography sx={{ fontSize: 13, fontWeight: 'bold' }}>on</Typography>
                 </Stack>
