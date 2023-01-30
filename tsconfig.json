@@ -12,7 +12,6 @@
         "jsx": "react",
     },
     "include": [
-        "./src/**/*",
-        "src/custom.d.ts"
+        "./src/**/*"
     ]
 }
