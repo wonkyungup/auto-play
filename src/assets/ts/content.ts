@@ -1,7 +1,14 @@
-chrome.storage.sync.get(['state'], async (result) => {
-    const state = result.state;
+const setAutoPlay = () => {
+    // video length check - <video />
+    chrome.runtime.sendMessage('videoPlay');
+}
 
-    if (state) {
-        await chrome.runtime.sendMessage({ state: state })
+// tab reload
+console.log('pageReload');
+setAutoPlay();
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request === 'videoReady') {
+        setAutoPlay();
     }
-})
+});

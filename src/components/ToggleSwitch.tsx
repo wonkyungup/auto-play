@@ -74,9 +74,15 @@ const ToggleSwitch = (props: { state: any; onChange: (arg0: boolean) => void; })
                     <IOSSwitch
                         sx={{ m: 1}}
                         checked={!!props.state}
-                        onChange={async (event) => {
+                        onChange={event => {
                                 props.onChange(event.target.checked)
-                                await chrome.runtime.sendMessage({ state: event.target.checked })
+                                chrome.tabs.query(
+                                    {
+                                        active: true,
+                                        currentWindow: true
+                                    },(tabs: any) => {
+                                        chrome.tabs.sendMessage(tabs[tabs.length - 1].id, 'videoReady');
+                                    });
                             }
                         }
                     />
