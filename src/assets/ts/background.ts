@@ -1,8 +1,11 @@
 chrome.runtime.onMessage.addListener((req, sender, sendRes) =>{
-    const state = req.state;
+    chrome.storage.sync.get(['state'], (result) => {
+        if (req === 'videoPlay') {
+            const state = result.state;
 
-    if (state) {
-        // auto play video
-        console.log('auto play video');
-    }
+            if (state) {
+                console.log('auto play');
+            }
+        }
+    })
 })
