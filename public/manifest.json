@@ -2,7 +2,7 @@
   "name": "Auto Play",
   "permissions": [
     "storage",
-    "tabs"
+    "activeTab"
   ],
   "description": "youtube shorts & tiktok video auto next play",
   "manifest_version": 2,
@@ -14,25 +14,21 @@
   },
   "browser_action": {
     "default_icon": {
-      "16": "icon16.png",
-      "48": "icon48.png"
+      "16": "icon16_disable.png",
+      "48": "icon48_disable.png"
     },
-    "default_popup": "popup.html"
+    "_comment" : {
+      "default_popup": "popup.html"
+    }
   },
   "background": {
-    "scripts": [
-      "background.js"
-    ],
+    "scripts": ["background.js"],
     "persistent": false
   },
   "content_scripts": [
     {
-      "matches": [
-        "*://*/*"
-      ],
-      "js": [
-        "content.js"
-      ]
+      "matches": ["*://*/*"],
+      "js": ["content.js"]
     }
   ]
 }
