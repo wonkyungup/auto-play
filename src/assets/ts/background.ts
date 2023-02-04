@@ -1,34 +1,45 @@
-const STORAGE_KEY: string = 'state';
-const ICON_ENABLE: string = 'icon16.png';
-const ICON_DISABLE: string = 'icon16_disable.png';
+import Defs from './constants';
+
+const isCheckUrl = async (url: string | undefined) => {
+    const list = Defs.URI_LIST;
+    return list.map(keyword => (url != null) ? url.includes(keyword) : '').filter(isState => isState).length;
+}
 
 const getState = () => {
     return new Promise(resolve => {
-        chrome.storage.sync.get([STORAGE_KEY], (result) => {
+        chrome.storage.sync.get([Defs.STORAGE_KEY], (result) => {
             resolve(result.state);
         });
     });
 };
 
 const setIcon = async () => {
-    if (await getState()) chrome.browserAction.setIcon({ path: ICON_ENABLE });
-    else chrome.browserAction.setIcon({ path: ICON_DISABLE });
+    if (await getState()) chrome.browserAction.setIcon({ path: Defs.ICON_ENABLE });
+    else chrome.browserAction.setIcon({ path: Defs.ICON_DISABLE });
 }
 
-chrome.browserAction.onClicked.addListener(async (tab) => {
-    await chrome.storage.sync.set({ [STORAGE_KEY]: !await getState() })
+chrome.browserAction.onClicked.addListener(async ({id, url}) => {
+    if (await isCheckUrl(url) <= 0 && id != null) {
+        chrome.tabs.sendMessage(id, {
+            action: Defs.ACTION_ALERT,
+            message: '현재 사용 가능한 URL: \n' +
+                '- Youtube Shorts\n' +
+                '- Tiktok'
+        });
+        return
+    }
+
+    await chrome.storage.sync.set({ [Defs.STORAGE_KEY]: !await getState() });
     await setIcon();
 
-    if (await getState() && tab.id != null) {
-        chrome.tabs.sendMessage(tab.id, {
-            action: 'enable',
-            message: 'onState'
+    if (id != null) {
+        chrome.tabs.sendMessage(id, {
+            action: Defs.ACTION_ENABLE,
+            message: 'movement'
         });
     }
 });
 
-
-// load page
 window.onload = () => {
     chrome.storage.sync.set({ state: false }, () => {
         console.log('Installed', new Date());
