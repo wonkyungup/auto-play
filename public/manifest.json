@@ -16,9 +16,6 @@
     "default_icon": {
       "16": "icon16_disable.png",
       "48": "icon48_disable.png"
-    },
-    "_comment" : {
-      "default_popup": "popup.html"
     }
   },
   "background": {
