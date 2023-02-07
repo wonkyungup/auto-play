@@ -8,9 +8,9 @@ export default class Utils {
         chrome.tabs.sendMessage(id, { action: Defs.ACTION_ERROR });
     }
 
-    static async isValidToUri (url: string) {
+    static async onValidToUri (url: string) {
         const list = Defs.URI_LIST;
-        return list.map(keyword => (url != null) ? url.includes(keyword) : '').filter(isState => isState).length <= 0;
+        return list.map(keyword => (url != null) ? url.includes(keyword) : '');
     }
 
     static async setIcon ()  {

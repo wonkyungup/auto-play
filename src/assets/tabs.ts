@@ -41,7 +41,8 @@ export default class Tabs {
 
     static async onCheckValidUrl (id: number , url: string) {
         try {
-            if (await Storage.getValue() && await Utils.isValidToUri(url)) {
+            const isValidToUri = (await Utils.onValidToUri(url)).filter(isState => isState).length <= 0;
+            if (await Storage.getValue() && isValidToUri) {
                 await Storage.init();
                 await Utils.setIcon();
             }

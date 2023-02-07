@@ -14,7 +14,7 @@ export default class Defs {
 
     // ACTIONS
     static ACTION_AUTO_PLAY = 'autoPlay';
-    static ACTION_USE = 'Use';
     static ACTION_CLICK = 'click';
     static ACTION_ERROR = 'error';
+    static ACTION_SCROLL_DOWN = 'scroll_down';
 }
