@@ -39,15 +39,7 @@ export default class Tabs {
         })
     }
 
-    static async onCheckValidUrl (id: number , url: string) {
-        try {
-            const isValidToUri = (await Utils.onValidToUri(url)).filter(isState => isState).length <= 0;
-            if (await Storage.getValue() && isValidToUri) {
-                await Storage.init();
-                await Utils.setIcon();
-            }
-        } catch (err) {
-            await Utils.onErrorHandler(id);
-        }
+    static async isCheckValidTabUrl (url: string) {
+        return (await Utils.onValidToUri(url)).filter(state => state).length > 0
     }
 };

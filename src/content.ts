@@ -1,36 +1,41 @@
-import { Defs } from './assets';
+import { Defs, Utils } from './assets';
+import Storage from './model'
 
-window.addEventListener('click', async () => {
-    chrome.runtime.sendMessage({ action: Defs.ACTION_CLICK });
-}, { once: true })
-
-chrome.runtime.onMessage.addListener((req) => {
-    const { action, state, useURI, height } = req;
+chrome.runtime.onMessage.addListener(async (req) => {
+    const { action, url } = req;
     if (action !== Defs.ACTION_AUTO_PLAY) {
         alert('올바르지않는 URL 입니다');
         return;
     }
 
-    // useURI: [boolean, boolean] = [youtube-shorts, tiktok]
-    if (useURI[0] && !useURI[1]) {
-        if (state) {
-            const video = document.querySelector('video');
-            const container = document.getElementById('shorts-container');
+    const state = await Storage.getValue();
+    const height = Number(await Storage.getHeight());
+    const validToUriList = await Utils.onValidToUri(url);
 
-            video?.addEventListener('playing', () => {
-                container?.scrollTo({ top: container.offsetHeight, behavior: 'smooth' });
-            }, false)
+    if (validToUriList[0] && !validToUriList[1]) {
+        const video = document.querySelector('video');
+        const container = document.getElementById('shorts-container');
 
-            container?.addEventListener('scroll', (event) => {
-                console.log(event)
-                // @ts-ignore
-                console.log(event.target.offsetHeight);
-                chrome.runtime.sendMessage({ action: Defs.ACTION_SCROLL_DOWN })
-            }, false)
+        if (!state) {
+            console.log('disable: ');
+            console.log(await Storage.getHeight());
+            // *
+            video?.removeEventListener('playing', () => {
+                console.log('removed');
+            })
+        }
+        else {
+            video?.addEventListener('playing', async () => {
+                console.log('enable: ');
+                console.log(await Storage.getHeight());
+                await Storage.setHeight(height === 0 ? Number(container?.offsetHeight) : Number(height + Number(container?.offsetHeight)));
+                container?.scrollTo({ top: Number(await Storage.getHeight()), behavior: 'smooth' });
+            })
         }
     }
 
-    if (!useURI[0] && useURI[1]) {
-        //
+    if (!validToUriList[0] && validToUriList[1]) {
+        // tiktok
+        return;
     }
 })
