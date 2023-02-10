@@ -1,64 +1,46 @@
-import { Defs, Utils } from './assets';
+import Defs from './assets/constants';
 import Storage from './model';
+import YoutubeShorts from './assets/youtubeShorts';
 
-const getPlayList = async (innerContainer: string) => {
-    const inner = document.getElementById(innerContainer);
-    if (inner != null) {
-        const list = Array.from(inner.children);
-        list.shift();
-        list.pop();
+const doesYoutubeShorts = async (state: Boolean) => {
+    const youtubeShorts = new YoutubeShorts('shorts-container', 'shorts-inner-container');
+    const curPlay = await youtubeShorts.getCurPlayVideo();
 
-        return list;
-    }
-}
-
-const getCurPlayHeight = (play: Element, list: Array<any>) => {
-    return list
-        .filter(element => Number(element.id) <= Number(play.id))
-        .map(element => element.offsetHeight)
-        .reduce((acc, cur) => acc + cur, 0);
-}
-
-chrome.runtime.onMessage.addListener(async (req) => {
-    const { action, url } = req;
-    if (action !== Defs.ACTION_AUTO_PLAY) {
-        alert('올바르지않는 URL 입니다');
-        return undefined;
-    }
-
-    const state = await Storage.getValue();
-    const validToUriList = await Utils.onValidToUri(url);
-
-    if (validToUriList[0] && !validToUriList[1]) { // youtube
-        const container = document.getElementById('shorts-container');
-        const playList = await getPlayList('shorts-inner-container');
-
-        // https://www.youtube.com/shorts/4HGxOzTSKRQ
-        if (playList != null) {
-            for(let index = 0; index < playList.length; index++) {
-                const curPlay = playList[index]
-
-                if (curPlay.getAttribute('is-active') !== null) {
-                    setTimeout(() => {
-                        const video = curPlay.querySelector('video');
-
-                        if (state) {
-                            video?.removeAttribute('loop');
-                            video?.addEventListener('ended', () => {
-                                container?.scrollTo({ top: getCurPlayHeight(curPlay, playList), behavior: 'smooth' })
-                            })
-                        } else {
-                            video?.setAttribute('loop', String(true));
-                        }
-                    }, 1000);
-                }
-            }
+    setTimeout(() => {
+        const video = curPlay.querySelector('video');
+        if (!state) {
+            video?.setAttribute('loop', String(true));
+            return;
         }
-    }
+        video?.removeAttribute('loop');
+        video?.addEventListener('ended', () => {
+            youtubeShorts.ct?.scrollTo({ top: youtubeShorts.getCurPlayHeight(curPlay), behavior: 'smooth' })
+        })
+    }, 1000);
+}
 
-    if (!validToUriList[0] && validToUriList[1]) { // tiktok
-        return undefined;
-    }
+chrome.runtime.onMessage.addListener(async ({ onClick, url }) => {
+    const state = await Storage.getValue();
 
-    return undefined;
+    try {
+        if (url.includes(Defs.URI_YOUTUBE_SHORTS)) {
+            // https://www.youtube.com/shorts/4HGxOzTSKRQ
+            await doesYoutubeShorts(<Boolean>state);
+            return;
+        }
+
+        if (url.includes(Defs.URI_TIKTOK)) {
+            return;
+        }
+
+        if (onClick) {
+            alert('올바르지 않는 주소 입니다.');
+        }
+        chrome.runtime.sendMessage({ message: Defs.STR_INVALID_URI });
+        return;
+    } catch (error) {
+        console.error(error.message);
+        chrome.runtime.sendMessage({ message: Defs.STR_ERROR });
+        return;
+    }
 })

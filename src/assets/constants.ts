@@ -1,20 +1,17 @@
 export default class Defs {
     // ICON
-    public static ICON_ENABLE = 'icon16.png';
-    public static ICON_DISABLE = 'icon16_disable.png';
+    static ICON_ENABLE = 'icon16.png';
+    static ICON_DISABLE = 'icon16_disable.png';
 
     // STORAGE
-    public static STORAGE_KEY = 'state';
+    static STORAGE_KEY = 'state';
 
     // URI
-    public static URI_LIST = [
-        'https://www.youtube.com/shorts',
-        'https://www.tiktok.com'
-    ];
+    static URI_YOUTUBE_SHORTS = 'https://www.youtube.com/shorts'
+    static URI_TIKTOK = 'https://www.tiktok.com'
+    static URI_CHROME_EXTEND = 'chrome://'
 
-    // ACTIONS
-    static ACTION_AUTO_PLAY = 'autoPlay';
-    static ACTION_CLICK = 'click';
-    static ACTION_ERROR = 'error';
-    static ACTION_SCROLL_DOWN = 'scroll_down';
+    // Status
+    static STR_ERROR = 'error'
+    static STR_INVALID_URI = 'invalid uri'
 }
