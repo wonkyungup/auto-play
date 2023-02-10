@@ -1,23 +1,6 @@
 import { Defs, Utils } from './assets';
 import Storage from './model';
-
-const getPlayList = async (innerContainer: string) => {
-    const inner = document.getElementById(innerContainer);
-    if (inner != null) {
-        const list = Array.from(inner.children);
-        list.shift();
-        list.pop();
-
-        return list;
-    }
-}
-
-const getCurPlayHeight = (play: Element, list: Array<any>) => {
-    return list
-        .filter(element => Number(element.id) <= Number(play.id))
-        .map(element => element.offsetHeight)
-        .reduce((acc, cur) => acc + cur, 0);
-}
+import YoutubeShorts from './assets/youtubeShorts'
 
 chrome.runtime.onMessage.addListener(async (req) => {
     const { action, url } = req;
@@ -29,31 +12,24 @@ chrome.runtime.onMessage.addListener(async (req) => {
     const state = await Storage.getValue();
     const validToUriList = await Utils.onValidToUri(url);
 
-    if (validToUriList[0] && !validToUriList[1]) { // youtube
-        const container = document.getElementById('shorts-container');
-        const playList = await getPlayList('shorts-inner-container');
-
+    if (validToUriList[0] && !validToUriList[1]) {
         // https://www.youtube.com/shorts/4HGxOzTSKRQ
-        if (playList != null) {
-            for(let index = 0; index < playList.length; index++) {
-                const curPlay = playList[index]
+        const youtubeShorts = new YoutubeShorts('shorts-container', 'shorts-inner-container');
 
-                if (curPlay.getAttribute('is-active') !== null) {
-                    setTimeout(() => {
-                        const video = curPlay.querySelector('video');
+        youtubeShorts.findCurPlay((play: { querySelector: (arg0: string) => any; }) => {
+            setTimeout(() => {
+                const video = play.querySelector('video');
 
-                        if (state) {
-                            video?.removeAttribute('loop');
-                            video?.addEventListener('ended', () => {
-                                container?.scrollTo({ top: getCurPlayHeight(curPlay, playList), behavior: 'smooth' })
-                            })
-                        } else {
-                            video?.setAttribute('loop', String(true));
-                        }
-                    }, 1000);
+                if (state) {
+                    video?.removeAttribute('loop');
+                    video?.addEventListener('ended', () => {
+                        youtubeShorts.ct?.scrollTo({ top: youtubeShorts.getCurPlayHeight(play), behavior: 'smooth' })
+                    })
+                } else {
+                    video?.setAttribute('loop', String(true));
                 }
-            }
-        }
+            }, 1000);
+        })
     }
 
     if (!validToUriList[0] && validToUriList[1]) { // tiktok

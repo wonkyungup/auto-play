@@ -8,7 +8,7 @@ window.onload = async () => {
 
 Tabs.onActivatedTab(async ({ id, url }: { id: number, url: string }) => {
     if (!await Tabs.isCheckValidTabUrl(url)) {
-        await Storage.setDisableValue();
+        await Storage.init();
         await Utils.setIcon();
     }
 

@@ -6,10 +6,6 @@ export default class Storage {
         await chrome.storage.sync.set({ [Defs.STORAGE_KEY]: false });
     }
 
-    static async setDisableValue () {
-        await chrome.storage.sync.set({ [Defs.STORAGE_KEY]: false });
-    }
-
     static getValue () {
         return new Promise(resolve => {
             chrome.storage.sync.get([Defs.STORAGE_KEY], (result) => {
