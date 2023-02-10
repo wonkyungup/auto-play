@@ -1,11 +1,6 @@
 import Defs from '../assets/constants';
-import Utils from '../assets/utils';
 
 export default class Storage {
-    static async init () {
-        await chrome.storage.sync.set({ [Defs.STORAGE_KEY]: false });
-    }
-
     static getValue () {
         return new Promise(resolve => {
             chrome.storage.sync.get([Defs.STORAGE_KEY], (result) => {
@@ -14,8 +9,18 @@ export default class Storage {
         });
     }
 
-    static async onToggleValue () {
-        await chrome.storage.sync.set({ [Defs.STORAGE_KEY]: !await Storage.getValue() });
-        await Utils.setIcon();
+    static async disabled () {
+        await chrome.storage.sync.set({ [Defs.STORAGE_KEY]: false });
+        chrome.browserAction.setIcon({ path: Defs.ICON_DISABLE });
     }
+
+    static async toggle () {
+        await chrome.storage.sync.set({ [Defs.STORAGE_KEY]: !await Storage.getValue() });
+        await Storage.setMatchIcon();
+    }
+
+    static async setMatchIcon () {
+        if (await Storage.getValue()) chrome.browserAction.setIcon({ path: Defs.ICON_ENABLE });
+        else chrome.browserAction.setIcon({ path: Defs.ICON_DISABLE });
+     }
 }
