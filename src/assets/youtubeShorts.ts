@@ -1,62 +1,63 @@
 import Defs from '../assets/constants';
 
 export default class YoutubeShorts {
-    ct: HTMLElement | null;
-    list: any[];
+    _container: HTMLElement | null;
+    _inner: string;
     constructor(container: string, innerContainer: string) {
-        this.ct = document.getElementById(container);
-        this.list = <[]>this.getList(innerContainer);
-    }
-
-    getList (innerContainer: string) {
-        const inner = document.getElementById(innerContainer);
-        if (inner != null) {
-            const list = Array.from(inner.children);
-            list.shift();
-            list.pop();
-
-            return list;
-        }
+        this._container = document.getElementById(container);
+        this._inner = innerContainer;
     }
 
     async getCurPlayVideo () {
-        const _list = this.list;
-
-        for (let i = 0; i < _list.length; i++) {
-            const target = _list[i];
-            if (target.getAttribute(Defs.STR_IS_ACTIVE) !== null) {
-                return target;
+        const innerList = Array.from(<any>document.getElementById(this._inner)?.children);
+        for (let index = 1; index < innerList.length -1; index++) {
+            const inner = innerList[index];
+            // @ts-ignore
+            if (inner.getAttribute(Defs.STR_IS_ACTIVE) !== null) {
+                return { inner: inner, innerList: innerList };
             }
         }
     }
 
-    getCurPlayHeight (play: Element) {
-        const _list = this.list;
-        return _list
-            .filter((element: { id: string }) => Number(element.id) <= Number(play.id))
+    async getCurPlayHeight () {
+        // @ts-ignore
+        const { inner, innerList } = await this.getCurPlayVideo();
+        return innerList
+            .filter((element: { id: string }) => Number(element.id) <= Number(inner.id))
             .map((element: { offsetHeight: number }) => element.offsetHeight)
             .reduce((acc: number, cur: number) => acc + cur, 0);
     }
 
     async doesLoopVideo () {
-        const activePlay = await this.getCurPlayVideo();
+        // @ts-ignore
+        const { inner } = await this.getCurPlayVideo();
         setTimeout(() => {
-            const video = activePlay.querySelector('video');
+            const video = inner?.querySelector('video');
+            if (!video) {
+                return this.doesLoopVideo();
+            }
             video?.setAttribute('loop', String(true));
         }, Defs.NUMBER_TIMER)
     }
 
-    async doesPlayVideo () {
-        const activePlay = await this.getCurPlayVideo();
+    async doesNextVideo () {
+        // @ts-ignore
+        const { inner } = await this.getCurPlayVideo();
         setTimeout(() => {
-            const video = activePlay.querySelector('video');
+            const video = inner.querySelector('video');
             video?.removeAttribute('loop');
-            video?.addEventListener('ended', () => {
-                this.ct?.scrollTo({ top: this.getCurPlayHeight(activePlay), behavior: 'smooth' })
-                setTimeout(async () => {
-                    await this.doesPlayVideo();
-                }, Defs.NUMBER_TIMER)
+            video?.addEventListener('ended', async () => {
+                this._container?.scrollTo({ top: await this.getCurPlayHeight(), behavior: 'smooth' })
             })
         }, Defs.NUMBER_TIMER);
+    }
+
+    async onExecution (state: Boolean) {
+        if (!state) {
+            await this.doesLoopVideo();
+            return;
+        }
+
+        return await this.doesNextVideo();
     }
 }
