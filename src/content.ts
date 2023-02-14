@@ -8,16 +8,9 @@ chrome.runtime.onMessage.addListener(async ({ action }) => {
             const state = await Storage.getValue();
             const youtubeShorts = new YoutubeShorts('shorts-container', 'shorts-inner-container');
 
-            let timer: string | number | NodeJS.Timeout | undefined;
-            youtubeShorts._container?.addEventListener('scroll', () => {
-                if (timer) {
-                    clearTimeout(timer);
-                }
-                timer = setTimeout(async () => {
-                    console.log('scroll test');
-                    await youtubeShorts.onExecution(<Boolean>state);
-                }, 1000)
-            })
+            youtubeShorts._container?.addEventListener('scroll', require('lodash').throttle(async () => {
+                 await youtubeShorts.onExecution(<Boolean>state);
+            }, Defs.NUMBER_TIMER, { trailing: true, leading: false }));
 
             return await youtubeShorts.onExecution(<Boolean>state);
         case Defs.STR_ERROR:
