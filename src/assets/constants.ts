@@ -5,7 +5,7 @@ export default class Defs {
     static URI_YOUTUBE_SHORTS = 'https://www.youtube.com/shorts'
     static URI_TIKTOK = 'https://www.tiktok.com'
     static URI_CHROME_EXTEND = 'chrome://';
-    static NUMBER_TIMER = 3000;
+    static NUMBER_TIMER = 1000;
     static STR_ERROR = 'error';
     static STR_YOUTUBE = 'youtube';
     static STR_IS_ACTIVE = 'is-active';
