@@ -1,18 +1,11 @@
-import Storage from './model';
-import YoutubeShorts from './assets/youtubeShorts';
 import Defs from './assets/constants';
+import YoutubeShorts from './assets/youtubeShorts';
 
 chrome.runtime.onMessage.addListener(async ({ action }) => {
     switch (action) {
         case Defs.STR_YOUTUBE:
-            const state = await Storage.getValue();
             const youtubeShorts = new YoutubeShorts('shorts-container', 'shorts-inner-container');
-
-            youtubeShorts._container?.addEventListener('scroll', require('lodash').throttle(async () => {
-                 await youtubeShorts.onExecution(<Boolean>state);
-            }, Defs.NUMBER_TIMER, { trailing: true, leading: false }));
-
-            return await youtubeShorts.onExecution(<Boolean>state);
+            return await youtubeShorts.onExecution();
         case Defs.STR_ERROR:
         default:
             alert('올바르지 않는 주소 입니다.')

@@ -16,10 +16,10 @@ export default class Tabs {
         });
     };
 
-    static onActivatedTab (cb: (args: any) => void) {
-        chrome.tabs.onActivated.addListener(async activeInfo => {
+    static onActivatedTab (cb: () => void) {
+        chrome.tabs.onActivated.addListener(() => {
             if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
-            cb(await Tabs.getTabInfo(activeInfo.tabId));
+            cb();
         });
     };
 
@@ -31,11 +31,19 @@ export default class Tabs {
         return (url.includes(Defs.URI_CHROME_EXTEND) || !url.includes(Defs.URI_YOUTUBE_SHORTS));
     }
 
-    static onUpdatedTab (cb: (args: { id: number, url: string }) => void) { // back -> content
+    static onUpdatedTab (cb: () => void) { // back -> content
         chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-            if (changeInfo.url) {
-                cb({ id: tabId, url: changeInfo.url });
-            }
+            if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
+            if (changeInfo.url) cb();
         });
     };
+
+    static getAllTabSync () {
+        return new Promise(resolve => {
+            chrome.tabs.query({}, tabs => {
+                if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
+                resolve(tabs);
+            })
+        })
+    }
 };

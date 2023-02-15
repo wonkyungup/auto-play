@@ -1,4 +1,5 @@
 import Defs from '../assets/constants';
+import Storage from '../model'
 
 export default class YoutubeShorts {
     _container: HTMLElement | null;
@@ -21,38 +22,45 @@ export default class YoutubeShorts {
         }
     }
 
-    async getCurPlayHeight () {
-        // return this._obj.innerList
-        //     .filter((element: { id: string }) => Number(element.id) <= Number(this._obj.inner.id))
-        //     .map((element: { offsetHeight: number }) => element.offsetHeight)
-        //     .reduce((acc: number, cur: number) => acc + cur, 0);
+    getCurPlayHeight () { // 수정 필요
+        return this._obj.innerList
+            .filter((element: { id: string }) => Number(element.id) <= Number(this._obj.inner.id))
+            .map((element: { offsetHeight: number }) => element.offsetHeight)
+            .reduce((acc: number, cur: number) => acc + cur, 0);
     }
 
     doesLoopVideo () {
         const video = this._obj.inner?.querySelector('video');
-
         video?.setAttribute('loop', String(true));
     }
 
     doesNextVideo () {
         const video = this._obj.inner?.querySelector('video');
-
+        if (!video) {
+            return this.refreshExecution();
+        }
         video?.removeAttribute('loop');
         video?.addEventListener('ended', () => {
             this._container?.scrollTo({ top: this.getCurPlayHeight(), behavior: 'smooth' })
         })
     }
 
-    async onExecution (state: Boolean) {
-         await this.setCurPlayVideo();
+    refreshExecution () {
+        setTimeout(async () => {
+            await this.onExecution();
+        }, 0)
+    }
 
+    async onExecution () {
+        const state = await Storage.getValue(Defs.STORAGE_ICON_KEY);
+        await this.setCurPlayVideo();
+
+        console.log(state);
         if (!state) {
             this.doesLoopVideo();
             return;
         }
 
-        console.log(this._obj.innerList);
-        console.log(await this.getCurPlayHeight());
         return this.doesNextVideo();
     }
 }
