@@ -1,5 +1,5 @@
 import Defs from '../assets/constants';
-import Storage from '../model'
+import Storage from '../model';
 
 export default class YoutubeShorts {
     _container: HTMLElement | null;
@@ -22,11 +22,13 @@ export default class YoutubeShorts {
         }
     }
 
-    getCurPlayHeight () { // 수정 필요
-        return this._obj.innerList
-            .filter((element: { id: string }) => Number(element.id) <= Number(this._obj.inner.id))
-            .map((element: { offsetHeight: number }) => element.offsetHeight)
-            .reduce((acc: number, cur: number) => acc + cur, 0);
+    async getNextElement () {
+        await this.setCurPlayVideo();
+
+        const index = this._obj.innerList.indexOf(this._obj.inner);
+        if (index > 0) {
+            return this._obj.innerList[index + 1];
+        }
     }
 
     doesLoopVideo () {
@@ -40,8 +42,9 @@ export default class YoutubeShorts {
             return this.refreshExecution();
         }
         video?.removeAttribute('loop');
-        video?.addEventListener('ended', () => {
-            this._container?.scrollTo({ top: this.getCurPlayHeight(), behavior: 'smooth' })
+        video?.addEventListener('ended', async () => {
+            const element = await this.getNextElement();
+            element.scrollIntoView({ block: 'end', behavior: 'smooth'});
         })
     }
 
@@ -55,7 +58,6 @@ export default class YoutubeShorts {
         const state = await Storage.getValue(Defs.STORAGE_ICON_KEY);
         await this.setCurPlayVideo();
 
-        console.log(state);
         if (!state) {
             this.doesLoopVideo();
             return;
