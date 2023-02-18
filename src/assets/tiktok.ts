@@ -1,16 +1,60 @@
+import Defs from './constants';
+import Storage from '../model';
+
 export default class Tiktok {
-    _main: HTMLElement | null;
     _video: HTMLElement | null;
-    _videoRoot: any;
-    _list: any;
-    constructor(main: string) {
+    _root: any;
+    constructor() {
         this._video = document.querySelector('video');
-        this._videoRoot = this._video?.closest("div[data-e2e=recommend-list-item-container]");
-        this._main = document.getElementById(main);
-        this._list = this._main?.children[0].children;
+        this._root = null;
     }
 
-    static isFullScreen (url: string) {
-        return url.split('/').length > 5;
+    async isValidToMode () {
+        // mode = 2
+        return this._video?.closest("div[mode='2']");
+    }
+
+    async toggleChatElement (state: boolean) {
+        this._root = this._video?.closest("div[mode='2']")?.parentNode?.parentNode?.parentNode;
+        this._root = Array.from(<HTMLCollection>this._root?.children);
+
+        for (let i = 0; i < this._root.length; i++) {
+            const element = this._root[i];
+            if (state) {
+                if (i > 0 ) element.style.display = 'none';
+            }  else {
+                element.style.display = 'flex';
+            }
+        }
+    }
+
+    async doesNextVideo () {
+        const _video = this._video;
+        const _root = this._root;
+
+        if (_root.length > 0) {
+            const _buttonsElement = _root[0].getElementsByTagName('button');
+            const downButton = _buttonsElement[_buttonsElement.length - 1];
+
+            if (_video !== null) {
+                _video.addEventListener('ended', () => {
+                    downButton.click();
+                })
+            }
+        }
+    }
+
+    async onExecution () {
+        const state = await Storage.getValue(Defs.STORAGE_ICON_KEY);
+        if (await this.isValidToMode()) {
+            await this.toggleChatElement(<boolean>state);
+
+            if (state) {
+                // await this.doesNextVideo();
+            }
+            return;
+        } else {
+            throw new Error('error');
+        }
     }
 }

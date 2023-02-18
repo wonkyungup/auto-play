@@ -28,7 +28,7 @@ export default class Tabs {
     }
 
     static isValidToTikTok (url: string) {
-        return url.includes(Defs.URI_TIKTOK);
+        return (url.includes(Defs.URI_TIKTOK) && url.includes('video'));
     }
 
     static onUpdatedTab (cb: () => void) {

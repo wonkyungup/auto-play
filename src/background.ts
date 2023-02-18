@@ -11,21 +11,24 @@ const onWatchTab = async () => {
     if (tabId) {
         const tabs = <any>await Tabs.getAllTabSync();
         const activeTab = tabs.filter((info: { id: number }) => info?.id === Number(tabId));
+        const isInValidToUrl = (!Tabs.isValidToTikTok(activeTab[0].url)) && !Tabs.isValidToYoutubeShort(activeTab[0].url);
         let method = '';
 
-        if (activeTab.length <= 0) {
-            await Storage.disabled();
-        }
+        if (activeTab.length > 0) {
+            if (isInValidToUrl && await Storage.getValue(Defs.STORAGE_ICON_KEY)) {
+                await Storage.disabled();
+            }
 
-        if (Tabs.isValidToYoutubeShort(activeTab[0].url)) {
-            method = Defs.STR_YOUTUBE;
-        }
+            if (Tabs.isValidToYoutubeShort(activeTab[0].url)) {
+                method = Defs.STR_YOUTUBE;
+            }
 
-        if (Tabs.isValidToTikTok(activeTab[0].url)) {
-            method = Defs.STR_TIKTOK;
-        }
+            if (Tabs.isValidToTikTok(activeTab[0].url)) {
+                method = Defs.STR_TIKTOK;
+            }
 
-        chrome.tabs.sendMessage(<number>tabId, { action: method, url: activeTab[0].url });
+            chrome.tabs.sendMessage(<number>tabId, { action: method });
+        }
     }
 }
 
@@ -38,24 +41,19 @@ Tabs.onUpdatedTab(async ()  => {
 });
 
 Tabs.onClickIconTab(async ({ id, url }: { id: number, url: string }) => {
-    let method = '';
     const isInValidToUrl = (!Tabs.isValidToTikTok(url) && !Tabs.isValidToYoutubeShort(url));
+    let method = '';
 
-    if (isInValidToUrl
-        && !await Storage.getValue(Defs.STORAGE_ICON_KEY)
-    ) {
-        await Storage.disabled();
-        chrome.tabs.sendMessage(id, { action: Defs.STR_ERROR });
-    } else {
+    if (isInValidToUrl && !await Storage.getValue(Defs.STORAGE_ICON_KEY)) chrome.tabs.sendMessage(id, { action: Defs.ERROR_YOUTUBE_SHORTS });
+    else
         await Storage.toggle();
 
-        if (await Storage.getValue(Defs.STORAGE_TAB_KEY)
-            && !await Storage.getValue(Defs.STORAGE_ICON_KEY)
-        ) {
+        if (await Storage.getValue(Defs.STORAGE_TAB_KEY) && !await Storage.getValue(Defs.STORAGE_ICON_KEY)) {
             await onWatchTab();
             return;
         }
 
+        await Storage.activeTabId(id);
         if (Tabs.isValidToYoutubeShort(url)) {
             method = Defs.STR_YOUTUBE;
         }
@@ -64,7 +62,9 @@ Tabs.onClickIconTab(async ({ id, url }: { id: number, url: string }) => {
             method = Defs.STR_TIKTOK;
         }
 
-        await Storage.activeTabId(id);
-        chrome.tabs.sendMessage(id, { action: method, url: url });
-    }
+        chrome.tabs.sendMessage(id, { action: method });
+})
+
+chrome.runtime.onMessage.addListener(async () => {
+    await Storage.disabled();
 })
