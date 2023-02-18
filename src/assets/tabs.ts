@@ -23,15 +23,15 @@ export default class Tabs {
         });
     };
 
-    static isValidToUrl (url: string) {
+    static isValidToYoutubeShort (url: string) {
         return url.includes(Defs.URI_YOUTUBE_SHORTS);
     }
 
-    static isInValidToUrl (url: string) {
-        return (url.includes(Defs.URI_CHROME_EXTEND) || !url.includes(Defs.URI_YOUTUBE_SHORTS));
+    static isValidToTikTok (url: string) {
+        return (url.includes(Defs.URI_TIKTOK) && url.includes('video'));
     }
 
-    static onUpdatedTab (cb: () => void) { // back -> content
+    static onUpdatedTab (cb: () => void) {
         chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
             if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
             if (changeInfo.url) cb();
