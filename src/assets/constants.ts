@@ -8,5 +8,6 @@ export default class Defs {
     static URI_CHROME_EXTEND = 'chrome://';
     static STR_ERROR = 'error';
     static STR_YOUTUBE = 'youtube';
+    static STR_TIKTOK = 'tiktok';
     static STR_IS_ACTIVE = 'is-active';
 }

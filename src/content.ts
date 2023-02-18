@@ -1,11 +1,21 @@
 import Defs from './assets/constants';
 import YoutubeShorts from './assets/youtubeShorts';
+import Tiktok from './assets/tiktok';
 
-chrome.runtime.onMessage.addListener(async ({ action }) => {
+chrome.runtime.onMessage.addListener(async ({ action, url }) => {
     switch (action) {
         case Defs.STR_YOUTUBE:
             const youtubeShorts = new YoutubeShorts('shorts-container', 'shorts-inner-container');
             return await youtubeShorts.onExecution();
+        case Defs.STR_TIKTOK:
+            const isFullScreen = Tiktok.isFullScreen(url);
+
+            if (!isFullScreen) {
+                console.log('small');
+            } else {
+                console.log('full');
+            }
+            break;
         case Defs.STR_ERROR:
         default:
             alert('올바르지 않는 주소 입니다.')
