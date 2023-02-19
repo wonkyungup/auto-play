@@ -1,14 +1,13 @@
 {
   "name": "auto-play",
   "version": "0.0.1",
-  "description": "youtube shorts & tiktok video auto next play",
+  "description": "youtube shorts video auto next play",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "webpack --watch"
   },
-  "keywords": [],
-  "license": "ISC",
   "devDependencies": {
     "@babel/core": "7.12.3",
     "@babel/preset-env": "7.12.1",
@@ -30,14 +29,8 @@
     "webpack-dev-server": "3.11.0"
   },
   "dependencies": {
-    "@emotion/react": "11.10.5",
-    "@emotion/styled": "11.10.5",
-    "@mui/icons-material": "5.11.0",
-    "@mui/material": "5.11.6",
-    "lodash": "4.17.21",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-hot-loader": "4.13.0",
-    "use-chrome-storage": "1.0.8"
+    "react-hot-loader": "4.13.0"
   }
 }

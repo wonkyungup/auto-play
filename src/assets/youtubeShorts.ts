@@ -47,7 +47,6 @@ export default class YoutubeShorts {
         }
         video?.removeAttribute('loop');
         video?.addEventListener('ended', async () => {
-            console.log('1');
             const element = await this.getNextElement();
             element.scrollIntoView({ block: 'end', behavior: 'smooth'});
         })
