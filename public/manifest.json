@@ -1,10 +1,10 @@
 {
-  "name": "Auto Play",
+  "name": "youtube-shorts-play",
   "permissions": [
     "storage",
     "tabs"
   ],
-  "description": "youtube shorts & tiktok video auto next play",
+  "description": "youtube shorts video auto next play",
   "manifest_version": 2,
   "version": "0.0.1",
   "icons": {
