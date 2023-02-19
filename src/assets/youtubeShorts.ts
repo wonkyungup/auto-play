@@ -1,22 +1,26 @@
 import Defs from '../assets/constants';
-import Storage from '../model';
+import DB from '../model';
+
+const db = new DB();
 
 export default class YoutubeShorts {
     _container: HTMLElement | null;
-    _inner: string;
-    _obj: any;
-    constructor(container: string, innerContainer: string) {
-        this._container = document.getElementById(container);
-        this._inner = innerContainer;
-        this._obj = {};
+    _innerId: string;
+    _innerContainer: Element | null;
+    _innerList: any;
+    constructor(containerId: string, innerContainerId: string) {
+        this._container = document.getElementById(containerId);
+        this._innerId = innerContainerId;
+        this._innerContainer = null;
+        this._innerList = null;
     }
 
     async setCurPlayVideo () {
-        const innerList = Array.from(<any>document.getElementById(this._inner)?.children);
-        for (let index = 0; index < innerList.length; index++) {
-            const inner = <Element>innerList[index];
-            if (inner.getAttribute(Defs.STR_IS_ACTIVE) !== null) {
-                this._obj = { inner: inner, innerList: innerList };
+        this._innerList = Array.from(<HTMLCollection>document.getElementById(this._innerId)?.children);
+        for (let index = 0; index < this._innerList.length; index++) {
+            const innerContainer = <Element>this._innerList[index];
+            if (innerContainer.getAttribute(Defs.STR_IS_ACTIVE) !== null) {
+                this._innerContainer = innerContainer;
                 return;
             }
         }
@@ -25,24 +29,25 @@ export default class YoutubeShorts {
     async getNextElement () {
         await this.setCurPlayVideo();
 
-        const index = this._obj.innerList.indexOf(this._obj.inner);
+        const index = this._innerList.indexOf(this._innerContainer);
         if (index > 0) {
-            return this._obj.innerList[index + 1];
+            return this._innerList[index + 1];
         }
     }
 
     doesLoopVideo () {
-        const video = this._obj.inner?.querySelector('video');
+        const video = this._innerContainer?.querySelector('video');
         video?.setAttribute('loop', String(true));
     }
 
     doesNextVideo () {
-        const video = this._obj.inner?.querySelector('video');
+        const video = this._innerContainer?.querySelector('video');
         if (!video) {
             return this.refreshExecution();
         }
         video?.removeAttribute('loop');
         video?.addEventListener('ended', async () => {
+            console.log('1');
             const element = await this.getNextElement();
             element.scrollIntoView({ block: 'end', behavior: 'smooth'});
         })
@@ -55,7 +60,7 @@ export default class YoutubeShorts {
     }
 
     async onExecution () {
-        const state = await Storage.getValue(Defs.STORAGE_ICON_KEY);
+        const state = await db.getStateIconSync();
         await this.setCurPlayVideo();
 
         if (!state) {

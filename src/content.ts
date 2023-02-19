@@ -1,7 +1,9 @@
 import Defs from './assets/constants';
 import YoutubeShorts from './assets/youtubeShorts';
 import Tiktok from './assets/tiktok';
-import Storage from './model';
+import DB from './model';
+
+const db = new DB();
 
 chrome.runtime.onMessage.addListener(async ({ action }) => {
     switch (action) {
@@ -11,15 +13,15 @@ chrome.runtime.onMessage.addListener(async ({ action }) => {
         case Defs.STR_TIKTOK:
             const tiktok = new Tiktok();
             try {
-                return await tiktok.onExecution();
-            } catch (err) {
-                if (err) {
-                    if (await Storage.getValue(Defs.STORAGE_ICON_KEY)) alert('올바르지 않는 주소 입니다.');
-                    chrome.runtime.sendMessage('error');
+                await tiktok.onExecution();
+            } catch (e) {
+                if (await db.getStateIconSync()) {
+                    alert('올바르지 않는 주소 입니다. tiktok mode');
                 }
+                chrome.runtime.sendMessage('error');
             }
             break;
-        case Defs.ERROR_YOUTUBE_SHORTS:
+        case Defs.URI_ERROR:
             alert('올바르지 않는 주소 입니다.');
             chrome.runtime.sendMessage('error');
             break;

@@ -1,70 +1,46 @@
-import Storage from './model';
+import DB from './model';
 import Tabs from './assets/tabs';
 import Defs from './assets/constants';
+import Utils from './assets/utils';
 
-window.onload = async () => {
-    await Storage.disabled();
-};
+const db = new DB();
+
+window.onload = async () => await db.disabled();
+chrome.runtime.onMessage.addListener(async () => await db.disabled());
 
 const onWatchTab = async () => {
-    const tabId = await Storage.getValue(Defs.STORAGE_TAB_KEY);
+    const tabId = await db.getActiveTabSync();
     if (tabId) {
         const tabs = <any>await Tabs.getAllTabSync();
         const activeTab = tabs.filter((info: { id: number }) => info?.id === Number(tabId));
-        const isInValidToUrl = (!Tabs.isValidToTikTok(activeTab[0].url)) && !Tabs.isValidToYoutubeShort(activeTab[0].url);
-        let method = '';
 
         if (activeTab.length > 0) {
-            if (isInValidToUrl && await Storage.getValue(Defs.STORAGE_ICON_KEY)) {
-                await Storage.disabled();
+            if (Utils.isInValidToUrl(activeTab[0].url) && await db.getStateIconSync()) {
+                await db.disabled();
             }
 
-            if (Tabs.isValidToYoutubeShort(activeTab[0].url)) {
-                method = Defs.STR_YOUTUBE;
-            }
-
-            if (Tabs.isValidToTikTok(activeTab[0].url)) {
-                method = Defs.STR_TIKTOK;
-            }
-
-            chrome.tabs.sendMessage(<number>tabId, { action: method });
+            chrome.tabs.sendMessage(<number>tabId, {
+                action: Utils.isValidToYoutubeShort(activeTab[0].url) ? Defs.STR_YOUTUBE : Defs.STR_TIKTOK
+            });
         }
     }
 }
 
-Tabs.onActivatedTab(async () => {
-    await onWatchTab();
-});
-
-Tabs.onUpdatedTab(async ()  => {
-    await onWatchTab()
-});
-
+Tabs.onActivatedTab(async () => await onWatchTab());
+Tabs.onUpdatedTab(async ()  => await onWatchTab());
 Tabs.onClickIconTab(async ({ id, url }: { id: number, url: string }) => {
-    const isInValidToUrl = (!Tabs.isValidToTikTok(url) && !Tabs.isValidToYoutubeShort(url));
-    let method = '';
-
-    if (isInValidToUrl && !await Storage.getValue(Defs.STORAGE_ICON_KEY)) chrome.tabs.sendMessage(id, { action: Defs.ERROR_YOUTUBE_SHORTS });
+    if (Utils.isInValidToUrl(url) && !await db.getStateIconSync())
+        chrome.tabs.sendMessage(id, { action: Defs.URI_ERROR });
     else
-        await Storage.toggle();
+        await db.toggleStateIcon();
 
-        if (await Storage.getValue(Defs.STORAGE_TAB_KEY) && !await Storage.getValue(Defs.STORAGE_ICON_KEY)) {
+        if (await db.getActiveTabSync() && !await db.getStateIconSync()) {
             await onWatchTab();
             return;
         }
 
-        await Storage.activeTabId(id);
-        if (Tabs.isValidToYoutubeShort(url)) {
-            method = Defs.STR_YOUTUBE;
-        }
-
-        if (Tabs.isValidToTikTok(url)) {
-            method = Defs.STR_TIKTOK;
-        }
-
-        chrome.tabs.sendMessage(id, { action: method });
-})
-
-chrome.runtime.onMessage.addListener(async () => {
-    await Storage.disabled();
+        await db.setActiveTab(id);
+        chrome.tabs.sendMessage(id, {
+            action: Utils.isValidToYoutubeShort(url) ? Defs.STR_YOUTUBE : Defs.STR_TIKTOK
+        });
 })

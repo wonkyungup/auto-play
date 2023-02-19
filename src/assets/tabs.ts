@@ -1,5 +1,3 @@
-import Defs from './constants';
-
 export default class Tabs {
     static getTabInfo (id: number) {
         return new Promise(resolve => {
@@ -22,14 +20,6 @@ export default class Tabs {
             cb();
         });
     };
-
-    static isValidToYoutubeShort (url: string) {
-        return url.includes(Defs.URI_YOUTUBE_SHORTS);
-    }
-
-    static isValidToTikTok (url: string) {
-        return (url.includes(Defs.URI_TIKTOK) && url.includes('video'));
-    }
 
     static onUpdatedTab (cb: () => void) {
         chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {

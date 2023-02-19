@@ -1,41 +1,45 @@
 import Defs from '../assets/constants';
 
-export default class Storage {
-    static getValue (target: string) {
+export default class DB {
+    getStateIconSync () {
         return new Promise(resolve => {
-            chrome.storage.sync.get([target], (result) => {
-                switch (target) {
-                    case Defs.STORAGE_ICON_KEY:
-                        resolve(result[Defs.STORAGE_ICON_KEY]);
-                        break;
-                    case Defs.STORAGE_TAB_KEY:
-                        resolve(result[Defs.STORAGE_TAB_KEY]);
-                        break;
-                    default:
-                        break;
-                }
+            chrome.storage.sync.get([Defs.DB_ICON], (result) => {
+                resolve(result[Defs.DB_ICON]);
             });
         });
     }
 
-    static async activeTabId (id: number) {
-        if (await Storage.getValue(Defs.STORAGE_ICON_KEY)) await chrome.storage.sync.set({ [Defs.STORAGE_TAB_KEY]: id });
-        else await chrome.storage.sync.set({ [Defs.STORAGE_TAB_KEY]: '' });
+    getActiveTabSync () {
+        return new Promise(resolve => {
+            chrome.storage.sync.get([Defs.DB_TAB], (result) => {
+                resolve(result[Defs.DB_TAB]);
+            });
+        });
     }
 
-    static async disabled () {
-        await chrome.storage.sync.set({ [Defs.STORAGE_ICON_KEY]: false });
-        await chrome.storage.sync.set({ [Defs.STORAGE_TAB_KEY]: '' });
+
+    async setActiveTab (id: number) {
+        if (await this.getStateIconSync())
+            await chrome.storage.sync.set({ [Defs.DB_TAB]: id });
+        else
+            await chrome.storage.sync.set({ [Defs.DB_TAB]: '' });
+    }
+
+    async disabled () {
+        await chrome.storage.sync.set({ [Defs.DB_ICON]: false });
+        await chrome.storage.sync.set({ [Defs.DB_TAB]: '' });
         chrome.browserAction.setIcon({ path: Defs.ICON_DISABLE });
     }
 
-    static async toggle () {
-        await chrome.storage.sync.set({ [Defs.STORAGE_ICON_KEY]: !await Storage.getValue(Defs.STORAGE_ICON_KEY) });
-        await Storage.setMatchIcon();
+    async toggleStateIcon () {
+        await chrome.storage.sync.set({ [Defs.DB_ICON]: !await this.getStateIconSync() });
+        await this.doesMatchIcon();
     }
 
-    static async setMatchIcon () {
-        if (await Storage.getValue(Defs.STORAGE_ICON_KEY)) chrome.browserAction.setIcon({ path: Defs.ICON_ENABLE });
-        else chrome.browserAction.setIcon({ path: Defs.ICON_DISABLE });
-     }
+    async doesMatchIcon () {
+        if (await this.getStateIconSync())
+            chrome.browserAction.setIcon({ path: Defs.ICON_ENABLE });
+        else
+            chrome.browserAction.setIcon({ path: Defs.ICON_DISABLE });
+    }
 }

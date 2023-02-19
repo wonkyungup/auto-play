@@ -1,60 +1,87 @@
-import Defs from './constants';
-import Storage from '../model';
+import DB from '../model';
+
+const db = new DB();
 
 export default class Tiktok {
     _video: HTMLElement | null;
-    _root: any;
+    _divRoot: HTMLElement | any;
+    _divMode: HTMLElement | null;
     constructor() {
+        this._video = null;
+        this._divRoot = null;
+        this._divMode = null;
+    }
+
+    async setElement () {
         this._video = document.querySelector('video');
-        this._root = null;
+        this._divMode = <HTMLElement>this._video?.closest("div[mode='2']");
+
+        this._divRoot = this._divMode?.parentNode?.parentNode?.parentNode;
+        this._divRoot = Array.from(<HTMLCollection>this._divRoot.children);
+        return;
     }
 
-    async isValidToMode () {
-        // mode = 2
-        return this._video?.closest("div[mode='2']");
-    }
-
-    async toggleChatElement (state: boolean) {
-        this._root = this._video?.closest("div[mode='2']")?.parentNode?.parentNode?.parentNode;
-        this._root = Array.from(<HTMLCollection>this._root?.children);
-
-        for (let i = 0; i < this._root.length; i++) {
-            const element = this._root[i];
+    toggleScreenElement (state: boolean) {
+        const _list = Array.from(<HTMLCollection>this._divRoot?.children);
+        for (let i = 1; i < _list.length; i++) {
+            const element = <HTMLElement>_list[i];
             if (state) {
-                if (i > 0 ) element.style.display = 'none';
-            }  else {
+                element.style.display = 'none';
+            } else {
                 element.style.display = 'flex';
             }
         }
     }
 
-    async doesNextVideo () {
-        const _video = this._video;
-        const _root = this._root;
+    refreshVideoElement () {
+        setTimeout(async () => {
+            await this.onExecution();
+        }, 0)
+    }
 
-        if (_root.length > 0) {
-            const _buttonsElement = _root[0].getElementsByTagName('button');
-            const downButton = _buttonsElement[_buttonsElement.length - 1];
+    doesNextVideo () {
+        if (!this._video || !this._divRoot) {
+            this.refreshVideoElement();
+        }
 
-            if (_video !== null) {
-                _video.addEventListener('ended', () => {
-                    downButton.click();
-                })
-            }
+        const _list = this._divRoot;
+        for (let i = 1; i < _list.length; i++) {
+            const element = <HTMLElement>_list[i];
+            element.style.display = 'none';
+        }
+
+        const _buttons = _list[0].getElementsByTagName('button');
+        const _dwButton = _buttons[_buttons.length - 1];
+
+        this._video?.addEventListener('ended', () => {
+            setTimeout(() => {
+                _dwButton.click();
+            }, 0)
+        });
+    }
+
+    doesDisabledIcon () {
+        if (!this._divRoot) {
+            this.refreshVideoElement();
+        }
+
+        const _list = this._divRoot;
+        for (let i = 1; i < _list.length; i++) {
+            const element = <HTMLElement>_list[i];
+            element.style.display = 'flex';
         }
     }
 
     async onExecution () {
-        const state = await Storage.getValue(Defs.STORAGE_ICON_KEY);
-        if (await this.isValidToMode()) {
-            await this.toggleChatElement(<boolean>state);
+        const state = await db.getStateIconSync();
+        await this.setElement();
 
-            if (state) {
-                // await this.doesNextVideo();
-            }
-            return;
+        if (state) {
+            this.doesNextVideo();
         } else {
-            throw new Error('error');
+            this.doesDisabledIcon();
         }
+
+        return;
     }
 }
