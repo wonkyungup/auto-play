@@ -5,7 +5,7 @@ import Defs from './assets/constants';
 
 const db = new DB();
 
-window.onload = async () => await db.disabled();
+self.onload = async () => await db.disabled();
 Browser.runtime.onMessage.addListener(async () => await db.disabled());
 
 const isValidToYoutubeShort = (url: string) => url.includes(Defs.URI_YOUTUBE_SHORTS);
