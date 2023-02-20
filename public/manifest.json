@@ -1,31 +1,31 @@
 {
   "name": "youtube-shorts-play",
+  "manifest_version": 3,
+  "version": "0.0.1",
   "permissions": [
     "storage",
     "tabs"
   ],
   "description": "youtube shorts video auto next play",
-  "manifest_version": 2,
-  "version": "0.0.1",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
     "128": "icon128.png"
   },
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "icon16_disable.png",
       "48": "icon48_disable.png"
     }
   },
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": ["*://*/*"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "host_permissions": ["*://*/*"]
 }

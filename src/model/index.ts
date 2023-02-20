@@ -24,7 +24,7 @@ export default class DB {
     async disabled () {
         await Browser.storage.sync.set({ [Defs.DB_ICON]: false });
         await Browser.storage.sync.set({ [Defs.DB_TAB]: '' });
-        await Browser.browserAction.setIcon({ path: Defs.ICON_DISABLE });
+        await Browser.action.setIcon({ path: Defs.ICON_DISABLE });
     }
 
     async toggleStateIcon () {
@@ -34,9 +34,9 @@ export default class DB {
 
     async doesMatchIcon () {
         if (await this.getStateIconSync()) {
-            await Browser.browserAction.setIcon({ path: Defs.ICON_ENABLE });
+            await Browser.action.setIcon({ path: Defs.ICON_ENABLE });
         } else {
-            await Browser.browserAction.setIcon({ path: Defs.ICON_DISABLE });
+            await Browser.action.setIcon({ path: Defs.ICON_DISABLE });
         }
     }
 }

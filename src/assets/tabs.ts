@@ -6,7 +6,7 @@ export default class Tabs {
     };
 
     static onClickIconTab (cb: (args: any) => void) {
-        Browser.browserAction.onClicked.addListener(async ({id}) => {
+        Browser.action.onClicked.addListener(async ({id}) => {
             if (Browser.runtime.lastError) {
                 console.error(Browser.runtime.lastError);
             }
