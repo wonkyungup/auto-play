@@ -1,39 +1,41 @@
+import Browser from 'webextension-polyfill';
+
 export default class Tabs {
-    static getTabInfo (id: number) {
-        return new Promise(resolve => {
-            chrome.tabs.get(<number>id, (tab) => {
-                resolve(tab);
-            })
-        });
+     static async getTabInfo (id: number) {
+        return await Browser.tabs.get(<number>id);
     };
 
     static onClickIconTab (cb: (args: any) => void) {
-        chrome.browserAction.onClicked.addListener(async ({id}) => {
-            if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
+        Browser.browserAction.onClicked.addListener(async ({id}) => {
+            if (Browser.runtime.lastError) {
+                console.error(Browser.runtime.lastError);
+            }
+
             cb(await Tabs.getTabInfo(<number>id));
         });
     };
 
     static onActivatedTab (cb: () => void) {
-        chrome.tabs.onActivated.addListener(() => {
-            if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
+        Browser.tabs.onActivated.addListener(() => {
+            if (Browser.runtime.lastError) {
+                console.error(Browser.runtime.lastError);
+            }
+
             cb();
         });
     };
 
     static onUpdatedTab (cb: () => void) {
-        chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-            if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
+        Browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
+            if (Browser.runtime.lastError) {
+                console.error(Browser.runtime.lastError);
+            }
+
             if (changeInfo.url) cb();
         });
     };
 
-    static getAllTabSync () {
-        return new Promise(resolve => {
-            chrome.tabs.query({}, tabs => {
-                if (chrome.runtime.lastError) console.error(chrome.runtime.lastError);
-                resolve(tabs);
-            })
-        })
+    static async getAllTabSync () {
+        return await Browser.tabs.query({});
     }
 };
