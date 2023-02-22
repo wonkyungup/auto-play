@@ -32,7 +32,11 @@ Tabs.onActivatedTab(async () => await onWatchTab());
 Tabs.onUpdatedTab(async ()  => await onWatchTab());
 Tabs.onClickIconTab(async ({ id, url }: { id: number, url: string }) => {
     if (!isValidToYoutubeShort(url) && !await db.getStateIconSync()) {
-        await Browser.tabs.sendMessage(id, Defs.URI_ERROR);
+        try {
+            await Browser.tabs.sendMessage(id, Defs.URI_ERROR);
+        } catch (err) {
+            //
+        }
     } else {
         await db.toggleStateIcon();
 
