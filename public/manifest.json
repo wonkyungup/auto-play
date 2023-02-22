@@ -9,8 +9,7 @@
   "description": "youtube shorts video auto next play",
   "icons": {
     "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
+    "48": "icon48.png"
   },
   "action": {
     "default_icon": {

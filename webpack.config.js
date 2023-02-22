@@ -16,28 +16,9 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-        exclude: /\.module\.css$/,
-      },
-      {
         test: /\.ts(x)?$/,
         loader: "ts-loader",
         exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: true,
-            },
-          },
-        ],
-        include: /\.module\.css$/,
       },
       {
         test: /\.svg$/,
@@ -57,10 +38,7 @@ const config = {
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx", ".tsx", ".ts"],
-    alias: {
-      "react-dom": "@hot-loader/react-dom",
-    },
+    extensions: [".js", ".ts"],
   },
   devServer: {
     contentBase: "./dist",
