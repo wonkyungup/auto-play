@@ -21,7 +21,12 @@ const onWatchTab = async () => {
                 await db.disabled();
             }
 
-            await Browser.tabs.sendMessage(<number>id, Defs.STR_YOUTUBE_SHORTS);
+        
+            try {
+                await Browser.tabs.sendMessage(id, Defs.STR_YOUTUBE_SHORTS);
+            } catch (err) {
+                //
+            }
         } else {
             await db.disabled();
         }
@@ -45,6 +50,10 @@ Tabs.onClickIconTab(async ({ id, url }: { id: number, url: string }) => {
         }
 
         await db.setActiveTab(id);
-        await Browser.tabs.sendMessage(id, Defs.STR_YOUTUBE_SHORTS);
+        try {
+            await Browser.tabs.sendMessage(id, Defs.STR_YOUTUBE_SHORTS);
+        } catch (err) {
+            //
+        }
     }
 })

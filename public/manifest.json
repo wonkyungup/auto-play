@@ -8,13 +8,11 @@
   ],
   "description": "youtube shorts video auto next play",
   "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png"
+    "64": "icon.png"
   },
   "action": {
     "default_icon": {
-      "16": "icon16_disable.png",
-      "48": "icon48_disable.png"
+      "64": "icon_disable.png"
     }
   },
   "background": {
