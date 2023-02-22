@@ -23,6 +23,5 @@
       "matches": ["*://*/*"],
       "js": ["content.js"]
     }
-  ],
-  "host_permissions": ["*://*/*"]
+  ]
 }
