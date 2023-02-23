@@ -1,6 +1,6 @@
 export default class Defs {
-    static ICON_ENABLE = 'icon.png';
-    static ICON_DISABLE = 'icon_disable.png';
+    static ICON_ENABLE = 'icon_enabled.png';
+    static ICON_DISABLE = 'icon_disabled.png';
     static DB_ICON = 'state';
     static DB_TAB = 'activeTab';
     static URI_YOUTUBE_SHORTS = 'https://www.youtube.com/shorts';

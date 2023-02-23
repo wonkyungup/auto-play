@@ -1,18 +1,19 @@
 {
-  "name": "youtube-shorts-auto-play",
+  "name": "auto-youtube-shorts-scroll-down",
   "manifest_version": 3,
   "version": "0.0.1",
   "permissions": [
     "storage",
     "tabs"
   ],
-  "description": "youtube shorts video auto next play",
+  "description": "Auto youtube shorts scroll down",
   "icons": {
-    "64": "icon.png"
+    "32": "icon_enabled.png",
+    "64": "icon_main.png"
   },
   "action": {
     "default_icon": {
-      "64": "icon_disable.png"
+      "32": "icon_disabled.png"
     }
   },
   "background": {
