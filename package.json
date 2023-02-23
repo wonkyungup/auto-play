@@ -1,7 +1,7 @@
 {
-  "name": "youtube-shorts-auto-play",
+  "name": "auto-youtube-shorts-scroll-down",
   "version": "0.0.1",
-  "description": "youtube shorts video auto next play",
+  "description": "Auto youtube shorts scroll down",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
