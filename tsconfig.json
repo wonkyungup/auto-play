@@ -5,9 +5,9 @@
         "strict": true,
         "noImplicitReturns": false,
         "noImplicitAny": true,
-        "module": "es6",
+        "module": "ESNext",
         "moduleResolution": "node",
-        "target": "es5",
+        "target": "ESNext",
         "allowJs": true,
         "jsx": "react",
         "allowSyntheticDefaultImports": true
