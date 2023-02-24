@@ -1,12 +1,12 @@
 {
-  "name": "auto-youtube-shorts-scroll-down",
+  "name": "Auto Youtube Shorts Scroll Down",
   "manifest_version": 3,
   "version": "0.0.1",
   "permissions": [
     "storage",
     "tabs"
   ],
-  "description": "Auto youtube shorts scroll down",
+  "description": "Auto Youtube Shorts Scroll Down",
   "icons": {
     "32": "icon_enabled.png",
     "64": "icon_main.png"
