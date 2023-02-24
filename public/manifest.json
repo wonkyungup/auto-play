@@ -9,7 +9,7 @@
   "description": "Auto Youtube Shorts Scroll Down",
   "icons": {
     "32": "icon_enabled.png",
-    "64": "icon_main.png"
+    "48": "icon_main.png"
   },
   "action": {
     "default_icon": {
