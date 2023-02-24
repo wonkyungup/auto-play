@@ -1,0 +1,9 @@
+This extension adds a button to automatically skip YouTube Shorts videos.
+Click the icon to automatically skip YouTube Shorts videos.
+
+Extensions can only be tapped once.
+You can turn off autoscroll in other tabs, but not enable it in other tabs.
+
+Note: The video must end before moving on to the next one.
+
+Update (v0.0.2): Changed the title and main and extension icons to be more visible.
