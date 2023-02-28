@@ -17,3 +17,5 @@ Note: The video must be over before moving on to the next one.
 <br />
 <br />
 <a href="https://chrome.google.com/webstore/detail/auto-youtube-shorts-scrol/bfofdkanfmkkbngkmhmcjichambccene">Chrome Web Store</a>
+<br />
+<a href="https://microsoftedge.microsoft.com/addons/detail/auto-youtube-shorts-scrol/ebndgghmhjpnnpfmamijhgpdihpglfhj">Microsoft Edge</a>
