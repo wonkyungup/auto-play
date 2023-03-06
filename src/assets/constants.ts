@@ -8,4 +8,8 @@ export default class Defs {
     static URI_ERROR = 'ERROR URI';
     static STR_YOUTUBE_SHORTS = 'youtube shorts';
     static STR_IS_ACTIVE = 'is-active';
+    static STR_ERROR = 'error';
+    static CONTEXT_MENU_OPTION_ID = 'Preferences';
+    static CONTEXT_MENU_OPTION_TITLE = Defs.CONTEXT_MENU_OPTION_ID;
+    static CONTEXT_MENU_CONTEXTS = ['action'];
 }
