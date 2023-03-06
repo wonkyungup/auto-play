@@ -4,7 +4,8 @@
   "version": "0.0.2",
   "permissions": [
     "storage",
-    "tabs"
+    "tabs",
+    "contextMenus"
   ],
   "description": "Auto Youtube Shorts Scroll Down",
   "icons": {
