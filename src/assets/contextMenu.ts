@@ -25,7 +25,7 @@ export default class ContextMenu {
             switch (menuItemId) {
                 case Defs.CONTEXT_MENU_OPTION_ID:
                     await Browser.windows.create({
-                        url: 'https://stackoverflow.com/questions/33361715/open-extension-popup-when-click-on-context-menu',
+                        url: './options.html',
                         focused: true,
                         type: 'popup',
                         width: 640,
