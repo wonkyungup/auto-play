@@ -19,7 +19,7 @@ export default class YoutubeShorts {
         this._innerList = Array.from(<HTMLCollection>document.getElementById(this._innerId)?.children);
         for (let index = 0; index < this._innerList.length; index++) {
             const innerContainer = <Element>this._innerList[index];
-            if (innerContainer.getAttribute(Defs.STR_IS_ACTIVE) !== null) {
+            if (innerContainer.getAttribute('is-active') !== null) {
                 this._innerContainer = innerContainer;
                 return;
             }
