@@ -2,6 +2,9 @@
   "name": "Auto Youtube Shorts Scroll Down",
   "manifest_version": 3,
   "version": "0.0.2",
+  "permissions": [
+    "tabs"
+  ],
   "description": "Auto Youtube Shorts Scroll Down",
   "icons": {
     "16": "16x16.png",

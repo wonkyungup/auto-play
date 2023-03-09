@@ -3,10 +3,8 @@ import * as ReactDOM from "react-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import Link from '@mui/material/Link';
+import SystemTheme from './components/SystemTheme';
 
 const Introduction = () => {
     return (
@@ -50,23 +48,11 @@ const Introduction = () => {
 }
 
 const App = () => {
-    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-    const theme = React.useMemo(
-        () =>
-            createTheme({
-                palette: {
-                    mode: prefersDarkMode ? 'dark' : 'light',
-                },
-            }),
-        [prefersDarkMode],
-    );
-
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
+        <SystemTheme>
             <Introduction />
-        </ThemeProvider>
-    );
+        </SystemTheme>
+    )
 }
 
 const mountNode = document.getElementById("popup");
