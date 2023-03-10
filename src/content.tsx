@@ -12,36 +12,61 @@ import SystemTheme from './components/SystemTheme';
 import Browser from "webextension-polyfill";
 import YoutubeShorts from "./assets/youtubeShorts";
 
-const youtubeShorts = new YoutubeShorts();
+const youtubeShorts = new YoutubeShorts('shorts-container', 'shorts-inner-container');
+setTimeout(async () => {
+    await youtubeShorts.setCurPlayVideo();
+
+    const actions = youtubeShorts._innerContainer?.querySelector('#actions');
+    const div = document.createElement('div');
+    div.id = 'auto-play';
+    actions?.append(div);
+
+    const autoPlay = document.getElementById('auto-play');
+    if (autoPlay) {
+        ReactDOM.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>,
+            autoPlay
+        )
+    }
+}, 300);
+
 const MediaControlCard = () => {
     const theme = useTheme();
     const [profile, setProfile] = React.useState();
-    const [curVideo, setCurVideo] = React.useState();
+    const initVideoProfile = async () => {
+        setTimeout(async () => {
+            // @ts-ignore
+            setProfile(await youtubeShorts.getCurPlayVideoProfile());
+        }, 200);
+    }
 
     React.useEffect(() => {
-        setTimeout(async () => {
-            setProfile(await youtubeShorts.getMediaPlayProfile());
-            console.log(chrome);
-            console.log(chrome.tabs);
-        }, 500);
+        (async () => await initVideoProfile())();
+        Browser.runtime.onMessage.addListener(async message => {
+            if (message === `URL: Detection`) {
+                await initVideoProfile();
+            }
+        })
     }, [])
 
     return (
-        <Card sx={{ display: 'flex', right: 0, position: 'absolute', zIndex: 9999, top: '30%' }}>
+        <Card sx={{ display: 'flex', right: 0, position: 'absolute', top: 0 }}>
             <CardMedia
                 component="img"
                 sx={{ width: 48, height: 48 }}
                 image={profile}
-                alt="Refresh page."
+                alt="load"
             />
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <IconButton aria-label="previous">
+                <IconButton aria-label="previous" sx={{ display: 'none' }}>
                     {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
                 </IconButton>
                 <IconButton aria-label="play/pause">
-                    <PlayArrowIcon />
+                    <PlayArrowIcon sx={{ width: 32, height: 32 }}/>
                 </IconButton>
-                <IconButton aria-label="next">
+                <IconButton aria-label="next" sx={{ display: 'none' }}>
                     {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
                 </IconButton>
             </Box>
@@ -56,21 +81,3 @@ const App = () => {
         </SystemTheme>
     )
 }
-
-const mountNode = document.getElementById("page-manager");
-ReactDOM.render(<App />, mountNode);
-
-// window.onload = async () => {
-//     return await Browser.runtime.sendMessage(Defs.STR_ERROR);
-// }
-//
-// Browser.runtime.onMessage.addListener(async (message) => {
-//     switch (message) {
-//         case Defs.STR_YOUTUBE_SHORTS:
-//             const youtubeShorts = new YoutubeShorts('shorts-container', 'shorts-inner-container');
-//             return await youtubeShorts.onExecution();
-//         case Defs.URI_ERROR:
-//         default:
-//             return await Browser.runtime.sendMessage(Defs.STR_ERROR);
-//     }
-// })
