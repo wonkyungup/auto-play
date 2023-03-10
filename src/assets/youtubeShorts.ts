@@ -1,8 +1,3 @@
-import Defs from '../assets/constants';
-import DB from '../model';
-
-const db = new DB();
-
 export default class YoutubeShorts {
     _container: HTMLElement | null;
     _innerId: string;
@@ -19,11 +14,19 @@ export default class YoutubeShorts {
         this._innerList = Array.from(<HTMLCollection>document.getElementById(this._innerId)?.children);
         for (let index = 0; index < this._innerList.length; index++) {
             const innerContainer = <Element>this._innerList[index];
-            if (innerContainer.getAttribute(Defs.STR_IS_ACTIVE) !== null) {
+            if (innerContainer.getAttribute('is-active') !== null) {
                 this._innerContainer = innerContainer;
                 return;
             }
         }
+    }
+
+    async getCurPlayVideoProfile () {
+        await this.setCurPlayVideo();
+
+        const image = this._innerContainer?.querySelector('img');
+        console.log(image?.getAttribute('src'));
+        return image?.getAttribute('src');
     }
 
     async getNextElement () {
@@ -42,31 +45,10 @@ export default class YoutubeShorts {
 
     doesNextVideo () {
         const video = this._innerContainer?.querySelector('video');
-        if (!video) {
-            return this.refreshExecution();
-        }
         video?.removeAttribute('loop');
         video?.addEventListener('ended', async () => {
             const element = await this.getNextElement();
             element.scrollIntoView({ block: 'end', behavior: 'smooth'});
         })
-    }
-
-    refreshExecution () {
-        setTimeout(async () => {
-            await this.onExecution();
-        }, 0)
-    }
-
-    async onExecution () {
-        const state = await db.getStateIconSync();
-        await this.setCurPlayVideo();
-
-        if (!state) {
-            this.doesLoopVideo();
-            return;
-        }
-
-        return this.doesNextVideo();
     }
 }
