@@ -21,14 +21,6 @@ export default class YoutubeShorts {
         }
     }
 
-    async getCurPlayVideoProfile () {
-        await this.setCurPlayVideo();
-
-        const image = this._innerContainer?.querySelector('img');
-        console.log(image?.getAttribute('src'));
-        return image?.getAttribute('src');
-    }
-
     async getNextElement () {
         await this.setCurPlayVideo();
 
