@@ -1,9 +1,10 @@
-This extension adds a button to automatically skip YouTube Shorts videos.
-Click the icon to automatically skip YouTube Shorts videos.
+Automatically flip YouTube Shorts videos through a switch.
 
-Extensions can only be tapped once.
-You can turn off autoscroll in other tabs, but not enable it in other tabs.
+You need to open the YouTube Shorts homepage to use it.
+A switch is created at the top inside the video.
+If there is no switch, refresh the page.
 
-Note: The video must end before moving on to the next one.
+It is a test project that I made for personal study, so please give us a lot of interest.
+The code has been published on Github.
 
-Update (v0.0.2): Changed the title and main and extension icons to be more visible.
+Update (v0.0.3): Added popup window, changed default UI.
