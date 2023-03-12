@@ -1,10 +1,10 @@
-Automatically flip YouTube Shorts videos through a switch.
+Automatically play YouTube Shorts videos through a switch.
 
 You need to open the YouTube Shorts homepage to use it.
 A switch is created at the top inside the video.
-If there is no switch, refresh the page.
+If there is no switch, it will refresh the page.
 
-It is a test project that I made for personal study, so please give us a lot of interest.
-The code has been published on Github.
+This is a test project made for personal study, so please give us a lot of interest.
+The code has been posted on Github.
 
 Update (v0.0.3): Added popup window, changed default UI.
