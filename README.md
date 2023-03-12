@@ -5,21 +5,16 @@
 
 <h1>Auto Youtube Shorts Scroll Down</h1>
 <p>This extension adds a button to automatically skip YouTube Shorts videos.</p>
-<p>Click the icon to automatically skip YouTube Shorts videos.</p>
+<p>Automatically flip YouTube Shorts videos through a switch.</p>
 
-<br />
+You need to open the YouTube Shorts homepage to use it.
+A switch is created at the top inside the video.
+If there is no switch, refresh the page.
 
-<p>Extensions can only be tapped once.</p>
-<p>You can turn off autoscroll in other tabs, but not enable it in other tabs.</p>
+It is a test project that I made for personal study, so please give us a lot of interest.
 
-<br />
-Note: The video must be over before moving on to the next one.
+Update (v0.0.3): Added popup window, changed default UI.
 
-<br />
-<br />
-<strong>Update (v0.0.2): Changed title and main icons and extension icons to be more visible.</strong>
-
-<br />
 <br />
 <a href="https://chrome.google.com/webstore/detail/auto-youtube-shorts-scrol/bfofdkanfmkkbngkmhmcjichambccene">Chrome Web Store</a>
 <br />
