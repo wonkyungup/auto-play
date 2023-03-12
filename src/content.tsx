@@ -6,13 +6,7 @@ import Browser from "webextension-polyfill";
 import YoutubeShorts from "./assets/youtubeShorts";
 
 let isAutoPlay: boolean = false;
-
-window.onload = async () => {
-    await Browser.runtime.sendMessage('URL: Detection');
-}
-
 const youtubeShorts = new YoutubeShorts('shorts-container', 'shorts-inner-container');
-
 const App = () => {
     const [checked, setChecked] = React.useState(isAutoPlay);
     const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +15,11 @@ const App = () => {
     }
 
     React.useEffect(() => {
-        console.log(checked);
+        if (checked) {
+            youtubeShorts.doesNextVideo();
+        } else {
+            youtubeShorts.doesLoopVideo();
+        }
     }, [checked]);
 
     return (
@@ -32,6 +30,10 @@ const App = () => {
             />
         </SystemTheme>
     )
+}
+
+window.onload = async () => {
+    await Browser.runtime.sendMessage('URL: Detection');
 }
 
 Browser.runtime.onMessage.addListener((request) => {
