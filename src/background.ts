@@ -1,13 +1,13 @@
-import Browser from "webextension-polyfill";
+import Browser from 'webextension-polyfill';
+import Defs from './assets/constatns';
 
-const URL_YOUTUBE_SHORTS = 'https://www.youtube.com/shorts';
-const isValidToUrl = (url: string) => url.includes(URL_YOUTUBE_SHORTS);
+const isValidToUrl = (url: string) => url.includes(Defs.URL_YOUTUBE_SHORTS);
 
 Browser.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
     try {
         if (Browser.runtime.lastError) console.error(Browser.runtime.lastError);
         else if (changeInfo.url && isValidToUrl(changeInfo?.url)) {
-            await Browser.tabs.sendMessage(tabId, 'URL: Detection');
+            await Browser.tabs.sendMessage(tabId, Defs.EVENT_URL_DETECTION);
         }
     } catch (err) {
         console.log(`TAB :: UPDATE :: ERROR :: ${err}`);
@@ -15,10 +15,10 @@ Browser.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 });
 
 Browser.runtime.onMessage.addListener(async (request, sender) => {
-    if (request === 'URL: Detection') {
+    if (request === Defs.EVENT_URL_DETECTION) {
         const tabId = sender.tab?.id;
         if (tabId) {
-            await Browser.tabs.sendMessage(tabId, 'URL: Detection');
+            await Browser.tabs.sendMessage(tabId, Defs.EVENT_URL_DETECTION);
         }
     }
 })

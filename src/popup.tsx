@@ -1,10 +1,11 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import SystemTheme from './components/SystemTheme';
+import Defs from './assets/constatns'
 
 const Introduction = () => {
     return (
@@ -18,7 +19,7 @@ const Introduction = () => {
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     To start using this extension, <br />
-                    you need to open the <Link href="https://www.youtube.com/shorts" target="_blank">Youtube Shorts</Link> home page.
+                    you need to open the <Link href={Defs.URL_YOUTUBE_SHORTS} target="_blank">Youtube Shorts</Link> home page.
 
                     <br />
                     <br />
@@ -39,7 +40,7 @@ const Introduction = () => {
 
                     ❤️ If you come in, please press a star. Thank you.
                     <br />
-                    ⭐ Project home page and source code: <Link href="https://github.com/wonkyungup/auto-youtube-shorts-scroll-down" target="_blank">Github</Link>
+                    ⭐ Project home page and source code: <Link href={Defs.URL_GITHUB} target="_blank">Github</Link>
                     <br />
                 </Typography>
             </CardContent>
