@@ -24,17 +24,18 @@ const Introduction = () => {
                     <br />
                     <br />
 
-                    🚀 A box will display at the top right corner of your screen with a 'PLAY' button.<br />
-                    🚀 Click PLAY to start Video Scroll Down.
+                    🚀 A switch is created at the top of the video.
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     This extension allows you to automatically scroll down YouTube shorts.
                     <br />
                     <br />
 
-                    😀 play button, it means not using it.
+                    😀 Autoplay starts when you turn on the switch.
                     <br />
-                    😀 pause button, it means you're using it.
+                    😀 Autoplay is canceled when the switch is turned off.
+                    <br />
+                    😀 Sometimes I can't create a switch, the solution is to refresh the page.
                     <br />
                     <br />
 
