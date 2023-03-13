@@ -1,0 +1,17 @@
+{
+  "popup": {
+    "title": "Auto Youtube Shorts Scroll Down",
+    "body1P1": "To start using this extension, you need to open the: ",
+    "body1P2": "A switch is created at the top of the video.",
+    "body2P1": "This extension allows you to automatically scroll down YouTube shorts.",
+    "body2P2": "Autoplay starts when you turn on the switch.",
+    "body2P3": "Autoplay is canceled when the switch is turned off.",
+    "body2P4": "Sometimes I can't create a switch, the solution is to refresh the page.",
+    "body2P5": "If you come in, please press a star. Thank you.",
+    "body2P6": "Project home page and source code: "
+  },
+  "tooltip": {
+    "disableAutoPlay": "Disable autoplay",
+    "enableAutoPlay": "Enable autoplay"
+  }
+}

@@ -1,3 +1,4 @@
+import './i18n';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Card from '@mui/material/Card';
@@ -5,40 +6,42 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import SystemTheme from './components/SystemTheme';
+import { useTranslation } from 'react-i18next';
 import Defs from './assets/constatns';
 
 const Introduction = () => {
+  const { t } = useTranslation();
+
   return (
-    <Card sx={{ minWidth: 420 }} variant="outlined">
+    <Card sx={{ minWidth: 420, userSelect: 'none' }} variant="outlined">
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Auto Youtube Shorts Scroll Down
+          {t('popup:title')}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          To start using this extension, <br />
-          you need to open the{' '}
+        <Typography variant="body1" color="text.secondary">
+          {t('popup:body1P1')}
           <Link href={Defs.URL_YOUTUBE_SHORTS} target="_blank">
             Youtube Shorts
-          </Link>{' '}
-          home page.
+          </Link>
           <br />
           <br />
-          🚀 A switch is created at the top of the video.
+          🚀 {t('popup:body1P2')}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          This extension allows you to automatically scroll down YouTube shorts.
           <br />
           <br />
-          😀 Autoplay starts when you turn on the switch.
-          <br />
-          😀 Autoplay is canceled when the switch is turned off.
-          <br />
-          😀 Sometimes I can't create a switch, the solution is to refresh the
-          page.
+          {t('popup:body2P1')}
           <br />
           <br />
-          ❤️ If you come in, please press a star. Thank you.
-          <br />⭐ Project home page and source code:{' '}
+          😀 {t('popup:body2P2')}
+          <br />
+          😀 {t('popup:body2P3')}
+          <br />
+          😀 {t('popup:body2P4')}
+          <br />
+          <br />
+          ❤️ {t('popup:body2P5')}
+          <br />⭐ {t('popup:body2P6')}
           <Link href={Defs.URL_GITHUB} target="_blank">
             Github
           </Link>
