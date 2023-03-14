@@ -12,7 +12,8 @@
   },
   "tooltip": {
     "disableAutoPlay": "Deaktiviere Autoplay",
-    "enableAutoPlay": "Autoplay aktivieren"
+    "enableAutoPlay": "Autoplay aktivieren",
+    "setting": "Einstellung"
   }
 }
 

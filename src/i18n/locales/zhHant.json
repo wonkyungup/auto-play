@@ -12,7 +12,8 @@
   },
   "tooltip": {
     "disableAutoPlay": "禁用自動播放",
-    "enableAutoPlay": "啟用自動播放"
+    "enableAutoPlay": "啟用自動播放",
+    "setting": "環境"
   }
 }
 
