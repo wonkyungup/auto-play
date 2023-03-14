@@ -58,7 +58,6 @@ Browser.runtime.onMessage.addListener((request) => {
             'auto-youtube-shorts-scroll-down',
           );
           if (autoYoutubeShortsScrollDown) {
-            /* ....? */
             autoYoutubeShortsScrollDown.remove();
           }
 
