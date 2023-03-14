@@ -1,4 +1,4 @@
-Automatically play YouTube Shorts videos through a switch.
+Automatically play YouTube Shorts videos via switch.
 
 You need to open the YouTube Shorts homepage to use it.
 A switch is created at the top inside the video.
@@ -7,4 +7,6 @@ If there is no switch, it will refresh the page.
 This is a test project made for personal study, so please give us a lot of interest.
 The code has been posted on Github.
 
-Update (v0.0.3): Added popup window, changed default UI.
+Version 1.0.0
+1. The UI has been changed.
+2. Multilingual processing has been done.
