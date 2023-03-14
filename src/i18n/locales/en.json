@@ -12,6 +12,7 @@
   },
   "tooltip": {
     "disableAutoPlay": "Disable autoplay",
-    "enableAutoPlay": "Enable autoplay"
+    "enableAutoPlay": "Enable autoplay",
+    "setting": "setting"
   }
 }

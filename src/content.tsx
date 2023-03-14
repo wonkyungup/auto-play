@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import SystemTheme from './components/SystemTheme';
 import ToggleSwitch from './components/ToggleSwitch';
+import OptionButton from './components/OptionButton';
 import Browser from 'webextension-polyfill';
 import Defs from './assets/constatns';
 import YoutubeShorts from './assets/youtubeShorts';
@@ -13,26 +14,31 @@ const youtubeShorts = new YoutubeShorts(
   'shorts-inner-container',
 );
 const App = () => {
-  const [checked, setChecked] = React.useState(isAutoPlay);
+  const [isSwitch, setIsSwitch] = React.useState(isAutoPlay);
   const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     isAutoPlay = event.target.checked;
-    setChecked(isAutoPlay);
+    setIsSwitch(isAutoPlay);
+  };
+
+  const openOptionModal = () => {
+    console.log('openOptionModal');
   };
 
   React.useEffect(() => {
-    if (checked) {
+    if (isSwitch) {
       youtubeShorts.doesNextVideo();
     } else {
       youtubeShorts.doesLoopVideo();
     }
-  }, [checked]);
+  }, [isSwitch]);
 
   return (
     <SystemTheme>
       <ToggleSwitch
-        checked={checked}
+        isSwitch={isSwitch}
         onChange={(event) => handlerChange(event)}
       />
+      <OptionButton onClick={() => openOptionModal()} />
     </SystemTheme>
   );
 };

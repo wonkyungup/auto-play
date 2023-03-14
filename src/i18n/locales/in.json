@@ -12,7 +12,8 @@
   },
   "tooltip": {
     "disableAutoPlay": "ऑटोप्ले अक्षम करें",
-    "enableAutoPlay": "ऑटोप्ले सक्षम करें"
+    "enableAutoPlay": "ऑटोप्ले सक्षम करें",
+    "setting": "सेटिंग"
   }
 }
 

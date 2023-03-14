@@ -6,10 +6,10 @@ import Tooltip from '@mui/material/Tooltip';
 import { useTranslation } from 'react-i18next';
 
 const ToggleSwitch = ({
-  checked,
+  isSwitch,
   onChange,
 }: {
-  checked: boolean;
+  isSwitch: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ const ToggleSwitch = ({
   return (
     <Tooltip
       title={
-        checked ? t('tooltip:disableAutoPlay') : t('tooltip:enableAutoPlay')
+        isSwitch ? t('tooltip:disableAutoPlay') : t('tooltip:enableAutoPlay')
       }
       arrow
     >
@@ -26,7 +26,7 @@ const ToggleSwitch = ({
         sx={{ pointerEvents: 'all' }}
         checkedIcon={<PlayCircleFilledIcon fontSize="large" />}
         icon={<PauseCircleFilledIcon fontSize="large" />}
-        checked={checked}
+        checked={isSwitch}
         onChange={onChange}
       />
     </Tooltip>

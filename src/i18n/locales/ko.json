@@ -12,7 +12,8 @@
   },
   "tooltip": {
     "disableAutoPlay": "자동재생 사용 중지",
-    "enableAutoPlay": "자동재생 사용 설정"
+    "enableAutoPlay": "자동재생 사용 설정",
+    "setting": "설정"
   }
 }
 
