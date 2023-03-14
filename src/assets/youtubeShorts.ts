@@ -1,3 +1,6 @@
+import Browser from 'webextension-polyfill';
+import Defs from './constatns';
+
 export default class YoutubeShorts {
   _container: HTMLElement | null;
   _innerId: string;
@@ -43,6 +46,8 @@ export default class YoutubeShorts {
     video?.addEventListener('ended', async () => {
       const element = await this.getNextElement();
       element.scrollIntoView({ block: 'end', behavior: 'smooth' });
+
+      await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER);
     });
   }
 }
