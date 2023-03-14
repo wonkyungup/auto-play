@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import SystemTheme from './components/SystemTheme';
 import ToggleSwitch from './components/ToggleSwitch';
-import OptionButton from './components/OptionButton';
+// import OptionButton from './components/OptionButton';
 import Browser from 'webextension-polyfill';
 import Defs from './assets/constatns';
 import YoutubeShorts from './assets/youtubeShorts';
@@ -13,6 +13,7 @@ const youtubeShorts = new YoutubeShorts(
   'shorts-container',
   'shorts-inner-container',
 );
+
 const App = () => {
   const [isSwitch, setIsSwitch] = React.useState(isAutoPlay);
   const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,13 +39,17 @@ const App = () => {
         isSwitch={isSwitch}
         onChange={(event) => handlerChange(event)}
       />
-      <OptionButton onClick={() => openOptionModal()} />
+      {/*<OptionButton onClick={() => openOptionModal()} />*/}
     </SystemTheme>
   );
 };
 
 window.onload = async () => {
-  await Browser.runtime.sendMessage(Defs.EVENT_URL_DETECTION);
+  await Browser.runtime.sendMessage(Defs.EVENT_PAGE_RELOAD);
+};
+
+window.onclick = async () => {
+  await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER);
 };
 
 Browser.runtime.onMessage.addListener((request) => {
