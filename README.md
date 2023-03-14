@@ -5,7 +5,7 @@
 
 <h1>Auto Youtube Shorts Scroll Down</h1>
 <p>This extension adds a button to automatically skip YouTube Shorts videos.</p>
-<p>Automatically flip YouTube Shorts videos through a switch.</p>
+<p>Automatically play YouTube Shorts videos through a switch.</p>
 
 You need to open the YouTube Shorts homepage to use it.
 A switch is created at the top inside the video.
