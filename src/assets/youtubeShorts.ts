@@ -1,13 +1,13 @@
-import Browser from 'webextension-polyfill';
-import Defs from './constatns';
+import Defs from './constants';
 
 export default class YoutubeShorts {
   _innerContainer: Element | null;
   _innerList: any[];
-  constructor() {
+  _ee: any;
+  constructor(ee: any) {
     this._innerList = [];
     this._innerContainer = null;
-    this.setActivateEvent();
+    this._ee = ee;
   }
 
   async setCurPlayVideo() {
@@ -46,52 +46,38 @@ export default class YoutubeShorts {
       const element = await this.getNextElement();
       element.scrollIntoView({ block: 'end', behavior: 'smooth' });
 
-      await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER);
+      this._ee.emit(Defs.EVENT_PAGE_WATCH);
     });
   }
 
-  setActivateEvent() {
-    window.onload = async () =>
-      await Browser.runtime.sendMessage(Defs.EVENT_PAGE_RELOAD);
-    document
-      .getElementById('shorts-container')
-      ?.addEventListener(
-        'wheel',
-        async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER),
-      );
-    document
-      .querySelector(
-        '#navigation-button-up > ytd-button-renderer > yt-button-shape > button',
-      )
-      ?.addEventListener(
-        'click',
-        async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER),
-      );
-    document
-      .querySelector(
-        '#navigation-button-down > ytd-button-renderer > yt-button-shape > button',
-      )
-      ?.addEventListener(
-        'click',
-        async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER),
-      );
-    document
-      .querySelector('#items > ytd-guide-entry-renderer:nth-child(2)')
-      ?.addEventListener(
-        'click',
-        async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER),
-      );
-    document
-      .querySelector('#items > ytd-mini-guide-entry-renderer:nth-child(2)')
-      ?.addEventListener(
-        'click',
-        async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER),
-      );
+  async setActivateEvent() {
+    const navigationDown: HTMLElement | null = document.querySelector(
+      '#navigation-button-down',
+    );
+    const navigationUp: HTMLElement | null = document.querySelector(
+      '#navigation-button-up',
+    );
+    if (navigationDown) {
+      navigationDown.addEventListener('click', () => {
+        this._ee.emit(Defs.EVENT_PAGE_WATCH);
+      });
+    }
+    if (navigationUp) {
+      navigationUp.addEventListener('click', () => {
+        this._ee.emit(Defs.EVENT_PAGE_WATCH);
+      });
+    }
 
-    document.addEventListener('keyup', async (event) => {
+    document.addEventListener('wheel', () => {
+      this._ee.emit(Defs.EVENT_PAGE_WATCH);
+    });
+
+    document.addEventListener('keyup', (event) => {
       if (event.keyCode === 38 || event.keyCode === 40) {
-        await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER);
+        this._ee.emit(Defs.EVENT_PAGE_WATCH);
       }
     });
+
+    return;
   }
 }

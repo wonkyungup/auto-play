@@ -4,12 +4,31 @@ import * as ReactDOM from 'react-dom';
 import SystemTheme from './components/SystemTheme';
 import ToggleSwitch from './components/ToggleSwitch';
 import OptionButton from './components/OptionButton';
-import Browser from 'webextension-polyfill';
-import Defs from './assets/constatns';
 import YoutubeShorts from './assets/youtubeShorts';
+import Defs from './assets/constants';
+import { EventEmitter } from 'events';
+
+const ee = new EventEmitter();
+const youtubeShorts = new YoutubeShorts(ee);
 
 let isAutoPlay: boolean = false;
-const youtubeShorts = new YoutubeShorts();
+
+setTimeout(async () => {
+  if (document.getElementById('guide-inner-content')) {
+    document.getElementById('guide-inner-content')?.remove();
+  }
+
+  if (document.querySelector('#content > ytd-mini-guide-renderer')) {
+    document.querySelector('#content > ytd-mini-guide-renderer')?.remove();
+  }
+
+  if (document.getElementById('masthead')) {
+    document.getElementById('masthead')?.remove();
+  }
+
+  await youtubeShorts.setActivateEvent();
+  window.onload = () => ee.emit(Defs.EVENT_PAGE_WATCH);
+}, 500);
 
 const App = () => {
   const [isSwitch, setIsSwitch] = React.useState(isAutoPlay);
@@ -41,47 +60,6 @@ const App = () => {
   );
 };
 
-Browser.runtime.onMessage.addListener((request) => {
-  if (
-    request === Defs.EVENT_PAGE_LISTENER ||
-    request === Defs.EVENT_PAGE_RELOAD
-  ) {
-    const isValidToUrl = (url: string) => url.includes(Defs.URL_YOUTUBE_SHORTS);
-    setTimeout(async () => {
-      if (!isValidToUrl(location.href)) {
-        return;
-      }
-
-      await youtubeShorts.setCurPlayVideo();
-      const actions = youtubeShorts._innerContainer?.querySelectorAll(
-        'ytd-shorts-player-controls',
-      );
-
-      if (actions) {
-        const actionsList = actions[0].children;
-        if (actionsList.length > 0) {
-          const beforeDiv = actionsList[actionsList.length - 1];
-
-          const autoYoutubeShortsScrollDown = document.getElementById(
-            'auto-youtube-shorts-scroll-down',
-          );
-          if (autoYoutubeShortsScrollDown) {
-            autoYoutubeShortsScrollDown.remove();
-          }
-
-          const div = document.createElement('div');
-          div.id = 'auto-youtube-shorts-scroll-down';
-          div.style.display = 'inline-block';
-          div.style.position = 'relative';
-          div.style.marginTop = '-7px';
-
-          beforeDiv?.parentNode?.insertBefore(div, beforeDiv);
-          ReactDOM.render(
-            <App />,
-            document.getElementById('auto-youtube-shorts-scroll-down'),
-          );
-        }
-      }
-    }, 500);
-  }
+ee.on(Defs.EVENT_PAGE_WATCH, () => {
+  ReactDOM.render(<App />, document.getElementById('masthead-container'));
 });

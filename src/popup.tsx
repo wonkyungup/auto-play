@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import SystemTheme from './components/SystemTheme';
 import { useTranslation } from 'react-i18next';
-import Defs from './assets/constatns';
+import Defs from './assets/constants';
 
 const Introduction = () => {
   const { t } = useTranslation();
