@@ -9,14 +9,14 @@ Browser.runtime.onMessage.addListener(async (request, sender) => {
       case Defs.EVENT_PAGE_RELOAD:
         return Browser.tabs.sendMessage(
           <number>sender.tab?.id,
-          Defs.EVENT_PAGE_RELOAD
+          Defs.EVENT_PAGE_RELOAD,
         );
       case Defs.EVENT_PAGE_LISTENER:
         Browser.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
           if (changeInfo.url && isValidToUrl(changeInfo?.url)) {
             return await Browser.tabs.sendMessage(
               tabId,
-              Defs.EVENT_PAGE_LISTENER
+              Defs.EVENT_PAGE_LISTENER,
             );
           }
         });

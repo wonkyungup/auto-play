@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import SystemTheme from './components/SystemTheme';
 import ToggleSwitch from './components/ToggleSwitch';
-// import OptionButton from './components/OptionButton';
+import OptionButton from './components/OptionButton';
 import Browser from 'webextension-polyfill';
 import Defs from './assets/constatns';
 import YoutubeShorts from './assets/youtubeShorts';
@@ -36,13 +36,16 @@ const App = () => {
         isSwitch={isSwitch}
         onChange={(event) => handlerChange(event)}
       />
-      {/*<OptionButton onClick={() => openOptionModal()} />*/}
+      <OptionButton onClick={() => openOptionModal()} />
     </SystemTheme>
   );
 };
 
 Browser.runtime.onMessage.addListener((request) => {
-  if (request === Defs.EVENT_PAGE_LISTENER || request === Defs.EVENT_PAGE_RELOAD) {
+  if (
+    request === Defs.EVENT_PAGE_LISTENER ||
+    request === Defs.EVENT_PAGE_RELOAD
+  ) {
     const isValidToUrl = (url: string) => url.includes(Defs.URL_YOUTUBE_SHORTS);
     setTimeout(async () => {
       if (!isValidToUrl(location.href)) {
@@ -53,25 +56,25 @@ Browser.runtime.onMessage.addListener((request) => {
       const actions = youtubeShorts._innerContainer?.querySelectorAll(
         'ytd-shorts-player-controls',
       );
-  
+
       if (actions) {
         const actionsList = actions[0].children;
         if (actionsList.length > 0) {
           const beforeDiv = actionsList[actionsList.length - 1];
-  
+
           const autoYoutubeShortsScrollDown = document.getElementById(
             'auto-youtube-shorts-scroll-down',
           );
           if (autoYoutubeShortsScrollDown) {
             autoYoutubeShortsScrollDown.remove();
           }
-  
+
           const div = document.createElement('div');
           div.id = 'auto-youtube-shorts-scroll-down';
           div.style.display = 'inline-block';
           div.style.position = 'relative';
           div.style.marginTop = '-7px';
-  
+
           beforeDiv?.parentNode?.insertBefore(div, beforeDiv);
           ReactDOM.render(
             <App />,
