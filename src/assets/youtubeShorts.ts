@@ -2,20 +2,17 @@ import Browser from 'webextension-polyfill';
 import Defs from './constatns';
 
 export default class YoutubeShorts {
-  _container: HTMLElement | null;
-  _innerId: string;
   _innerContainer: Element | null;
   _innerList: any[];
-  constructor(containerId: string, innerContainerId: string) {
-    this._container = document.getElementById(containerId);
-    this._innerId = innerContainerId;
-    this._innerContainer = null;
+  constructor() {
     this._innerList = [];
+    this._innerContainer = null;
+    this.setActivateEvent();
   }
 
   async setCurPlayVideo() {
     this._innerList = Array.from(
-      <HTMLCollection>document.getElementById(this._innerId)?.children,
+      <HTMLCollection>document.getElementById('shorts-inner-container')?.children,
     );
     for (let index = 0; index < this._innerList.length; index++) {
       const innerContainer = <Element>this._innerList[index];
@@ -49,5 +46,20 @@ export default class YoutubeShorts {
 
       await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER);
     });
+  }
+
+  setActivateEvent () {
+    window.onload = async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_RELOAD);
+    document.getElementById("shorts-container")?.addEventListener("wheel", async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER));
+    document.querySelector("#navigation-button-up > ytd-button-renderer > yt-button-shape > button")?.addEventListener("click", async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER));
+    document.querySelector("#navigation-button-down > ytd-button-renderer > yt-button-shape > button")?.addEventListener("click", async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER));
+    document.querySelector("#items > ytd-guide-entry-renderer:nth-child(2)")?.addEventListener("click", async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER));
+    document.querySelector("#items > ytd-mini-guide-entry-renderer:nth-child(2)")?.addEventListener("click", async () => await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER));
+
+    document.addEventListener("keyup", async (event) => {
+      if (event.keyCode === 38 || event.keyCode === 40) {
+        await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER);
+      }
+    })
   }
 }

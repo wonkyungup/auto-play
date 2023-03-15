@@ -9,18 +9,14 @@ Browser.runtime.onMessage.addListener(async (request, sender) => {
       case Defs.EVENT_PAGE_RELOAD:
         return Browser.tabs.sendMessage(
           <number>sender.tab?.id,
-          Defs.EVENT_URL_DETECTION,
+          Defs.EVENT_PAGE_RELOAD
         );
       case Defs.EVENT_PAGE_LISTENER:
         Browser.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
-          if (Browser.runtime.lastError) {
-            throw new Error(<any>Browser.runtime.lastError);
-          }
-
           if (changeInfo.url && isValidToUrl(changeInfo?.url)) {
             return await Browser.tabs.sendMessage(
               tabId,
-              Defs.EVENT_URL_DETECTION,
+              Defs.EVENT_PAGE_LISTENER
             );
           }
         });
@@ -28,8 +24,8 @@ Browser.runtime.onMessage.addListener(async (request, sender) => {
       default:
         break;
     }
-  } catch (e) {
-    console.log(`BACKGROUND :: LISTENER :: ERROR :: ${e}`);
+  } catch (e: any) {
+    console.log(`BACKGROUND :: LISTENER :: ERROR :: ${e.message}`);
   }
   return false;
 });

@@ -9,10 +9,7 @@ import Defs from './assets/constatns';
 import YoutubeShorts from './assets/youtubeShorts';
 
 let isAutoPlay: boolean = false;
-const youtubeShorts = new YoutubeShorts(
-  'shorts-container',
-  'shorts-inner-container',
-);
+const youtubeShorts = new YoutubeShorts();
 
 const App = () => {
   const [isSwitch, setIsSwitch] = React.useState(isAutoPlay);
@@ -44,40 +41,37 @@ const App = () => {
   );
 };
 
-window.onload = async () => {
-  await Browser.runtime.sendMessage(Defs.EVENT_PAGE_RELOAD);
-};
-
-window.onclick = async () => {
-  await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER);
-};
-
 Browser.runtime.onMessage.addListener((request) => {
-  if (request === Defs.EVENT_URL_DETECTION) {
+  if (request === Defs.EVENT_PAGE_LISTENER || request === Defs.EVENT_PAGE_RELOAD) {
+    const isValidToUrl = (url: string) => url.includes(Defs.URL_YOUTUBE_SHORTS);
     setTimeout(async () => {
-      await youtubeShorts.setCurPlayVideo();
+      if (!isValidToUrl(location.href)) {
+        return;
+      }
 
+      await youtubeShorts.setCurPlayVideo();
       const actions = youtubeShorts._innerContainer?.querySelectorAll(
         'ytd-shorts-player-controls',
       );
+  
       if (actions) {
         const actionsList = actions[0].children;
         if (actionsList.length > 0) {
           const beforeDiv = actionsList[actionsList.length - 1];
-
+  
           const autoYoutubeShortsScrollDown = document.getElementById(
             'auto-youtube-shorts-scroll-down',
           );
           if (autoYoutubeShortsScrollDown) {
             autoYoutubeShortsScrollDown.remove();
           }
-
+  
           const div = document.createElement('div');
           div.id = 'auto-youtube-shorts-scroll-down';
           div.style.display = 'inline-block';
           div.style.position = 'relative';
           div.style.marginTop = '-7px';
-
+  
           beforeDiv?.parentNode?.insertBefore(div, beforeDiv);
           ReactDOM.render(
             <App />,
