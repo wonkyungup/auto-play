@@ -1,32 +1,19 @@
+import $ from 'jquery';
 import Browser from 'webextension-polyfill';
 import Defs from './constatns';
 
 export default class YoutubeShorts {
   _innerContainer: Element | null;
   _innerList: any[];
-  constructor() {
-    this._innerList = [];
-    this._innerContainer = null;
-  }
-
-  async onReadyActiveVideo() {
-    this._innerList = Array.from(
-      <HTMLCollection>(
-        document.getElementById('shorts-inner-container')?.children
-      ),
-    );
-    for (let index = 0; index < this._innerList.length; index++) {
-      const innerContainer = <Element>this._innerList[index];
-      if (innerContainer.getAttribute('is-active') !== null) {
-        this._innerContainer = innerContainer;
-        return;
-      }
-    }
+  constructor(innerContainerID: string) {
+    this._innerList = Array.from($(`#${innerContainerID}`).children());
+    this._innerContainer =
+      this._innerList.filter(
+        (inner) => inner.getAttribute('is-active') !== null,
+      )[0] || null;
   }
 
   async getNextElement() {
-    await this.onReadyActiveVideo();
-
     const index = this._innerList.indexOf(this._innerContainer);
     if (index > 0) {
       return this._innerList[index + 1];
