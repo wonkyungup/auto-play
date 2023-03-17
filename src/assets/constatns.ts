@@ -4,4 +4,5 @@ export default class Defs {
     'https://github.com/wonkyungup/auto-youtube-shorts-scroll-down';
 
   static EVENT_PAGE_UPDATE = 'Page Update';
+  static EVENT_PAGE_RELOAD = 'Page Reload';
 }

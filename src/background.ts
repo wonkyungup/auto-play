@@ -3,6 +3,12 @@ import Defs from './assets/constatns';
 
 Browser.runtime.onMessage.addListener(async ({ event }, sender) => {
   try {
+    if (event === Defs.EVENT_PAGE_RELOAD) {
+      return Browser.tabs.sendMessage(<number>sender.tab?.id, {
+        event: Defs.EVENT_PAGE_RELOAD,
+      });
+    }
+
     if (event === Defs.EVENT_PAGE_UPDATE) {
       Browser.tabs.onUpdated.addListener(async function listener(
         tabId,

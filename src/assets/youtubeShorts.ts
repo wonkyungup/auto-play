@@ -6,7 +6,7 @@ export default class YoutubeShorts {
   _innerContainer: Element | null;
   _innerList: any[];
   constructor(innerContainerID: string) {
-    this._innerList = Array.from($(`#${innerContainerID}`).children());
+    this._innerList = Array.from($(innerContainerID).children());
     this._innerContainer =
       this._innerList.filter(
         (inner) => inner.getAttribute('is-active') !== null,
