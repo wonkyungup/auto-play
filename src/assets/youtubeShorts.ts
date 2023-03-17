@@ -32,7 +32,7 @@ export default class YoutubeShorts {
       const element = await this.getNextElement();
       element.scrollIntoView({ block: 'end', behavior: 'smooth' });
 
-      await Browser.runtime.sendMessage(Defs.EVENT_PAGE_LISTENER);
+      await Browser.runtime.sendMessage(Defs.EVENT_PAGE_UPDATE);
     });
   }
 }

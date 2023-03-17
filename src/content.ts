@@ -15,20 +15,25 @@ let isAutoPlay: boolean = false;
   5. shorts button click
 */
 
-Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_LISTENER }).then(() => {}); // page reload
+Browser.runtime
+  .sendMessage({ event: Defs.EVENT_PAGE_UPDATE })
+  .then(() => console.log('reload!'));
+
 $(document).on(
   'wheel',
   async () =>
-    await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_LISTENER }),
+    await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE }),
 );
+
 $(document).on('keyup', async (event) => {
   if (event.keyCode === 38 || event.keyCode === 40) {
-    await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_LISTENER });
+    await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
   }
 });
 
 Browser.runtime.onMessage.addListener(async ({ event }) => {
-  if (event === Defs.EVENT_PAGE_LISTENER) {
+  if (event === Defs.EVENT_PAGE_UPDATE) {
+    console.log(Defs.EVENT_PAGE_UPDATE);
     await Utils.onWaitForElement('#shorts-container');
 
     if ($('#shorts-container').length > 0) {
