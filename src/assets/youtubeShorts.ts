@@ -1,11 +1,14 @@
 import $ from 'jquery';
-import Browser from 'webextension-polyfill';
-import Defs from './constatns';
 
 export default class YoutubeShorts {
   _innerContainer: Element | null;
   _innerList: any[];
-  constructor(innerContainerID: string) {
+  constructor() {
+    this._innerList = [];
+    this._innerContainer = null;
+  }
+
+  async onReadyVideo(innerContainerID: string) {
     this._innerList = Array.from($(innerContainerID).children());
     this._innerContainer =
       this._innerList.filter(
@@ -31,8 +34,6 @@ export default class YoutubeShorts {
     video?.addEventListener('ended', async () => {
       const element = await this.getNextElement();
       element.scrollIntoView({ block: 'end', behavior: 'smooth' });
-
-      await Browser.runtime.sendMessage(Defs.EVENT_PAGE_UPDATE);
     });
   }
 }

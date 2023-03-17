@@ -1,5 +1,7 @@
 import './assets/style/style.css';
 import $ from 'jquery';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import Browser from 'webextension-polyfill';
 import Defs from './assets/constatns';
 import YoutubeShorts from './assets/youtubeShorts';
@@ -15,15 +17,41 @@ EventsListener.onGuideShortsButton();
 EventsListener.onGuideMiniShortButton();
 EventsListener.onShortUpDownButton();
 
+const youtubeShorts = new YoutubeShorts();
+
+const Switch = () => {
+  const [checked, setChecked] = React.useState(isAutoPlay);
+  const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    isAutoPlay = event.target.checked;
+    setChecked(isAutoPlay);
+  };
+
+  React.useEffect(() => {
+    if (checked) {
+      youtubeShorts.doesNextVideo();
+    } else {
+      youtubeShorts.doesLoopVideo();
+    }
+  }, [checked]);
+
+  return (
+    <label id="auto-play-switch" className="switch">
+      <input
+        type="checkbox"
+        checked={isAutoPlay}
+        onChange={(event) => handlerChange(event)}
+      />
+      <span className="slider round"></span>
+    </label>
+  );
+};
+
 Browser.runtime.onMessage.addListener(async ({ event }) => {
   if (event === Defs.EVENT_PAGE_UPDATE || event === Defs.EVENT_PAGE_RELOAD) {
-    const shortsInnerContainerID = '#shorts-inner-container';
-    const autoYoutubeShortsScrollDown = '#auto-youtube-shorts-scroll-down';
-
-    await Utils.onWaitForElement(shortsInnerContainerID);
+    await Utils.onWaitForElement('#shorts-inner-container');
 
     if ($('#shorts-inner-container').length > 0) {
-      const youtubeShorts = new YoutubeShorts(shortsInnerContainerID);
+      await youtubeShorts.onReadyVideo('#shorts-inner-container');
       const video = youtubeShorts._innerContainer;
 
       if (video === null) {
@@ -31,8 +59,8 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
       }
 
       if (video !== null) {
-        if ($(autoYoutubeShortsScrollDown).length > 0) {
-          $(autoYoutubeShortsScrollDown).remove();
+        if ($('#auto-youtube-shorts-scroll-down').length > 0) {
+          $('#auto-youtube-shorts-scroll-down').remove();
         }
 
         $(video)
@@ -42,11 +70,9 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
             '<div id="auto-youtube-shorts-scroll-down" style="display: inline-block;position: relative;" ></div>',
           );
 
-        $(autoYoutubeShortsScrollDown).append(
-          '<label class="switch">\n' +
-            '  <input type="checkbox">\n' +
-            '  <span class="slider round"></span>\n' +
-            '</label>',
+        ReactDOM.render(
+          <Switch />,
+          document.getElementById('auto-youtube-shorts-scroll-down'),
         );
       }
     }
