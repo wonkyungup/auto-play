@@ -1,4 +1,4 @@
-<h1>We are fixing it for a better interface. sorry.</h1>
+<h1>We are fixing it for a better interface. If you want to check the currently deployed code, please check the 0.0.2 branch.</h1>
 
 
 
