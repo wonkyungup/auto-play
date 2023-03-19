@@ -1,21 +1,18 @@
+import { waitForTheElement } from 'wait-for-the-element';
+import Defs from './constatns';
+
 export default class Utils {
-  static onWaitForElement(selector: any) {
-    return new Promise((resolve) => {
-      if (document.querySelector(selector)) {
-        return resolve(document.querySelector(selector));
-      }
+  static sleep = (delay: number) => {
+    return new Promise((resolve) => setTimeout(resolve, delay));
+  };
 
-      const observer = new MutationObserver((mutations) => {
-        if (document.querySelector(selector)) {
-          resolve(document.querySelector(selector));
-          observer.disconnect();
-        }
-      });
-
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-      });
+  static async waitForElement(element: string) {
+    const ele = await waitForTheElement(element, {
+      timeout: Defs.TIMEOUT_AWAIT_ELEMENT,
     });
+
+    if (ele) {
+      return ele;
+    }
   }
 }

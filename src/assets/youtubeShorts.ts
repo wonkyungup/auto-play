@@ -1,19 +1,30 @@
-import $ from 'jquery';
+import Defs from './constatns';
+import Utils from './utils';
+import { waitForTheElement } from 'wait-for-the-element';
 
 export default class YoutubeShorts {
   _innerContainer: Element | null;
   _innerList: any[];
+  _innerVideo: any;
   constructor() {
-    this._innerList = [];
     this._innerContainer = null;
+    this._innerList = [];
+    this._innerVideo = null;
   }
 
-  async onReadyVideo(innerContainerID: string) {
-    this._innerList = Array.from($(innerContainerID).children());
-    this._innerContainer =
-      this._innerList.filter(
-        (inner) => inner.getAttribute('is-active') !== null,
-      )[0] || null;
+  async waitForVideoContainer() {
+    const video = await waitForTheElement('video', {
+      timeout: Defs.TIMEOUT_AWAIT_ELEMENT,
+    });
+    await Utils.sleep(Defs.TIMEOUT_SLEEP_ELEMENT);
+    this._innerVideo = video || null;
+    this._innerContainer = video?.closest('ytd-reel-video-renderer') || null;
+    this._innerList =
+      Array.from(
+        <HTMLCollection>video?.closest('#shorts-inner-container')?.children,
+      ) || [];
+
+    return;
   }
 
   async getNextElement() {
