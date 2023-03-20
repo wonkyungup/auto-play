@@ -33,17 +33,21 @@ export default class EventsListener {
       const upBtn = $('#navigation-button-up').find('yt-button-shape');
       const downBtn = $('#navigation-button-down').find('yt-button-shape');
 
-      upBtn.on('click', async () => {
-        await Browser.runtime.sendMessage({
-          event: Defs.EVENT_PAGE_UPDATE,
-        });
-      });
+      upBtn.on(
+        'click',
+        async () =>
+          await Browser.runtime.sendMessage({
+            event: Defs.EVENT_PAGE_UPDATE,
+          }),
+      );
 
-      downBtn.on('click', async () => {
-        await Browser.runtime.sendMessage({
-          event: Defs.EVENT_PAGE_UPDATE,
-        });
-      });
+      downBtn.on(
+        'click',
+        async () =>
+          await Browser.runtime.sendMessage({
+            event: Defs.EVENT_PAGE_UPDATE,
+          }),
+      );
     });
   }
 }
