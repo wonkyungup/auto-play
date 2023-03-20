@@ -1,19 +1,23 @@
 import Utils from './utils';
 import $ from 'jquery';
+import Browser from 'webextension-polyfill';
+import Defs from './constatns';
 
 export default class YoutubeShorts {
   _innerContainer: Element | null;
   _innerList: any[];
   _innerVideo: any;
+  _innerPlayerControl: any;
   constructor() {
     this._innerContainer = null;
     this._innerList = [];
     this._innerVideo = null;
+    this._innerPlayerControl = null;
   }
 
   async waitForVideoContainer() {
     const video: any = await Utils.waitForElement('video');
-    await Utils.sleep(300);
+    await Utils.sleep(500);
 
     this._innerVideo = video || null;
     this._innerList =
@@ -26,10 +30,15 @@ export default class YoutubeShorts {
         (element) => $(element).attr('is-active') !== undefined,
       )[0] || null;
 
+    this._innerPlayerControl = this._innerContainer?.querySelector(
+      'ytd-shorts-player-controls',
+    );
     return;
   }
 
   async getNextElement() {
+    await this.waitForVideoContainer();
+
     const index = this._innerList.indexOf(this._innerContainer);
     if (index > 0) {
       return this._innerList[index + 1];
@@ -37,16 +46,15 @@ export default class YoutubeShorts {
   }
 
   doesLoopVideo() {
-    const video = this._innerContainer?.querySelector('video');
-    video?.setAttribute('loop', String(true));
+    this._innerVideo?.setAttribute('loop', String(true));
   }
 
   doesNextVideo() {
-    const video = this._innerContainer?.querySelector('video');
-    video?.removeAttribute('loop');
-    video?.addEventListener('ended', async () => {
+    this._innerVideo?.removeAttribute('loop');
+    this._innerVideo.onended = async () => {
       const element = await this.getNextElement();
       element.scrollIntoView({ block: 'end', behavior: 'smooth' });
-    });
+      await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
+    };
   }
 }

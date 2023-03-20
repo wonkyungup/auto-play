@@ -1,8 +1,8 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 54px;
-    height: 24px;
+    width: 47px;
+    height: 20px;
     pointer-events: all;
 }
 
@@ -29,8 +29,6 @@
     content: "";
     height: 20px;
     width: 20px;
-    left: 4px;
-    bottom: 2px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
