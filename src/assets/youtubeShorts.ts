@@ -1,6 +1,7 @@
 import Defs from './constatns';
 import Utils from './utils';
 import { waitForTheElement } from 'wait-for-the-element';
+import $ from 'jquery';
 
 export default class YoutubeShorts {
   _innerContainer: Element | null;
@@ -18,11 +19,15 @@ export default class YoutubeShorts {
     });
     await Utils.sleep(Defs.TIMEOUT_SLEEP_ELEMENT);
     this._innerVideo = video || null;
-    this._innerContainer = video?.closest('ytd-reel-video-renderer') || null;
     this._innerList =
       Array.from(
         <HTMLCollection>video?.closest('#shorts-inner-container')?.children,
       ) || [];
+
+    this._innerContainer =
+      this._innerList.filter(
+        (element) => $(element).attr('is-active') !== undefined,
+      )[0] || null;
 
     return;
   }
