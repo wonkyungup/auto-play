@@ -1,6 +1,4 @@
-import Defs from './constatns';
 import Utils from './utils';
-import { waitForTheElement } from 'wait-for-the-element';
 import $ from 'jquery';
 
 export default class YoutubeShorts {
@@ -14,10 +12,9 @@ export default class YoutubeShorts {
   }
 
   async waitForVideoContainer() {
-    const video = await waitForTheElement('video', {
-      timeout: Defs.TIMEOUT_AWAIT_ELEMENT,
-    });
-    await Utils.sleep(Defs.TIMEOUT_SLEEP_ELEMENT);
+    const video: any = await Utils.waitForElement('video');
+    await Utils.sleep(300);
+
     this._innerVideo = video || null;
     this._innerList =
       Array.from(
