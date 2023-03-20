@@ -49,7 +49,6 @@ const Switch = () => {
 Browser.runtime.onMessage.addListener(async ({ event }) => {
   if (event === Defs.EVENT_PAGE_UPDATE || event === Defs.EVENT_PAGE_RELOAD) {
     await youtubeShorts.waitForVideoContainer();
-    console.log(youtubeShorts);
 
     const autoYoutubeShortsScrollDown = $('#auto-youtube-shorts-scroll-down');
     if (autoYoutubeShortsScrollDown.length > 0) {
