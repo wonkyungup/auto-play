@@ -4,13 +4,20 @@ import $ from 'jquery';
 import Utils from './utils';
 
 export default class EventsListener {
-  static onReload() {
+  constructor() {
+    this.onReload();
+    this.onWheel();
+    this.onKeyup();
+    this.onShortUpDownButton();
+  }
+
+  onReload() {
     Browser.runtime
-      .sendMessage({ event: Defs.EVENT_PAGE_UPDATE })
+      .sendMessage({ event: Defs.EVENT_PAGE_RELOAD })
       .then(() => {});
   }
 
-  static onKeyup() {
+  onKeyup() {
     $(document).on('keyup', async (event) => {
       if (event.keyCode === 38 || event.keyCode === 40) {
         event.preventDefault();
@@ -19,16 +26,20 @@ export default class EventsListener {
     });
   }
 
-  static onWheelRemove() {
-    window.addEventListener(
-      'wheel',
-      () =>
-        alert('마우스 휠 대신, 화살표 버튼 혹은 키보드 위/아래를 사용해주세요'),
-      false,
-    );
+  onWheel() {
+    let lastScrollTime = 0;
+
+    window.addEventListener('wheel', async () => {
+      const now = performance.now();
+      if (now - lastScrollTime > 100) {
+        await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
+      }
+      lastScrollTime = now;
+      window.requestAnimationFrame(() => {});
+    });
   }
 
-  static onShortUpDownButton() {
+  onShortUpDownButton() {
     Utils.waitForElement('#shorts-container').then(() => {
       const upBtn = $('#navigation-button-up').find('yt-button-shape');
       const downBtn = $('#navigation-button-down').find('yt-button-shape');

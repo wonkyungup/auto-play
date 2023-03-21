@@ -8,10 +8,7 @@ import YoutubeShorts from './assets/youtubeShorts';
 import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
 
-EventsListener.onReload();
-EventsListener.onKeyup();
-EventsListener.onShortUpDownButton();
-EventsListener.onWheelRemove();
+new EventsListener();
 
 const youtubeShorts = new YoutubeShorts();
 
@@ -47,23 +44,29 @@ const Switch = () => {
 };
 
 Browser.runtime.onMessage.addListener(async ({ event }) => {
-  if (event === Defs.EVENT_PAGE_UPDATE || event === Defs.EVENT_PAGE_RELOAD) {
-    await youtubeShorts.waitForVideoContainer();
+  switch (event) {
+    case Defs.EVENT_PAGE_RELOAD:
+    case Defs.EVENT_PAGE_UPDATE:
+      await youtubeShorts.waitForVideoContainer();
 
-    const autoYoutubeShortsScrollDown = $('#auto-youtube-shorts-scroll-down');
-    if (autoYoutubeShortsScrollDown.length > 0) {
-      autoYoutubeShortsScrollDown.remove();
-    }
+      // eslint-disable-next-line no-case-declarations
+      const autoYoutubeShortsScrollDown = $('#auto-youtube-shorts-scroll-down');
+      if (autoYoutubeShortsScrollDown.length > 0) {
+        autoYoutubeShortsScrollDown.remove();
+      }
 
-    $(youtubeShorts._innerPlayerControl)
-      .children('yt-icon-button:eq(1)')
-      .before(
-        '<div id="auto-youtube-shorts-scroll-down" style="display: inline-block;position: relative;" ></div>',
+      $(youtubeShorts._innerPlayerControl)
+        .children('yt-icon-button:eq(1)')
+        .before(
+          '<div id="auto-youtube-shorts-scroll-down" style="display: inline-block;position: relative;" ></div>',
+        );
+
+      ReactDOM.render(
+        <Switch />,
+        document.getElementById('auto-youtube-shorts-scroll-down'),
       );
-
-    ReactDOM.render(
-      <Switch />,
-      document.getElementById('auto-youtube-shorts-scroll-down'),
-    );
+      break;
+    default:
+      break;
   }
 });
