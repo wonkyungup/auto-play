@@ -25,8 +25,8 @@ Browser.runtime.onMessage.addListener(async ({ event }, sender) => {
       default:
         break;
     }
-  } catch (e: any) {
-    if (e) {
+  } catch (e) {
+    if (e instanceof Error) {
       console.log(`BACKGROUND :: LISTENER :: ERROR :: ${e.message}`);
     }
   }
