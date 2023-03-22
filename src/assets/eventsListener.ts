@@ -27,15 +27,13 @@ export default class EventsListener {
   }
 
   onWheel() {
-    let lastScrollTime = 0;
+    let scrollTimeout: string | number | NodeJS.Timeout | undefined;
 
-    window.addEventListener('wheel', async () => {
-      const now = performance.now();
-      if (now - lastScrollTime > 100) {
+    window.addEventListener('wheel', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(async () => {
         await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
-      }
-      lastScrollTime = now;
-      window.requestAnimationFrame(() => {});
+      }, 100);
     });
   }
 
