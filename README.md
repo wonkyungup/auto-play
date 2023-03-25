@@ -5,7 +5,7 @@
 <h1>Auto Youtube Shorts Scroll Down</h1>
 <p>This extension adds a button to automatically skip YouTube Shorts videos.</p>
 
-<h1>If you want to check the currently deployed code, please check the 0.0.2 branch.</h1>
+<h1>If you want to check the currently deployed code, please check the version 0.0.2 branch.</h1>
 <h2>https://github.com/wonkyungup/auto-youtube-shorts-scroll-down/tree/v-0.0.2</h2>
 
 <br />
