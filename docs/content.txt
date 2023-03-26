@@ -4,9 +4,18 @@ You need to open the YouTube Shorts homepage to use it.
 A switch is created at the top inside the video.
 If there is no switch, it will refresh the page.
 
-This is a test project made for personal study, so please give us a lot of interest.
+It is a test project made for personal study, so I would appreciate it if you could understand it even if you fix it late.
 The code has been posted on Github.
 
-Version 1.0.0
-1. The UI has been changed.
-2. Multilingual processing has been done.
+If you have any additional or uncomfortable points while using it, please send us a review or e-mail and we will respond.
+
+[Version 1.0.0]
+1. UI has been changed overall.
+2. Fixed the problem that the video stops after several hours.
+
+[Frequently Asked Questions]
+1. The program does not work
+  - If you do not see the automatic switch, you can use it normally by refreshing the tab.
+
+2. Can I skip what I don't want to see?
+- It is currently under development, and we plan to add various options such as adding keywords and skipping by adding option buttons.
