@@ -5,8 +5,24 @@
 <h1>Auto Youtube Shorts Scroll Down</h1>
 <p>This extension adds a button to automatically skip YouTube Shorts videos.</p>
 
-<h1>If you want to check the currently deployed code, please check the version 0.0.2 branch.</h1>
-<h2>https://github.com/wonkyungup/auto-youtube-shorts-scroll-down/tree/v-0.0.2</h2>
+A switch is created at the top inside the video.
+If there is no switch, it will refresh the page.
+
+It is a test project made for personal study, so I would appreciate it if you could understand it even if you fix it late.
+The code has been posted on Github.
+
+If you have any additional or uncomfortable points while using it, please send us a review or e-mail and we will respond.
+
+[Version 1.0.0]
+1. UI has been changed overall.
+2. Fixed the problem that the video stops after several hours.
+
+[Frequently Asked Questions]
+1. The program does not work
+  - If you do not see the automatic switch, you can use it normally by refreshing the tab.
+
+2. Can I skip what I don't want to see?
+- It is currently under development, and we plan to add various options such as adding keywords and skipping by adding option buttons.
 
 <br />
 <a href="https://chrome.google.com/webstore/detail/auto-youtube-shorts-scrol/bfofdkanfmkkbngkmhmcjichambccene">Chrome Web Store</a>
