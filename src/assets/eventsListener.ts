@@ -27,13 +27,21 @@ export default class EventsListener {
   }
 
   onWheel() {
-    let scrollTimeout: string | number | NodeJS.Timeout | undefined;
+    let isScrolling: boolean = false;
+    let timeoutId: number | NodeJS.Timeout | undefined;
 
-    window.addEventListener('wheel', () => {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(async () => {
-        await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
-      }, 100);
+    window.addEventListener('wheel', (): void => {
+      if (!isScrolling) {
+        isScrolling = true;
+        if (timeoutId !== undefined) {
+          clearTimeout(timeoutId);
+        }
+        timeoutId = setTimeout(async (): Promise<void> => {
+          await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
+          isScrolling = false;
+          timeoutId = undefined;
+        }, 100);
+      }
     });
   }
 
