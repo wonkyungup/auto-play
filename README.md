@@ -28,3 +28,5 @@ If you have any additional or uncomfortable points while using it, please send u
 <a href="https://chrome.google.com/webstore/detail/auto-youtube-shorts-scrol/bfofdkanfmkkbngkmhmcjichambccene">Chrome Web Store</a>
 <br />
 <a href="https://microsoftedge.microsoft.com/addons/detail/auto-youtube-shorts-scrol/ebndgghmhjpnnpfmamijhgpdihpglfhj">Microsoft Edge</a>
+<br />
+<a href="https://addons.mozilla.org/firefox/addon/autoyoutubeshortsscrolldown/">FireFox</a>
