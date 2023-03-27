@@ -15,21 +15,13 @@ new EventsListener();
 const youtubeShorts = new YoutubeShorts();
 
 const Switch = () => {
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(youtubeShorts._isAutoPlay);
   const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
-    Browser.storage.local
-      .set({ isAutoPlay: event.target.checked })
-      .then(() => {});
+    youtubeShorts.onToggleAutoPlayState(event.target.checked);
   };
 
   React.useEffect(() => {
-    const checkStorageData = async () => {
-      return await Browser.storage.local.get(['isAutoPlay']);
-    };
-
-    checkStorageData().then((r) => setChecked(r.isAutoPlay));
-
     if (checked) {
       youtubeShorts.doesNextVideo();
     } else {

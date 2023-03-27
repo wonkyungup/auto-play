@@ -3,8 +3,7 @@
   "manifest_version": 3,
   "version": "1.0.1",
   "permissions": [
-    "tabs",
-    "storage"
+    "tabs"
   ],
   "description": "Auto Youtube Shorts Scroll Down",
   "icons": {
