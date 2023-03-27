@@ -13,16 +13,16 @@ The code has been posted on Github.
 
 If you have any additional or uncomfortable points while using it, please send us a review or e-mail and we will respond.
 
-[Version 1.0.0]
-1. UI has been changed overall.
-2. Fixed the problem that the video stops after several hours.
+### Version 1.0.0
+- UI has been changed overall.
+- Fixed the problem that the video stops after several hours.
 
-[Frequently Asked Questions]
-1. The program does not work
-  - If you do not see the automatic switch, you can use it normally by refreshing the tab.
+### Questions
+- The program does not work
+ > If you do not see the automatic switch, you can use it normally by refreshing the tab.
 
-2. Can I skip what I don't want to see?
-- It is currently under development, and we plan to add various options such as adding keywords and skipping by adding option buttons.
+- Can I skip what I don't want to see?
+ > It is currently under development, and we plan to add various options such as adding keywords and skipping by adding option buttons.
 
 <br />
 <a href="https://chrome.google.com/webstore/detail/auto-youtube-shorts-scrol/bfofdkanfmkkbngkmhmcjichambccene">Chrome Web Store</a>
