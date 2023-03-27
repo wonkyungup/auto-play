@@ -13,9 +13,9 @@ The code has been posted on Github.
 
 If you have any additional or uncomfortable points while using it, please send us a review or e-mail and we will respond.
 
-### Version 1.0.0
-- UI has been changed overall.
-- Fixed the problem that the video stops after several hours.
+### Version 1.0.1
+- FIX: Scroll event doesn't work.
+- ADD: Firefox extension.
 
 ### Questions
 - The program does not work
