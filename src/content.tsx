@@ -1,3 +1,4 @@
+import './i18n';
 import './assets/style/style.css';
 import $ from 'jquery';
 import * as React from 'react';
@@ -7,6 +8,7 @@ import Defs from './assets/constatns';
 import YoutubeShorts from './assets/youtubeShorts';
 import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
+import OptionButton from './components/OptionButton';
 
 new EventsListener();
 
@@ -43,6 +45,14 @@ const Switch = () => {
   );
 };
 
+const Options = () => {
+  const handlerClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(event);
+  };
+
+  return <OptionButton onClick={(event) => handlerClick(event)} />;
+};
+
 Browser.runtime.onMessage.addListener(async ({ event }) => {
   switch (event) {
     case Defs.EVENT_PAGE_RELOAD:
@@ -62,7 +72,10 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
         );
 
       ReactDOM.render(
-        <Switch />,
+        <div>
+          <Switch />
+          <Options />
+        </div>,
         document.getElementById('auto-youtube-shorts-scroll-down'),
       );
       break;
