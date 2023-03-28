@@ -1,5 +1,4 @@
 import './i18n';
-import './assets/style/style.css';
 import $ from 'jquery';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -9,33 +8,10 @@ import YoutubeShorts from './assets/youtubeShorts';
 import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
 import SystemTheme from './components/SystemTheme';
+import OptionButton from './components/OptionButton';
 
 new EventsListener();
-
 const youtubeShorts = new YoutubeShorts();
-
-const Switch = () => {
-  const [checked, setChecked] = React.useState(youtubeShorts._isAutoPlay);
-  const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-    youtubeShorts.onToggleAutoPlayState(event.target.checked);
-  };
-
-  React.useEffect(() => {
-    if (checked) {
-      youtubeShorts.doesNextVideo();
-    } else {
-      youtubeShorts.doesLoopVideo();
-    }
-  }, [checked]);
-
-  return (
-    <ToggleSwitch
-      isSwitch={checked}
-      onChange={(event) => handlerChange(event)}
-    />
-  );
-};
 
 Browser.runtime.onMessage.addListener(async ({ event }) => {
   switch (event) {
@@ -55,7 +31,8 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
 
       ReactDOM.render(
         <SystemTheme>
-          <Switch />
+          <ToggleSwitch yts={youtubeShorts} />
+          <OptionButton yts={youtubeShorts} />
         </SystemTheme>,
         document.getElementById('auto-youtube-shorts-scroll-down'),
       );

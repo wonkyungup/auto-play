@@ -4,20 +4,28 @@ import Switch from '@mui/material/Switch';
 import { useTranslation } from 'react-i18next';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
+import { TypeProps } from '../assets/constatns';
 
-const ToggleSwitch = ({
-  isSwitch,
-  onChange,
-}: {
-  isSwitch: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}) => {
+const ToggleSwitch = (props: TypeProps) => {
   const { t } = useTranslation();
+  const [checked, setChecked] = React.useState(props.yts._isAutoPlay);
+  const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+    props.yts.onToggleAutoPlayState(event.target.checked);
+  };
+
+  React.useEffect(() => {
+    if (checked) {
+      props.yts.doesNextVideo();
+    } else {
+      props.yts.doesLoopVideo();
+    }
+  }, [checked]);
 
   return (
     <Tooltip
       title={
-        isSwitch ? t('tooltip:enableAutoPlay') : t('tooltip:disableAutoPlay')
+        checked ? t('tooltip:enableAutoPlay') : t('tooltip:disableAutoPlay')
       }
       arrow
     >
@@ -25,8 +33,8 @@ const ToggleSwitch = ({
         sx={{ pointerEvents: 'all', bottom: 5 }}
         checkedIcon={<PlayCircleFilledIcon fontSize="large" />}
         icon={<PauseCircleFilledIcon fontSize="large" />}
-        checked={isSwitch}
-        onChange={onChange}
+        checked={checked}
+        onChange={handlerChange}
       />
     </Tooltip>
   );
