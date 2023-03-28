@@ -8,6 +8,7 @@ import Link from '@mui/material/Link';
 import SystemTheme from './components/SystemTheme';
 import { useTranslation } from 'react-i18next';
 import Defs from './assets/constatns';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const Introduction = () => {
   const { t } = useTranslation();
@@ -55,6 +56,7 @@ const Introduction = () => {
 const App = () => {
   return (
     <SystemTheme>
+      <CssBaseline />
       <Introduction />
     </SystemTheme>
   );

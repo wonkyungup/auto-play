@@ -1,7 +1,6 @@
 import * as React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 
 const SystemTheme = ({ children }: any) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -15,12 +14,7 @@ const SystemTheme = ({ children }: any) => {
     [prefersDarkMode],
   );
 
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
 export default SystemTheme;
