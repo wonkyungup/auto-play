@@ -1,6 +1,9 @@
 import * as React from 'react';
 import Tooltip from '@mui/material/Tooltip';
+import Switch from '@mui/material/Switch';
 import { useTranslation } from 'react-i18next';
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
+import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 
 const ToggleSwitch = ({
   isSwitch,
@@ -18,10 +21,13 @@ const ToggleSwitch = ({
       }
       arrow
     >
-      <label id="auto-play-switch" className="switch">
-        <input type="checkbox" checked={isSwitch} onChange={onChange} />
-        <span className="slider round"></span>
-      </label>
+      <Switch
+        sx={{ pointerEvents: 'all', bottom: 5 }}
+        checkedIcon={<PlayCircleFilledIcon fontSize="large" />}
+        icon={<PauseCircleFilledIcon fontSize="large" />}
+        checked={isSwitch}
+        onChange={onChange}
+      />
     </Tooltip>
   );
 };

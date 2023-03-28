@@ -8,7 +8,7 @@ import Defs from './assets/constatns';
 import YoutubeShorts from './assets/youtubeShorts';
 import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
-import OptionButton from './components/OptionButton';
+import SystemTheme from './components/SystemTheme';
 
 new EventsListener();
 
@@ -37,24 +37,14 @@ const Switch = () => {
   );
 };
 
-const Options = () => {
-  const handlerClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(event);
-  };
-
-  return <OptionButton onClick={(event) => handlerClick(event)} />;
-};
-
 Browser.runtime.onMessage.addListener(async ({ event }) => {
   switch (event) {
     case Defs.EVENT_PAGE_RELOAD:
     case Defs.EVENT_PAGE_UPDATE:
       await youtubeShorts.waitForVideoContainer();
 
-      // eslint-disable-next-line no-case-declarations
-      const autoYoutubeShortsScrollDown = $('#auto-youtube-shorts-scroll-down');
-      if (autoYoutubeShortsScrollDown.length > 0) {
-        autoYoutubeShortsScrollDown.remove();
+      if ($('#auto-youtube-shorts-scroll-down').length > 0) {
+        $('#auto-youtube-shorts-scroll-down').remove();
       }
 
       $(youtubeShorts._innerPlayerControl)
@@ -64,10 +54,9 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
         );
 
       ReactDOM.render(
-        <div>
+        <SystemTheme>
           <Switch />
-          <Options />
-        </div>,
+        </SystemTheme>,
         document.getElementById('auto-youtube-shorts-scroll-down'),
       );
       break;
