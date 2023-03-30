@@ -4,14 +4,20 @@ import Switch from '@mui/material/Switch';
 import { useTranslation } from 'react-i18next';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
-import { TypeProps } from '../assets/constatns';
+import Defs, { TypeProps } from '../assets/constatns';
+import { store } from '../store';
 
 const ToggleSwitch = (props: TypeProps) => {
   const { t } = useTranslation();
-  const [checked, setChecked] = React.useState(props.yts._isAutoPlay);
+  const [checked, setChecked] = React.useState<boolean>(
+    store.getState().toggleSwitch.status,
+  );
   const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
-    props.yts.onToggleAutoPlayState(event.target.checked);
+    store.dispatch({
+      type: Defs.REDUX_TOGGLE_SWITCH_CHANGE,
+      value: event.target.checked,
+    });
   };
 
   React.useEffect(() => {
