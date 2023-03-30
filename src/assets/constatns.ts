@@ -1,11 +1,17 @@
+export interface TypeToggleSwitch {
+  status: boolean;
+}
+
+export interface TypeOptions {
+  rotate: number;
+}
+
 export interface TypeProps {
   yts: {
     _innerContainer: Element | null;
     _innerList: any[];
     _innerVideo: any;
     _innerPlayerControl: any;
-    _isAutoPlay: boolean;
-    onToggleAutoPlayState: (arg0: boolean) => void;
     waitForVideoContainer: () => void;
     getNextElement: () => void;
     doesLoopVideo: () => void;
@@ -20,4 +26,8 @@ export default class Defs {
 
   static EVENT_PAGE_UPDATE = 'Page Update';
   static EVENT_PAGE_RELOAD = 'Page Reload';
+
+  // Redux
+  static REDUX_TOGGLE_SWITCH_CHANGE = 'ToggleSwitch/CHANGE';
+  static REDUX_OPTIONS_ROTATE = 'Options/ROTATE';
 }

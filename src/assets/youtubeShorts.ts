@@ -8,18 +8,11 @@ export default class YoutubeShorts {
   _innerList: any[];
   _innerVideo: any;
   _innerPlayerControl: any;
-  _isAutoPlay: boolean;
   constructor() {
-    this._isAutoPlay = false;
     this._innerContainer = null;
     this._innerList = [];
     this._innerVideo = null;
     this._innerPlayerControl = null;
-  }
-
-  onToggleAutoPlayState(state: boolean) {
-    this._isAutoPlay = state;
-    return;
   }
 
   async waitForVideoContainer() {
