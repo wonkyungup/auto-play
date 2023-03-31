@@ -8,7 +8,6 @@ import Defs, { TypeProps } from '../assets/constatns';
 import { store } from '../store';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import MenuItem from '@mui/material/MenuItem';
 
 const OptionButton = (props: TypeProps) => {
   const { t } = useTranslation();
@@ -39,9 +38,9 @@ const OptionButton = (props: TypeProps) => {
             bottom: 9,
             top: 0,
             right: 0,
-            left: 55,
+            left: 60,
             transform: `rotate(${rotate}deg)`,
-            color: 'white',
+            color: '#ffffff',
           }}
           onClick={handleButtonClick}
         >
@@ -56,13 +55,10 @@ const OptionButton = (props: TypeProps) => {
             width: 200,
             left: 50,
             top: 33,
+            opacity: 0.8,
           }}
         >
-          <CardContent>
-            <MenuItem>Profile</MenuItem>
-            <MenuItem>My account</MenuItem>
-            <MenuItem>Logout</MenuItem>
-          </CardContent>
+          <CardContent>Options</CardContent>
         </Card>
       )}
     </div>

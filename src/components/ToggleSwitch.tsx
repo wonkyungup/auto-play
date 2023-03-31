@@ -21,11 +21,8 @@ const ToggleSwitch = (props: TypeProps) => {
   };
 
   React.useEffect(() => {
-    if (checked) {
-      props.yts.doesNextVideo();
-    } else {
-      props.yts.doesLoopVideo();
-    }
+    if (checked) props.yts.doesNextVideo();
+    else props.yts.doesLoopVideo();
   }, [checked]);
 
   return (
@@ -39,16 +36,13 @@ const ToggleSwitch = (props: TypeProps) => {
         sx={{
           pointerEvents: 'all',
           bottom: 5,
-          color: '#6f6e73',
-          '& .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track': {
-            backgroundColor: '#a89fbd',
-          },
-          '& .MuiSwitch-switchBase.Mui-checked': {
-            color: '#efedf2',
-          },
         }}
-        checkedIcon={<PlayCircleFilledIcon fontSize="large" />}
-        icon={<PauseCircleFilledIcon fontSize="large" />}
+        checkedIcon={
+          <PlayCircleFilledIcon fontSize="large" sx={{ color: '#ffffff' }} />
+        }
+        icon={
+          <PauseCircleFilledIcon fontSize="large" sx={{ color: '#ffffff' }} />
+        }
         checked={checked}
         onChange={handlerChange}
       />
