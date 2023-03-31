@@ -1,42 +1,71 @@
 import * as React from 'react';
+import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Tooltip from '@mui/material/Tooltip';
 import { useTranslation } from 'react-i18next';
 import Defs, { TypeProps } from '../assets/constatns';
 import { store } from '../store';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import MenuItem from '@mui/material/MenuItem';
 
 const OptionButton = (props: TypeProps) => {
   const { t } = useTranslation();
-  const [rotate, setRotate] = React.useState(store.getState().options.rotate);
-  const handlerClick = () => {
+  const [rotate, setRotate] = useState(store.getState().options.rotate);
+  const [cardOpen, setCardOpen] = useState(false);
+
+  const handleButtonClick = () => {
     props.yts._innerVideo.pause();
-
-    if (rotate !== 0) setRotate(0);
-    else setRotate(90);
-
-    store.dispatch({ type: Defs.REDUX_OPTIONS_ROTATE });
+    setCardOpen(!cardOpen);
   };
 
+  React.useEffect(() => {
+    setRotate(cardOpen ? 90 : 0);
+    store.dispatch({
+      type: Defs.REDUX_OPTIONS_ROTATE,
+      rotate: cardOpen ? 90 : 0,
+    });
+  }, [cardOpen]);
+
   return (
-    <Tooltip title={t('tooltip:setting')} arrow>
-      <IconButton
-        aria-label="option"
-        sx={{
-          pointerEvents: 'all',
-          position: 'absolute',
-          bottom: 9,
-          top: 0,
-          right: 0,
-          left: 55,
-          transform: `rotate(${rotate}deg)`,
-        }}
-        onClick={handlerClick}
-        disabled
-      >
-        <SettingsIcon sx={{ width: 24, height: 24 }} />
-      </IconButton>
-    </Tooltip>
+    <div>
+      <Tooltip title={t('tooltip:setting')} arrow>
+        <IconButton
+          aria-label="option"
+          sx={{
+            pointerEvents: 'all',
+            position: 'absolute',
+            bottom: 9,
+            top: 0,
+            right: 0,
+            left: 55,
+            transform: `rotate(${rotate}deg)`,
+            color: 'white',
+          }}
+          onClick={handleButtonClick}
+        >
+          <SettingsIcon sx={{ width: 24, height: 24 }} />
+        </IconButton>
+      </Tooltip>
+      {cardOpen && (
+        <Card
+          sx={{
+            position: 'absolute',
+            pointerEvents: 'all',
+            width: 200,
+            left: 50,
+            top: 33,
+          }}
+        >
+          <CardContent>
+            <MenuItem>Profile</MenuItem>
+            <MenuItem>My account</MenuItem>
+            <MenuItem>Logout</MenuItem>
+          </CardContent>
+        </Card>
+      )}
+    </div>
   );
 };
 

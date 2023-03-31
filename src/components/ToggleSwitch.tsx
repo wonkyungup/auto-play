@@ -36,7 +36,17 @@ const ToggleSwitch = (props: TypeProps) => {
       arrow
     >
       <Switch
-        sx={{ pointerEvents: 'all', bottom: 5 }}
+        sx={{
+          pointerEvents: 'all',
+          bottom: 5,
+          color: '#6f6e73',
+          '& .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track': {
+            backgroundColor: '#a89fbd',
+          },
+          '& .MuiSwitch-switchBase.Mui-checked': {
+            color: '#efedf2',
+          },
+        }}
         checkedIcon={<PlayCircleFilledIcon fontSize="large" />}
         icon={<PauseCircleFilledIcon fontSize="large" />}
         checked={checked}
