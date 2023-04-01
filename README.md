@@ -13,9 +13,9 @@ The code has been posted on Github.
 
 If you have any additional or uncomfortable points while using it, please send us a review or e-mail and we will respond.
 
-### Version 1.0.1
-- FIX: Scroll event doesn't work.
-- ADD: Firefox extension.
+### Version 1.0.2
+- FIX: Autoplay has occasional copy issues.
+- MOD: switch Mui x.
 
 ### Questions
 - The program does not work

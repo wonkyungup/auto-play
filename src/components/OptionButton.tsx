@@ -31,9 +31,10 @@ const OptionButton = (props: TypeProps) => {
     <div>
       <Tooltip title={t('tooltip:setting')} arrow>
         <IconButton
+          disabled
           aria-label="option"
           sx={{
-            pointerEvents: 'all',
+            pointerEvents: 'none',
             position: 'absolute',
             bottom: 9,
             top: 0,
