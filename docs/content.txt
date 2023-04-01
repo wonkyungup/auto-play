@@ -14,5 +14,5 @@ The code has been posted on Github.
 If you have any additional or uncomfortable points while using it, please send us a review or e-mail and we will respond.
 
 ### Version 1.0.2
-- FIX: Autoplay has occasional copy issues.
+- FIX: autoplay intermittent error
 - MOD: switch Mui x.
