@@ -17,7 +17,7 @@ export default class YoutubeShorts {
 
   async waitForVideoContainer() {
     const video: any = await Utils.waitForElement('video');
-    await Utils.sleep(400);
+    await Utils.sleep(1000);
 
     this._innerVideo = video || null;
     this._innerList =
