@@ -85,9 +85,9 @@ const Options = (props: TypeProps) => {
                   {!cc && <ClosedCaptionDisabledIcon fontSize="large" />}
                   {cc && <ClosedCaptionIcon fontSize="large" />}
                 </ListItemIcon>
-                <ListItemText>자막</ListItemText>
+                <ListItemText>{t('options:cc')}</ListItemText>
                 <Typography variant="body2" color="text.secondary">
-                  {!cc ? 'OFF' : 'ON'}
+                  {!cc ? t('options:ccDisabled') : t('options:ccEnabled')}
                 </Typography>
               </MenuItem>
             </MenuList>

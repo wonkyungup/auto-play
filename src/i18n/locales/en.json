@@ -14,5 +14,10 @@
     "disableAutoPlay": "Disable autoplay",
     "enableAutoPlay": "Enable autoplay",
     "setting": "setting"
+  },
+  "options": {
+    "cc": "CC",
+    "ccEnabled": "ON",
+    "ccDisabled": "OFF"
   }
 }

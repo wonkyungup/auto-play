@@ -17,7 +17,7 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
   switch (event) {
     case Defs.EVENT_PAGE_RELOAD:
     case Defs.EVENT_PAGE_UPDATE:
-      await youtubeShorts.waitForVideoContainer(1000);
+      await youtubeShorts.waitForVideoContainer();
 
       if ($('#auto-youtube-shorts-scroll-down').length > 0) {
         $('#auto-youtube-shorts-scroll-down').remove();

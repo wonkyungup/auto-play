@@ -13,8 +13,7 @@ export interface TypeProps {
     _innerList: any[];
     _innerVideo: any;
     _innerPlayerControl: any;
-    _innerVideoCC: any;
-    waitForVideoContainer: (arg0: number) => void;
+    waitForVideoContainer: () => void;
     getNextElement: () => void;
     doesLoopVideo: () => void;
     doesNextVideo: () => void;

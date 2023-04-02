@@ -14,6 +14,11 @@
     "disableAutoPlay": "禁用自动播放",
     "enableAutoPlay": "启用自动播放",
     "setting": "环境"
+  },
+  "options": {
+    "cc": "字幕",
+    "ccEnabled": "使用",
+    "ccDisabled": "不曾用过"
   }
 }
 
