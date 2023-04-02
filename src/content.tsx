@@ -8,7 +8,7 @@ import YoutubeShorts from './assets/youtubeShorts';
 import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
 import SystemTheme from './components/SystemTheme';
-import OptionButton from './components/OptionButton';
+import Options from './components/Options';
 
 new EventsListener();
 const youtubeShorts = new YoutubeShorts();
@@ -17,7 +17,7 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
   switch (event) {
     case Defs.EVENT_PAGE_RELOAD:
     case Defs.EVENT_PAGE_UPDATE:
-      await youtubeShorts.waitForVideoContainer();
+      await youtubeShorts.waitForVideoContainer(1000);
 
       if ($('#auto-youtube-shorts-scroll-down').length > 0) {
         $('#auto-youtube-shorts-scroll-down').remove();
@@ -32,7 +32,7 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
       ReactDOM.render(
         <SystemTheme>
           <ToggleSwitch yts={youtubeShorts} />
-          <OptionButton yts={youtubeShorts} />
+          <Options yts={youtubeShorts} />
         </SystemTheme>,
         document.getElementById('auto-youtube-shorts-scroll-down'),
       );

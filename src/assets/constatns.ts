@@ -4,6 +4,7 @@ export interface TypeToggleSwitch {
 
 export interface TypeOptions {
   rotate: number;
+  isCC: boolean;
 }
 
 export interface TypeProps {
@@ -12,10 +13,13 @@ export interface TypeProps {
     _innerList: any[];
     _innerVideo: any;
     _innerPlayerControl: any;
-    waitForVideoContainer: () => void;
+    _innerVideoCC: any;
+    waitForVideoContainer: (arg0: number) => void;
     getNextElement: () => void;
     doesLoopVideo: () => void;
     doesNextVideo: () => void;
+    showVideoCC: () => void;
+    hiddenVideoCC: () => void;
   };
 }
 
@@ -30,4 +34,5 @@ export default class Defs {
   // Redux
   static REDUX_TOGGLE_SWITCH_CHANGE = 'ToggleSwitch/CHANGE';
   static REDUX_OPTIONS_ROTATE = 'Options/ROTATE';
+  static REDUX_OPTIONS_CC = 'Options/CC';
 }
