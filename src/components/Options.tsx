@@ -7,16 +7,31 @@ import { useTranslation } from 'react-i18next';
 import Defs, { TypeProps } from '../assets/constatns';
 import { store } from '../store';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import Paper from '@mui/material/Paper';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Typography from '@mui/material/Typography';
+import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption';
+import ClosedCaptionDisabledIcon from '@mui/icons-material/ClosedCaptionDisabled';
 
-const OptionButton = (props: TypeProps) => {
+const Options = (props: TypeProps) => {
   const { t } = useTranslation();
   const [rotate, setRotate] = useState(store.getState().options.rotate);
   const [cardOpen, setCardOpen] = useState(false);
+  const [cc, setCC] = useState(store.getState().options.isCC);
 
   const handleButtonClick = () => {
-    props.yts._innerVideo.pause();
     setCardOpen(!cardOpen);
+  };
+
+  const onHandlerCC = () => {
+    setCC(!cc);
+    store.dispatch({
+      type: Defs.REDUX_OPTIONS_CC,
+      cc: !cc,
+    });
   };
 
   React.useEffect(() => {
@@ -27,14 +42,18 @@ const OptionButton = (props: TypeProps) => {
     });
   }, [cardOpen]);
 
+  React.useEffect(() => {
+    if (cc) props.yts.showVideoCC();
+    else props.yts.hiddenVideoCC();
+  }, [cc]);
+
   return (
     <div>
       <Tooltip title={t('tooltip:setting')} arrow>
         <IconButton
-          disabled
           aria-label="option"
           sx={{
-            pointerEvents: 'none',
+            pointerEvents: 'all',
             position: 'absolute',
             bottom: 9,
             top: 0,
@@ -59,11 +78,24 @@ const OptionButton = (props: TypeProps) => {
             opacity: 0.8,
           }}
         >
-          <CardContent>Options</CardContent>
+          <Paper sx={{ width: 320, maxWidth: '100%' }}>
+            <MenuList>
+              <MenuItem onClick={onHandlerCC}>
+                <ListItemIcon>
+                  {!cc && <ClosedCaptionDisabledIcon fontSize="large" />}
+                  {cc && <ClosedCaptionIcon fontSize="large" />}
+                </ListItemIcon>
+                <ListItemText>자막</ListItemText>
+                <Typography variant="body2" color="text.secondary">
+                  {!cc ? 'OFF' : 'ON'}
+                </Typography>
+              </MenuItem>
+            </MenuList>
+          </Paper>
         </Card>
       )}
     </div>
   );
 };
 
-export default OptionButton;
+export default Options;

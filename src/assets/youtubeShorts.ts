@@ -8,16 +8,20 @@ export default class YoutubeShorts {
   _innerList: any[];
   _innerVideo: any;
   _innerPlayerControl: any;
+  _innerVideoCC: any;
   constructor() {
     this._innerContainer = null;
     this._innerList = [];
     this._innerVideo = null;
     this._innerPlayerControl = null;
+    this._innerVideoCC = null;
   }
 
-  async waitForVideoContainer() {
+  async waitForVideoContainer(delay: number) {
+    const cc = await Utils.waitForElement('#ytp-caption-window-container');
     const video: any = await Utils.waitForElement('video');
-    await Utils.sleep(1000);
+
+    await Utils.sleep(delay);
 
     this._innerVideo = video || null;
     this._innerList =
@@ -33,11 +37,13 @@ export default class YoutubeShorts {
     this._innerPlayerControl = this._innerContainer?.querySelector(
       'ytd-shorts-player-controls',
     );
+
+    this._innerVideoCC = cc;
     return;
   }
 
   async getNextElement() {
-    await this.waitForVideoContainer();
+    await this.waitForVideoContainer(500);
 
     const index = this._innerList.indexOf(this._innerContainer);
     if (index > 0) {
@@ -56,5 +62,15 @@ export default class YoutubeShorts {
       element.scrollIntoView({ block: 'end', behavior: 'smooth' });
       await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
     };
+  }
+
+  showVideoCC() {
+    const cc = this._innerVideoCC;
+    $(cc).show();
+  }
+
+  hiddenVideoCC() {
+    const cc = this._innerVideoCC;
+    $(cc).hide();
   }
 }
