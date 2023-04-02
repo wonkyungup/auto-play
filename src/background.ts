@@ -15,7 +15,7 @@ Browser.runtime.onMessage.addListener(async ({ event }, sender) => {
           tab,
         ) {
           if (changeInfo.status === 'complete' && tab?.url !== undefined) {
-            Browser.tabs.onUpdated.removeListener(await listener);
+            // Browser.tabs.onUpdated.removeListener(await listener);
             return await Browser.tabs.sendMessage(tabId, {
               event: Defs.EVENT_PAGE_UPDATE,
             });
