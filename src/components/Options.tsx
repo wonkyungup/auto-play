@@ -22,7 +22,11 @@ const Options = (props: TypeProps) => {
   const [cardOpen, setCardOpen] = useState(false);
   const [cc, setCC] = useState(store.getState().options.isCC);
 
-  const handleButtonClick = () => {
+  const onMouseLeaveHandler = () => {
+    setCardOpen(!cardOpen);
+  };
+
+  const onClickHandler = () => {
     setCardOpen(!cardOpen);
   };
 
@@ -62,13 +66,14 @@ const Options = (props: TypeProps) => {
             transform: `rotate(${rotate}deg)`,
             color: '#ffffff',
           }}
-          onClick={handleButtonClick}
+          onClick={onClickHandler}
         >
           <SettingsIcon sx={{ width: 24, height: 24 }} />
         </IconButton>
       </Tooltip>
       {cardOpen && (
         <Card
+          onMouseLeave={onMouseLeaveHandler}
           sx={{
             position: 'absolute',
             pointerEvents: 'all',
