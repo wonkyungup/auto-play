@@ -26,3 +26,6 @@ yarn-error.log*
 
 # package
 package-lock.json
+
+# jetbrains
+.idea
