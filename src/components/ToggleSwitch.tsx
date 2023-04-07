@@ -12,13 +12,6 @@ const ToggleSwitch = (props: TypeProps) => {
   const [checked, setChecked] = React.useState<boolean>(
     store.getState().toggleSwitch.status,
   );
-  const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-    store.dispatch({
-      type: Defs.REDUX_TOGGLE_SWITCH_CHANGE,
-      value: event.target.checked,
-    });
-  };
 
   React.useEffect(() => {
     if (checked) props.yts.doesNextVideo();
@@ -44,7 +37,13 @@ const ToggleSwitch = (props: TypeProps) => {
           <PauseCircleFilledIcon fontSize="large" sx={{ color: '#ffffff' }} />
         }
         checked={checked}
-        onChange={handlerChange}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          setChecked(event.target.checked);
+          store.dispatch({
+            type: Defs.REDUX_TOGGLE_SWITCH_CHANGE,
+            value: event.target.checked,
+          });
+        }}
       />
     </Tooltip>
   );
