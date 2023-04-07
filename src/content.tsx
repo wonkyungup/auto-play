@@ -8,7 +8,7 @@ import YoutubeShorts from './assets/youtubeShorts';
 import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
 import SystemTheme from './components/SystemTheme';
-import Options from './components/Options';
+import OptionView from './components/Options/View';
 
 new EventsListener();
 const youtubeShorts = new YoutubeShorts();
@@ -32,7 +32,7 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
       ReactDOM.render(
         <SystemTheme>
           <ToggleSwitch yts={youtubeShorts} />
-          <Options yts={youtubeShorts} />
+          <OptionView yts={youtubeShorts} />
         </SystemTheme>,
         document.getElementById('auto-youtube-shorts-scroll-down'),
       );

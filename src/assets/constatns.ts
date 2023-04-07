@@ -32,6 +32,6 @@ export default class Defs {
 
   // Redux
   static REDUX_TOGGLE_SWITCH_CHANGE = 'ToggleSwitch/CHANGE';
-  static REDUX_OPTIONS_ROTATE = 'Options/ROTATE';
-  static REDUX_OPTIONS_CC = 'Options/CC';
+  static REDUX_OPTIONS_ROTATE = 'View/ROTATE';
+  static REDUX_OPTIONS_CC = 'View/CC';
 }
