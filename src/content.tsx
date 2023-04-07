@@ -9,6 +9,7 @@ import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
 import SystemTheme from './components/SystemTheme';
 import OptionView from './components/Options/View';
+import { store } from './store';
 
 new EventsListener();
 const youtubeShorts = new YoutubeShorts();
@@ -18,11 +19,15 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
     case Defs.EVENT_PAGE_RELOAD:
     case Defs.EVENT_PAGE_UPDATE:
       await youtubeShorts.waitForVideoContainer();
+      store.dispatch({
+        type: Defs.REDUX_YTS_WAIT_FOR_VIDEO,
+      });
 
       if ($('#auto-youtube-shorts-scroll-down').length > 0) {
         $('#auto-youtube-shorts-scroll-down').remove();
       }
 
+      console.log(store.getState().yts);
       $(youtubeShorts._innerPlayerControl)
         .children('yt-icon-button:eq(1)')
         .before(
