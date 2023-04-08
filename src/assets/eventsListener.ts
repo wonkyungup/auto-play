@@ -4,13 +4,12 @@ import $ from 'jquery';
 import Utils from './utils';
 
 export default class EventsListener {
-  constructor() {
+  onInitialize() {
     this.onReload();
     this.onWheel();
     this.onKeyup();
     this.onShortUpDownButton();
   }
-
   onReload() {
     Browser.runtime
       .sendMessage({ event: Defs.EVENT_PAGE_RELOAD })

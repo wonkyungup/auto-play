@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
-import Defs, { TypeProps } from '../../assets/constatns';
+import Defs from '../../assets/constatns';
 import { store } from '../../store';
 import OptionBtn from './Button';
 import OptionContent from './Content';
 import ItemCC from './Item/ItemCC';
 
-const OptionView = (props: TypeProps) => {
+const OptionView = () => {
   const [rotate, setRotate] = useState(store.getState().options.rotate);
   const [cardOpen, setCardOpen] = useState(false);
   const [cc, setCC] = useState(store.getState().options.isCC);
@@ -20,8 +20,8 @@ const OptionView = (props: TypeProps) => {
   }, [cardOpen]);
 
   React.useEffect(() => {
-    if (cc) props.yts.showVideoCC();
-    else props.yts.hiddenVideoCC();
+    if (cc) store.dispatch({ type: Defs.REDUX_YTS_SHOW_CC });
+    else store.dispatch({ type: Defs.REDUX_YTS_HIDDEN_CC });
   }, [cc]);
 
   return (

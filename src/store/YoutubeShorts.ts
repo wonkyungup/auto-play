@@ -10,30 +10,15 @@ const initialState: TypeYTS = {
   innerPlayerControl: null,
 };
 
-const ytsReducer = async (state = initialState, action: any) => {
+const ytsReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case Defs.REDUX_YTS_WAIT_FOR_VIDEO:
-      // eslint-disable-next-line no-case-declarations
-      const video: any = await Utils.waitForElement('video');
-      await Utils.sleep(700);
-
-      state.innerVideo = video;
-      state.innerList =
-        Array.from(
-          <HTMLCollection>video?.closest('#shorts-inner-container')?.children,
-        ) || [];
-      state.innerContainer =
-        state.innerList.filter(
-          (element) => $(element).attr('is-active') !== undefined,
-        )[0] || null;
-      state.innerPlayerControl = state.innerContainer?.querySelector(
-        'ytd-shorts-player-controls',
-      );
+      state.innerVideo = action.innerVideo;
+      state.innerContainer = action.innerContainer;
+      state.innerList = action.innerList;
+      state.innerPlayerControl = action.innerPlayerControl;
       break;
     case Defs.REDUX_YTS_NEXT_INNER:
-      await ytsReducer(state, { type: Defs.REDUX_YTS_WAIT_FOR_VIDEO });
-
-      // eslint-disable-next-line no-case-declarations
       const index = state.innerList.indexOf(state.innerContainer);
       if (index > 0) {
         return state.innerList[index + 1];
