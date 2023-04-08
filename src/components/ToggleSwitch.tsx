@@ -4,18 +4,18 @@ import Switch from '@mui/material/Switch';
 import { useTranslation } from 'react-i18next';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
-import Defs, { TypeProps } from '../assets/constatns';
+import Defs from '../assets/constatns';
 import { store } from '../store';
 
-const ToggleSwitch = (props: TypeProps) => {
+const ToggleSwitch = () => {
   const { t } = useTranslation();
   const [checked, setChecked] = React.useState<boolean>(
     store.getState().toggleSwitch.status,
   );
 
   React.useEffect(() => {
-    if (checked) props.yts.doesNextVideo();
-    else props.yts.doesLoopVideo();
+    if (checked) store.dispatch({ type: Defs.REDUX_YTS_NEXT_VIDEO });
+    else store.dispatch({ type: Defs.REDUX_YTS_LOOP_VIDEO });
   }, [checked]);
 
   return (

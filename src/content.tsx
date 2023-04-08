@@ -4,26 +4,37 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Browser from 'webextension-polyfill';
 import Defs from './assets/constatns';
-import YoutubeShorts from './assets/youtubeShorts';
+import YoutubeShortsBase from './assets/youtubeShortsBase';
 import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
 import SystemTheme from './components/SystemTheme';
 import OptionView from './components/Options/View';
+import { store } from './store';
 
-new EventsListener();
-const youtubeShorts = new YoutubeShorts();
+const eventsListener = new EventsListener();
+const youtubeShorts = new YoutubeShortsBase();
+
+eventsListener.onInitialize();
 
 Browser.runtime.onMessage.addListener(async ({ event }) => {
   switch (event) {
     case Defs.EVENT_PAGE_RELOAD:
     case Defs.EVENT_PAGE_UPDATE:
-      await youtubeShorts.waitForVideoContainer();
+      const { _innerContainer, _innerList, _innerPlayerControl, _innerVideo } =
+        await youtubeShorts.waitForVideoContainer();
+      store.dispatch({
+        type: Defs.REDUX_YTS_WAIT_FOR_VIDEO,
+        innerContainer: _innerContainer,
+        innerList: _innerList,
+        innerPlayerControl: _innerPlayerControl,
+        innerVideo: _innerVideo,
+      });
 
       if ($('#auto-youtube-shorts-scroll-down').length > 0) {
         $('#auto-youtube-shorts-scroll-down').remove();
       }
 
-      $(youtubeShorts._innerPlayerControl)
+      $(store.getState().yts.innerPlayerControl)
         .children('yt-icon-button:eq(1)')
         .before(
           '<div id="auto-youtube-shorts-scroll-down" style="display: inline-block;position: relative;" ></div>',
@@ -31,8 +42,8 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
 
       ReactDOM.render(
         <SystemTheme>
-          <ToggleSwitch yts={youtubeShorts} />
-          <OptionView yts={youtubeShorts} />
+          <ToggleSwitch />
+          <OptionView />
         </SystemTheme>,
         document.getElementById('auto-youtube-shorts-scroll-down'),
       );
