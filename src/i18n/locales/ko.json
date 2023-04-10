@@ -18,7 +18,8 @@
   "options": {
     "cc": "자막",
     "ccEnabled": "사용",
-    "ccDisabled": "사용 안함"
+    "ccDisabled": "사용 안함",
+    "PBR": "재생 속도"
   }
 }
 

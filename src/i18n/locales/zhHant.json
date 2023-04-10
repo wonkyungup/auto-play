@@ -18,7 +18,8 @@
   "options": {
     "cc": "字幕",
     "ccEnabled": "使用",
-    "ccDisabled": "不曾用過"
+    "ccDisabled": "不曾用過",
+    "PBR": "播放速度"
   }
 }
 
