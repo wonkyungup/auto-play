@@ -18,7 +18,8 @@
   "options": {
     "cc": "Untertitel",
     "ccEnabled": "Verwenden Sie",
-    "ccDisabled": "Behinderte"
+    "ccDisabled": "Behinderte",
+    "PBR": "Wiedergaberate"
   }
 }
 

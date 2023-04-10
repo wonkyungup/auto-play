@@ -18,6 +18,7 @@
   "options": {
     "cc": "CC",
     "ccEnabled": "ON",
-    "ccDisabled": "OFF"
+    "ccDisabled": "OFF",
+    "PBR": "Replay Rate"
   }
 }
