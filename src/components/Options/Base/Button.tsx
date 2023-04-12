@@ -4,12 +4,12 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Tooltip from '@mui/material/Tooltip';
 import { useTranslation } from 'react-i18next';
 
-interface TypeOptionBtn {
+interface TypeButton {
   rotate: number;
   onClick: () => void;
 }
 
-const OptionBtn = ({ rotate, onClick }: TypeOptionBtn) => {
+const Button = ({ rotate, onClick }: TypeButton) => {
   const { t } = useTranslation();
 
   return (
@@ -34,4 +34,4 @@ const OptionBtn = ({ rotate, onClick }: TypeOptionBtn) => {
   );
 };
 
-export default OptionBtn;
+export default Button;

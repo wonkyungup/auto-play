@@ -3,9 +3,15 @@ export interface TypeToggleSwitch {
 }
 
 export interface TypeOptions {
-  rotate: number;
-  isCC: boolean;
-  nPlayBackRate: number;
+  base: {
+    rotate: number;
+  };
+  closedCaption: {
+    state: boolean;
+  };
+  playBackRate: {
+    speed: number;
+  };
 }
 
 export interface TypeYTS {

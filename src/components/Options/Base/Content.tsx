@@ -3,12 +3,12 @@ import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
 import MenuList from '@mui/material/MenuList';
 
-interface TypeOptionsContent {
+interface TypeContent {
   onMouseLeave: () => void;
   children: any;
 }
 
-const OptionContent = ({ onMouseLeave, children }: TypeOptionsContent) => {
+const Content = ({ onMouseLeave, children }: TypeContent) => {
   return (
     <Card
       onMouseLeave={onMouseLeave}
@@ -28,4 +28,4 @@ const OptionContent = ({ onMouseLeave, children }: TypeOptionsContent) => {
   );
 };
 
-export default OptionContent;
+export default Content;

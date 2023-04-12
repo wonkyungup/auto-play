@@ -10,16 +10,15 @@ import Slider from '@mui/material/Slider';
 import { store } from '../../../store';
 import Defs from '../../../assets/constatns';
 
-const OptionItemPlayBackRate = () => {
+const OptionPlayBackRate = () => {
+  const { playBackRate } = store.getState().options;
   const { t } = useTranslation();
-  const [value, setValue] = React.useState(
-    store.getState().options.nPlayBackRate,
-  );
+  const [value, setValue] = React.useState(playBackRate.speed);
   const valueTextHandler = (value: number) => {
     setValue(value);
     store.dispatch({
       type: Defs.REDUX_OPTION_PLAY_BACK_RATE,
-      nPlayBackRate: value,
+      speed: value,
     });
 
     return `${value}`;
@@ -28,7 +27,7 @@ const OptionItemPlayBackRate = () => {
   React.useEffect(() => {
     store.dispatch({
       type: Defs.REDUX_YTS_PLAY_BACK_RATE,
-      nPlayBackRate: value,
+      speed: value,
     });
   }, [value]);
 
@@ -56,4 +55,4 @@ const OptionItemPlayBackRate = () => {
   );
 };
 
-export default OptionItemPlayBackRate;
+export default OptionPlayBackRate;
