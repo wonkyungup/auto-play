@@ -13,10 +13,14 @@ The code has been posted on Github.
 
 If you have any additional or uncomfortable points while using it, please send us a review or e-mail and we will respond.
 
+
 ### Version 1.0.4 (planned)
 ADD: video speed control (done)
+<br />
 MOD: When clicking the option menu, additional UI (in progress)
+<br />
 ADD: Show video 00:00:00 (planned)
+<br />
 
 ### Questions
 - The program does not work
