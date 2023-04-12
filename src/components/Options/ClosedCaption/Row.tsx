@@ -10,9 +10,10 @@ import { useState } from 'react';
 import { store } from '../../../store';
 import Defs from '../../../assets/constatns';
 
-const OptionItemCC = () => {
+const OptionCC = () => {
+  const { closedCaption } = store.getState().options;
   const { t } = useTranslation();
-  const [cc, setCC] = useState(store.getState().options.isCC);
+  const [cc, setCC] = useState(closedCaption.state);
   const onClickHandler = () => {
     setCC(!cc);
     store.dispatch({
@@ -40,4 +41,4 @@ const OptionItemCC = () => {
   );
 };
 
-export default OptionItemCC;
+export default OptionCC;

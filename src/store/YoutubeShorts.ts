@@ -52,7 +52,7 @@ const ytsReducer = (state = initialState, action: any) => {
       });
       break;
     case Defs.REDUX_YTS_PLAY_BACK_RATE:
-      state.innerVideo.playbackRate = action.nPlayBackRate;
+      state.innerVideo.playbackRate = action.speed;
       break;
     default:
       break;
