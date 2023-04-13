@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import MenuItem from '@mui/material/MenuItem';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import SpeedIcon from '@mui/icons-material/Speed';
@@ -21,7 +23,7 @@ const OptionPlayBackRate = () => {
       speed: value,
     });
 
-    return `${value}`;
+    return `${value}x`;
   };
 
   React.useEffect(() => {
@@ -32,25 +34,31 @@ const OptionPlayBackRate = () => {
   }, [value]);
 
   return (
-    <MenuItem>
-      <ListItemIcon>
-        <SpeedIcon fontSize="large" />
-      </ListItemIcon>
-      <ListItemText>{t('options:PBR')}</ListItemText>
-      <Typography variant="body2" color="text.secondary">
-        <Box sx={{ width: 70 }}>
-          <Slider
-            size="small"
-            aria-label="play-back-rate"
-            defaultValue={value}
-            getAriaValueText={valueTextHandler}
-            step={0.5}
-            min={0.5}
-            max={1.5}
-            valueLabelDisplay="auto"
-          />
-        </Box>
-      </Typography>
+    <MenuItem sx={{ padding: 0 }}>
+      <List dense>
+        <ListItem>
+          <ListItemIcon>
+            <SpeedIcon fontSize="large" />
+          </ListItemIcon>
+          <ListItemText>{t('options:PBR')}</ListItemText>
+        </ListItem>
+        <ListItem>
+          <Typography variant="body2" color="text.secondary">
+            <Box sx={{ width: 160 }}>
+              <Slider
+                size="small"
+                aria-label="play-back-rate"
+                defaultValue={value}
+                getAriaValueText={valueTextHandler}
+                step={0.25}
+                min={0.25}
+                max={2.0}
+                valueLabelDisplay="auto"
+              />
+            </Box>
+          </Typography>
+        </ListItem>
+      </List>
     </MenuItem>
   );
 };

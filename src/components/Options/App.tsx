@@ -4,8 +4,8 @@ import Defs from '../../assets/constatns';
 import { store } from '../../store';
 import Button from './Base/Button';
 import Content from './Base/Content';
-import OptionCC from './ClosedCaption/Row';
-import OptionPlayBackRate from './PlayBackRate/Row';
+import ClosedCaption from './Items/ClosedCaption';
+import PlayBackRate from './Items/PlayBackRate';
 
 const OptionApp = () => {
   const { base, closedCaption, playBackRate } = store.getState().options;
@@ -21,8 +21,10 @@ const OptionApp = () => {
   }, [cardOpen]);
 
   // CC
-  if (closedCaption.state) store.dispatch({ type: Defs.REDUX_YTS_SHOW_CC });
-  else store.dispatch({ type: Defs.REDUX_YTS_HIDDEN_CC });
+  store.dispatch({
+    type: Defs.REDUX_YTS_CC,
+    cc: closedCaption.state,
+  });
 
   // Play Back Rate
   store.dispatch({
@@ -34,9 +36,13 @@ const OptionApp = () => {
     <div>
       <Button rotate={rotate} onClick={() => setCardOpen(!cardOpen)} />
       {cardOpen && (
-        <Content onMouseLeave={() => setCardOpen(!cardOpen)}>
-          <OptionCC />
-          <OptionPlayBackRate />
+        <Content
+          onMouseLeave={() => {
+            setCardOpen(!cardOpen);
+          }}
+        >
+          <ClosedCaption />
+          <PlayBackRate />
         </Content>
       )}
     </div>

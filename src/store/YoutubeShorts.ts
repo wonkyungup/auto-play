@@ -37,17 +37,12 @@ const ytsReducer = (state = initialState, action: any) => {
         await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
       };
       break;
-    case Defs.REDUX_YTS_SHOW_CC:
+    case Defs.REDUX_YTS_CC:
       Utils.waitForElement('#ytp-caption-window-container').then((cc) => {
+        const isCC = action.cc;
         if (cc) {
-          $(cc).show();
-        }
-      });
-      break;
-    case Defs.REDUX_YTS_HIDDEN_CC:
-      Utils.waitForElement('#ytp-caption-window-container').then((cc) => {
-        if (cc) {
-          $(cc).hide();
+          if (isCC) $(cc).show();
+          else $(cc).hide();
         }
       });
       break;

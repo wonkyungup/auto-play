@@ -38,7 +38,6 @@ export default class Defs {
   static REDUX_YTS_NEXT_INNER = 'Yts/NEXT_INNER';
   static REDUX_YTS_LOOP_VIDEO = 'Yts/LOOP_VIDEO';
   static REDUX_YTS_NEXT_VIDEO = 'Yts/NEXT_VIDEO';
-  static REDUX_YTS_SHOW_CC = 'Yts/SHOW_CC';
-  static REDUX_YTS_HIDDEN_CC = 'Yts/HIDDEN_CC';
+  static REDUX_YTS_CC = 'Yts/CC';
   static REDUX_YTS_PLAY_BACK_RATE = 'Yts/PBR'; // PBR = Play Back Rate
 }
