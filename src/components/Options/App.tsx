@@ -6,9 +6,11 @@ import Button from './Base/Button';
 import Content from './Base/Content';
 import ClosedCaption from './Items/ClosedCaption';
 import PlayBackRate from './Items/PlayBackRate';
+import Controls from './Items/Controls';
 
 const OptionApp = () => {
-  const { base, closedCaption, playBackRate } = store.getState().options;
+  const { base, closedCaption, playBackRate, controls } =
+    store.getState().options;
   const [rotate, setRotate] = useState(base.rotate);
   const [cardOpen, setCardOpen] = useState(false);
 
@@ -32,6 +34,12 @@ const OptionApp = () => {
     speed: playBackRate.speed,
   });
 
+  // Controls
+  store.dispatch({
+    type: Defs.REDUX_YTS_CONTROLS,
+    isControls: controls.state,
+  });
+
   return (
     <div>
       <Button rotate={rotate} onClick={() => setCardOpen(!cardOpen)} />
@@ -43,6 +51,7 @@ const OptionApp = () => {
         >
           <ClosedCaption />
           <PlayBackRate />
+          <Controls />
         </Content>
       )}
     </div>

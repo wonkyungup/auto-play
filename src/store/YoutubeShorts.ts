@@ -49,6 +49,34 @@ const ytsReducer = (state = initialState, action: any) => {
     case Defs.REDUX_YTS_PLAY_BACK_RATE:
       state.innerVideo.playbackRate = action.speed;
       break;
+    case Defs.REDUX_YTS_CONTROLS:
+      const { innerVideo, innerContainer } = state;
+      const overlay = innerContainer?.querySelector('#overlay');
+      const progressBar = innerContainer?.querySelector('#progress-bar');
+
+      if (action.isControls) {
+        if (overlay) $(overlay).css('padding', '0 0 50px 0');
+        if (progressBar) $(progressBar).hide();
+      } else {
+        if (overlay) $(overlay).css('padding', '0');
+        if (progressBar) $(progressBar).show();
+      }
+
+      $(innerVideo).on('play', () => {
+        if (action.isControls) $(innerVideo).attr('controls', 'true');
+        else $(innerVideo).removeAttr('controls');
+      });
+
+      $(innerVideo).on('playing', () => {
+        if (action.isControls) $(innerVideo).attr('controls', 'true');
+        else $(innerVideo).removeAttr('controls');
+      });
+      $(innerVideo).on('pause', () => {
+        if (action.isControls) $(innerVideo).attr('controls', 'true');
+        else $(innerVideo).removeAttr('controls');
+      });
+
+      break;
     default:
       break;
   }

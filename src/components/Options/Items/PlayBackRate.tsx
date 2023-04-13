@@ -5,7 +5,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import SpeedIcon from '@mui/icons-material/Speed';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -19,7 +19,7 @@ const OptionPlayBackRate = () => {
   const valueTextHandler = (value: number) => {
     setValue(value);
     store.dispatch({
-      type: Defs.REDUX_OPTION_PLAY_BACK_RATE,
+      type: Defs.REDUX_OPTIONS_PLAY_BACK_RATE,
       speed: value,
     });
 
@@ -38,13 +38,13 @@ const OptionPlayBackRate = () => {
       <List dense>
         <ListItem>
           <ListItemIcon>
-            <SpeedIcon fontSize="large" />
+            <DirectionsRunIcon fontSize="large" />
           </ListItemIcon>
           <ListItemText>{t('options:PBR')}</ListItemText>
         </ListItem>
         <ListItem>
           <Typography variant="body2" color="text.secondary">
-            <Box sx={{ width: 160 }}>
+            <Box sx={{ width: 169 }}>
               <Slider
                 size="small"
                 aria-label="play-back-rate"

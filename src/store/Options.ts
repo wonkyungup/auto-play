@@ -10,6 +10,9 @@ const initialState: TypeOptions = {
   playBackRate: {
     speed: 1.0,
   },
+  controls: {
+    state: false,
+  },
 };
 
 const optionsReducer = (state = initialState, action: any) => {
@@ -20,8 +23,11 @@ const optionsReducer = (state = initialState, action: any) => {
     case Defs.REDUX_OPTIONS_CC:
       state.closedCaption.state = action.cc;
       break;
-    case Defs.REDUX_OPTION_PLAY_BACK_RATE:
+    case Defs.REDUX_OPTIONS_PLAY_BACK_RATE:
       state.playBackRate.speed = action.speed;
+      break;
+    case Defs.REDUX_OPTIONS_CONTROLS:
+      state.controls.state = action.isControls;
       break;
     default:
       break;

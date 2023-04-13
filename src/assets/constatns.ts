@@ -12,6 +12,9 @@ export interface TypeOptions {
   playBackRate: {
     speed: number;
   };
+  controls: {
+    state: boolean;
+  };
 }
 
 export interface TypeYTS {
@@ -29,15 +32,16 @@ export default class Defs {
   static EVENT_PAGE_UPDATE = 'Page Update';
   static EVENT_PAGE_RELOAD = 'Page Reload';
 
-  // Redux
   static REDUX_TOGGLE_SWITCH_CHANGE = 'ToggleSwitch/CHANGE';
-  static REDUX_OPTIONS_ROTATE = 'View/ROTATE';
-  static REDUX_OPTIONS_CC = 'View/CC';
-  static REDUX_OPTION_PLAY_BACK_RATE = 'View/PBR'; // PBR = Play Back Rate
-  static REDUX_YTS_WAIT_FOR_VIDEO = 'Yts/WAIT_FOR_VIDEO';
-  static REDUX_YTS_NEXT_INNER = 'Yts/NEXT_INNER';
-  static REDUX_YTS_LOOP_VIDEO = 'Yts/LOOP_VIDEO';
-  static REDUX_YTS_NEXT_VIDEO = 'Yts/NEXT_VIDEO';
-  static REDUX_YTS_CC = 'Yts/CC';
-  static REDUX_YTS_PLAY_BACK_RATE = 'Yts/PBR'; // PBR = Play Back Rate
+  static REDUX_OPTIONS_ROTATE = 'OPTIONS/ROTATE';
+  static REDUX_OPTIONS_CC = 'OPTIONS/CC';
+  static REDUX_OPTIONS_PLAY_BACK_RATE = 'OPTIONS/PBR';
+  static REDUX_OPTIONS_CONTROLS = 'OPTIONS/CONTROLS';
+  static REDUX_YTS_WAIT_FOR_VIDEO = 'YOUTUBESHORTS/WAIT_FOR_VIDEO';
+  static REDUX_YTS_NEXT_INNER = 'YOUTUBESHORTS/NEXT_INNER';
+  static REDUX_YTS_LOOP_VIDEO = 'YOUTUBESHORTS/LOOP_VIDEO';
+  static REDUX_YTS_NEXT_VIDEO = 'YOUTUBESHORTS/NEXT_VIDEO';
+  static REDUX_YTS_CC = 'YOUTUBESHORTS/CC';
+  static REDUX_YTS_PLAY_BACK_RATE = 'YOUTUBESHORTS/PBR';
+  static REDUX_YTS_CONTROLS = 'YOUTUBESHORTS/CONTROLS';
 }
