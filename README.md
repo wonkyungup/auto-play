@@ -26,9 +26,6 @@ ADD: Show video 00:00:00 (planned)
 - The program does not work
  > If you do not see the automatic switch, you can use it normally by refreshing the tab.
 
-- Can I skip what I don't want to see?
- > It is currently under development, and we plan to add various options such as adding keywords and skipping by adding option buttons.
-
 <br />
 <a href="https://chrome.google.com/webstore/detail/auto-youtube-shorts-scrol/bfofdkanfmkkbngkmhmcjichambccene">Chrome Web Store</a>
 <br />
