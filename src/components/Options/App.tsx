@@ -10,7 +10,14 @@ import OptionPlayBackRate from './PlayBackRate/Row';
 const OptionApp = () => {
   const { base, closedCaption, playBackRate } = store.getState().options;
   const [rotate, setRotate] = useState(base.rotate);
-  const [cardOpen, setCardOpen] = useState(false);
+  const [cardOpen, setCardOpen] = useState(base.open);
+
+  const onHandlerBaseOption = () => {
+    setCardOpen(!cardOpen);
+    store.dispatch({
+      type: Defs.REDUX_OPTION_OPEN,
+    });
+  };
 
   React.useEffect(() => {
     setRotate(cardOpen ? 90 : 0);
@@ -32,9 +39,9 @@ const OptionApp = () => {
 
   return (
     <div>
-      <Button rotate={rotate} onClick={() => setCardOpen(!cardOpen)} />
+      <Button rotate={rotate} onClick={onHandlerBaseOption} />
       {cardOpen && (
-        <Content onMouseLeave={() => setCardOpen(!cardOpen)}>
+        <Content onMouseLeave={onHandlerBaseOption}>
           <OptionCC />
           <OptionPlayBackRate />
         </Content>

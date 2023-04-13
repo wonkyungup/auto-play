@@ -5,12 +5,15 @@ export interface TypeToggleSwitch {
 export interface TypeOptions {
   base: {
     rotate: number;
+    open: boolean;
   };
   closedCaption: {
     state: boolean;
+    open: boolean;
   };
   playBackRate: {
     speed: number;
+    open: boolean;
   };
 }
 
@@ -32,8 +35,11 @@ export default class Defs {
   // Redux
   static REDUX_TOGGLE_SWITCH_CHANGE = 'ToggleSwitch/CHANGE';
   static REDUX_OPTIONS_ROTATE = 'View/ROTATE';
+  static REDUX_OPTION_OPEN = 'OPTION/Base/OPEN';
   static REDUX_OPTIONS_CC = 'View/CC';
+  static REDUX_OPTIONS_CC_OPEN = 'OPTION/CC/OPEN';
   static REDUX_OPTION_PLAY_BACK_RATE = 'View/PBR'; // PBR = Play Back Rate
+  static REDUX_OPTION_PLAY_BACK_RATE_OPEN = 'OPTION/PBR/OPEN';
   static REDUX_YTS_WAIT_FOR_VIDEO = 'Yts/WAIT_FOR_VIDEO';
   static REDUX_YTS_NEXT_INNER = 'Yts/NEXT_INNER';
   static REDUX_YTS_LOOP_VIDEO = 'Yts/LOOP_VIDEO';
