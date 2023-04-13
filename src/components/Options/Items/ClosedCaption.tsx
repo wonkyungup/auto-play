@@ -23,8 +23,10 @@ const OptionCC = () => {
   };
 
   React.useEffect(() => {
-    if (cc) store.dispatch({ type: Defs.REDUX_YTS_SHOW_CC });
-    else store.dispatch({ type: Defs.REDUX_YTS_HIDDEN_CC });
+    store.dispatch({
+      type: Defs.REDUX_YTS_CC,
+      cc: cc,
+    });
   }, [cc]);
 
   return (
