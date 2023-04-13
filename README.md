@@ -17,8 +17,6 @@ If you have any additional or uncomfortable points while using it, please send u
 ### Version 1.0.4 (planned)
 ADD: video speed control (done)
 <br />
-ADD: video Sound control (planned)
-<br />
 ADD: Show video 00:00:00 (planned)
 <br />
 
