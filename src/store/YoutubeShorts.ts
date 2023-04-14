@@ -54,28 +54,15 @@ const ytsReducer = (state = initialState, action: any) => {
       const overlay = innerContainer?.querySelector('#overlay');
       const progressBar = innerContainer?.querySelector('#progress-bar');
 
-      if (action.isControls) {
-        if (overlay) $(overlay).css('padding', '0 0 50px 0');
-        if (progressBar) $(progressBar).hide();
-      } else {
-        if (overlay) $(overlay).css('padding', '0');
-        if (progressBar) $(progressBar).show();
+      if (progressBar) {
+        if (action.isControls) {
+          if (overlay) $(overlay).css('padding', '0 0 50px 0');
+          $(progressBar).css({ width: '98%', left: '1%' });
+        } else {
+          if (overlay) $(overlay).css('padding', '0');
+          $(progressBar).css({ width: '100%', left: '0' });
+        }
       }
-
-      $(innerVideo).on('play', () => {
-        if (action.isControls) $(innerVideo).attr('controls', 'true');
-        else $(innerVideo).removeAttr('controls');
-      });
-
-      $(innerVideo).on('playing', () => {
-        if (action.isControls) $(innerVideo).attr('controls', 'true');
-        else $(innerVideo).removeAttr('controls');
-      });
-      $(innerVideo).on('pause', () => {
-        if (action.isControls) $(innerVideo).attr('controls', 'true');
-        else $(innerVideo).removeAttr('controls');
-      });
-
       break;
     default:
       break;
