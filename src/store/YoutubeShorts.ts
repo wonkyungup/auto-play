@@ -53,14 +53,30 @@ const ytsReducer = (state = initialState, action: any) => {
       const { innerVideo, innerContainer } = state;
       const overlay = innerContainer?.querySelector('#overlay');
       const progressBar = innerContainer?.querySelector('#progress-bar');
+      const setControls = () => {
+        const controls = action.isControls;
+        if (controls) $(innerVideo).attr('controls', 'true');
+        else $(innerVideo).removeAttr('controls');
+      };
 
-      if (progressBar) {
+      $(innerVideo).on('timeupdate', () => setControls());
+      $(innerVideo).on('pause', () => setControls());
+      $(innerVideo).on('play', () => setControls());
+      $(innerVideo).on('click', () => setControls());
+      $(innerVideo).on('mouseleave', () => {
+        setControls();
+        console.log('1');
+      });
+
+      if (overlay && progressBar) {
         if (action.isControls) {
-          if (overlay) $(overlay).css('padding', '0 0 50px 0');
-          $(progressBar).css({ width: '98%', left: '1%' });
+          $(overlay).css('padding', '0 0 50px 0');
+          $(progressBar).css({ display: 'none' });
+          $(innerVideo).attr('controls', 'true');
         } else {
-          if (overlay) $(overlay).css('padding', '0');
-          $(progressBar).css({ width: '100%', left: '0' });
+          $(overlay).css('padding', '0');
+          $(progressBar).css({ display: 'block' });
+          $(innerVideo).removeAttr('controls');
         }
       }
       break;
