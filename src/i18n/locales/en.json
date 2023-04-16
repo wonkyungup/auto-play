@@ -16,9 +16,18 @@
     "setting": "setting"
   },
   "options": {
-    "cc": "CC",
-    "ccEnabled": "ON",
-    "ccDisabled": "OFF",
-    "PBR": "Replay Rate"
+    "cc": {
+      "title": "CC",
+      "enabled": "ON",
+      "disabled": "OFF"
+    },
+    "playBackRate": {
+      "title": "Replay Rate"
+    },
+    "windowOverlay": {
+      "title": "Overlay",
+      "show": "Show",
+      "hide": "Hide"
+    }
   }
 }

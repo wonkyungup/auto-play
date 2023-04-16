@@ -16,10 +16,19 @@
     "setting": "環境"
   },
   "options": {
-    "cc": "字幕",
-    "ccEnabled": "使用",
-    "ccDisabled": "不曾用過",
-    "PBR": "播放速度"
+    "cc": {
+      "title": "字幕",
+      "enabled": "使用",
+      "disabled": "不曾用過"
+    },
+    "playBackRate": {
+      "title": "播放速度"
+    },
+    "windowOverlay": {
+      "title": "覆蓋",
+      "show": "展示",
+      "hide": "隱藏"
+    }
   }
 }
 

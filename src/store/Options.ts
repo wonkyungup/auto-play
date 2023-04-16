@@ -10,6 +10,9 @@ const initialState: TypeOptions = {
   playBackRate: {
     speed: 1.0,
   },
+  clearWindowText: {
+    state: false,
+  },
 };
 
 const optionsReducer = (state = initialState, action: any) => {
@@ -22,6 +25,9 @@ const optionsReducer = (state = initialState, action: any) => {
       break;
     case Defs.REDUX_OPTION_PLAY_BACK_RATE:
       state.playBackRate.speed = action.speed;
+      break;
+    case Defs.REDUX_OPTION_WINDOW_OVERLAY:
+      state.clearWindowText.state = action.clearWindowText;
       break;
     default:
       break;

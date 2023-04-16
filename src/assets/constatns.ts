@@ -12,6 +12,9 @@ export interface TypeOptions {
   playBackRate: {
     speed: number;
   };
+  clearWindowText: {
+    state: boolean;
+  };
 }
 
 export interface TypeYTS {
@@ -34,10 +37,12 @@ export default class Defs {
   static REDUX_OPTIONS_ROTATE = 'View/ROTATE';
   static REDUX_OPTIONS_CC = 'View/CC';
   static REDUX_OPTION_PLAY_BACK_RATE = 'View/PBR'; // PBR = Play Back Rate
+  static REDUX_OPTION_WINDOW_OVERLAY = 'View/CLEAN_WINDOW_TEXT';
   static REDUX_YTS_WAIT_FOR_VIDEO = 'Yts/WAIT_FOR_VIDEO';
   static REDUX_YTS_NEXT_INNER = 'Yts/NEXT_INNER';
   static REDUX_YTS_LOOP_VIDEO = 'Yts/LOOP_VIDEO';
   static REDUX_YTS_NEXT_VIDEO = 'Yts/NEXT_VIDEO';
   static REDUX_YTS_CC = 'Yts/CC';
   static REDUX_YTS_PLAY_BACK_RATE = 'Yts/PBR'; // PBR = Play Back Rate
+  static REDUX_YTS_WINDOW_OVERLAY = 'Yts/CLEAN_WINDOW_TEXT';
 }
