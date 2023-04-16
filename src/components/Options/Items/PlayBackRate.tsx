@@ -40,7 +40,7 @@ const OptionPlayBackRate = () => {
           <ListItemIcon>
             <SpeedIcon fontSize="large" />
           </ListItemIcon>
-          <ListItemText>{t('options:PBR')}</ListItemText>
+          <ListItemText>{t('options:playBackRate:title')}</ListItemText>
         </ListItem>
         <ListItem>
           <Typography variant="body2" color="text.secondary">

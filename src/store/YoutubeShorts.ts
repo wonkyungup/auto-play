@@ -49,6 +49,15 @@ const ytsReducer = (state = initialState, action: any) => {
     case Defs.REDUX_YTS_PLAY_BACK_RATE:
       state.innerVideo.playbackRate = action.speed;
       break;
+    case Defs.REDUX_YTS_WINDOW_OVERLAY:
+      const { innerContainer } = state;
+      if (innerContainer) {
+        const _overlay = $(innerContainer).find('.overlay');
+
+        if (action.clearWindowText) _overlay.css('display', 'none');
+        else _overlay.css('display', 'block');
+      }
+      break;
     default:
       break;
   }

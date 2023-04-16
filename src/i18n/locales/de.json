@@ -16,10 +16,19 @@
     "setting": "Einstellung"
   },
   "options": {
-    "cc": "Untertitel",
-    "ccEnabled": "Verwenden Sie",
-    "ccDisabled": "Behinderte",
-    "PBR": "Wiedergaberate"
+    "cc": {
+      "title": "Untertitel",
+      "enabled": "Verwenden Sie",
+      "disabled": "Behinderte"
+    },
+    "playBackRate": {
+      "title": "Wiedergaberate"
+    },
+    "windowOverlay": {
+      "title": "überlagern",
+      "show": "zeigen",
+      "hide": "verstecken"
+    }
   }
 }
 

@@ -16,10 +16,19 @@
     "setting": "설정"
   },
   "options": {
-    "cc": "자막",
-    "ccEnabled": "사용",
-    "ccDisabled": "사용 안함",
-    "PBR": "재생 속도"
+    "cc": {
+      "title": "자막",
+      "enabled": "사용",
+      "disabled": "사용 안함"
+    },
+    "playBackRate": {
+      "title": "재생 속도"
+    },
+    "windowOverlay": {
+      "title": "오버레이",
+      "show": "보이기",
+      "hide": "숨기기"
+    }
   }
 }
 

@@ -16,10 +16,19 @@
     "setting": "सेटिंग"
   },
   "options": {
-    "cc": "उपशीर्षक",
-    "ccEnabled": "उपयोग",
-    "ccDisabled": "उपयोग नहीं किया",
-    "PBR": "फिर से खेलना दर"
+    "cc": {
+      "title": "उपशीर्षक",
+      "enabled": "उपयोग",
+      "disabled": "उपयोग नहीं किया"
+    },
+    "playBackRate": {
+      "title": "फिर से खेलना दर"
+    },
+    "windowOverlay": {
+      "title": "उपरिशायी",
+      "show": "दिखाना",
+      "hide": "छिपाना"
+    }
   }
 }
 

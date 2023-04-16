@@ -6,9 +6,11 @@ import Button from './Base/Button';
 import Content from './Base/Content';
 import ClosedCaption from './Items/ClosedCaption';
 import PlayBackRate from './Items/PlayBackRate';
+import WindowOverlay from './Items/WindowOverlay';
 
 const OptionApp = () => {
-  const { base, closedCaption, playBackRate } = store.getState().options;
+  const { base, closedCaption, playBackRate, clearWindowText } =
+    store.getState().options;
   const [rotate, setRotate] = useState(base.rotate);
   const [cardOpen, setCardOpen] = useState(false);
 
@@ -20,16 +22,19 @@ const OptionApp = () => {
     });
   }, [cardOpen]);
 
-  // CC
   store.dispatch({
     type: Defs.REDUX_YTS_CC,
     cc: closedCaption.state,
   });
 
-  // Play Back Rate
   store.dispatch({
     type: Defs.REDUX_YTS_PLAY_BACK_RATE,
     speed: playBackRate.speed,
+  });
+
+  store.dispatch({
+    type: Defs.REDUX_YTS_WINDOW_OVERLAY,
+    clearWindowText: clearWindowText.state,
   });
 
   return (
@@ -43,6 +48,7 @@ const OptionApp = () => {
         >
           <ClosedCaption />
           <PlayBackRate />
+          <WindowOverlay />
         </Content>
       )}
     </div>

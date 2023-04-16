@@ -16,10 +16,19 @@
     "setting": "設定"
   },
   "options": {
-    "cc": "字幕",
-    "ccEnabled": "使用",
-    "ccDisabled": "無効",
-    "PBR": "再生速度"
+    "cc": {
+      "title": "字幕",
+      "enabled": "使用",
+      "disabled": "無効"
+    },
+    "playBackRate": {
+      "title": "再生速度"
+    },
+    "windowOverlay": {
+      "title": "オーバーレイ",
+      "show": "見える",
+      "hide": "隠す"
+    }
   }
 }
 
