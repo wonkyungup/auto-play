@@ -5,7 +5,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import SpeedIcon from '@mui/icons-material/Speed';
+import TimesOneMobiledataIcon from '@mui/icons-material/TimesOneMobiledata';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -38,7 +38,7 @@ const OptionPlayBackRate = () => {
       <List dense>
         <ListItem>
           <ListItemIcon>
-            <SpeedIcon fontSize="large" />
+            <TimesOneMobiledataIcon fontSize="large" />
           </ListItemIcon>
           <ListItemText>{t('options:playBackRate:title')}</ListItemText>
         </ListItem>
