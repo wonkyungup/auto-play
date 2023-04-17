@@ -3,8 +3,8 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Typography from '@mui/material/Typography';
-import FontDownloadIcon from '@mui/icons-material/FontDownload';
-import FontDownloadOffIcon from '@mui/icons-material/FontDownloadOff';
+import LayersIcon from '@mui/icons-material/Layers';
+import LayersClearIcon from '@mui/icons-material/LayersClear';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { store } from '../../../store';
@@ -32,8 +32,8 @@ const OptionWindowOverlay = () => {
   return (
     <MenuItem onClick={onClickHandler}>
       <ListItemIcon>
-        {state && <FontDownloadOffIcon fontSize="large" />}
-        {!state && <FontDownloadIcon fontSize="large" />}
+        {state && <LayersClearIcon fontSize="large" />}
+        {!state && <LayersIcon fontSize="large" />}
       </ListItemIcon>
       <ListItemText>{t('options:windowOverlay:title')}</ListItemText>
       <Typography variant="body2" color="text.secondary">
