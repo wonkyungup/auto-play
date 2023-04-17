@@ -13,11 +13,6 @@ The code has been posted on Github.
 
 If you have any additional or uncomfortable points while using it, please send us a review or e-mail and we will respond.
 
-### Version 1.0.3
-- FIX: Remove previously blocked scroll event
-    - When scrolling, too many events were imported and throttling was used, but there were still too many events, so the events were removed. However, there was a problem here, and the problem that the video did not automatically go over was confirmed and removed altogether. 
-- ADD: i18n
-    - ko, en, de, in, jp, ru, zhHans, zhHant    
-- ADD: Options button
-- ADD: Option CC enabled/disabled
-    - Subtitles are displayed on shorts videos when YouTube video subtitles option is turned on.
+### Version 1.0.4
+ADD: video speed control
+ADD: video window overlay Show/Hide
