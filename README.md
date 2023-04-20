@@ -19,6 +19,8 @@ ADD: video speed control
 <br />
 ADD: video window overlay Show/Hide
 <br />
+ADD: video volume up/down
+<br />
 
 ### Questions
 - The program does not work
