@@ -7,9 +7,10 @@ import Content from './Base/Content';
 import ClosedCaption from './Items/ClosedCaption';
 import PlayBackRate from './Items/PlayBackRate';
 import WindowOverlay from './Items/WindowOverlay';
+import ControlVideoVol from './Items/ControlVideoVol';
 
 const OptionApp = () => {
-  const { base, closedCaption, playBackRate, clearWindowText } =
+  const { base, closedCaption, playBackRate, clearWindowText, videoVol } =
     store.getState().options;
   const [rotate, setRotate] = useState(base.rotate);
   const [cardOpen, setCardOpen] = useState(false);
@@ -37,6 +38,11 @@ const OptionApp = () => {
     clearWindowText: clearWindowText.state,
   });
 
+  store.dispatch({
+    type: Defs.REDUX_YTS_CONTROL_VIDEO_VOL,
+    vol: videoVol.value,
+  });
+
   return (
     <div>
       <Button rotate={rotate} onClick={() => setCardOpen(!cardOpen)} />
@@ -49,6 +55,7 @@ const OptionApp = () => {
           <ClosedCaption />
           <PlayBackRate />
           <WindowOverlay />
+          <ControlVideoVol />
         </Content>
       )}
     </div>
