@@ -43,7 +43,7 @@ const OptionControlVideoVol = () => {
             {value <= 0.5 && value > 0 && <VolumeDownIcon fontSize="large" />}
             {value > 0.5 && <VolumeUpIcon fontSize="large" />}
           </ListItemIcon>
-          <ListItemText>{t('options:playBackRate:title')}</ListItemText>
+          <ListItemText>{t('options:videoVol:title')}</ListItemText>
         </ListItem>
         <ListItem>
           <Typography variant="body2" color="text.secondary">

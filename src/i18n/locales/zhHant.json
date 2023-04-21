@@ -28,6 +28,9 @@
       "title": "覆蓋",
       "show": "展示",
       "hide": "隱藏"
+    },
+    "videoVol": {
+      "title": "聲音"
     }
   }
 }
