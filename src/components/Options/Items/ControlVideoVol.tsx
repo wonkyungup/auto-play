@@ -5,52 +5,57 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import TimesOneMobiledataIcon from '@mui/icons-material/TimesOneMobiledata';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeDownIcon from '@mui/icons-material/VolumeDown';
+import VolumeMuteIcon from '@mui/icons-material/VolumeMute';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { store } from '../../../store';
 import Defs from '../../../assets/constatns';
 
-const OptionPlayBackRate = () => {
-  const { playBackRate } = store.getState().options;
+const OptionControlVideoVol = () => {
+  const { innerVideo } = store.getState().yts;
+  const { videoVol } = store.getState().options;
   const { t } = useTranslation();
-  const [value, setValue] = React.useState(playBackRate.speed);
+  const [value, setValue] = React.useState(videoVol.value);
   const onHandler = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number);
     store.dispatch({
-      type: Defs.REDUX_OPTION_PLAY_BACK_RATE,
-      speed: newValue,
+      type: Defs.REDUX_OPTION_CONTROL_VIDEO_VOL,
+      vol: newValue,
     });
   };
 
   React.useEffect(() => {
     store.dispatch({
-      type: Defs.REDUX_YTS_PLAY_BACK_RATE,
-      speed: value,
+      type: Defs.REDUX_YTS_CONTROL_VIDEO_VOL,
+      vol: value,
     });
   }, [value]);
 
   return (
-    <MenuItem sx={{ padding: 0 }}>
+    <MenuItem sx={{ padding: 0 }} disabled={innerVideo.muted}>
       <List dense>
         <ListItem>
           <ListItemIcon>
-            <TimesOneMobiledataIcon fontSize="large" />
+            {value <= 0 && <VolumeMuteIcon fontSize="large" />}
+            {value <= 0.5 && value > 0 && <VolumeDownIcon fontSize="large" />}
+            {value > 0.5 && <VolumeUpIcon fontSize="large" />}
           </ListItemIcon>
-          <ListItemText>{t('options:playBackRate:title')}</ListItemText>
+          <ListItemText>{t('options:videoVol:title')}</ListItemText>
         </ListItem>
         <ListItem>
           <Typography variant="body2" color="text.secondary">
             <Box sx={{ width: 160 }}>
               <Slider
                 size="small"
-                aria-label="play-back-rate"
+                aria-label="controls-video-vol"
                 defaultValue={value}
                 onChange={onHandler}
-                step={0.25}
-                min={0.25}
-                max={2.0}
+                step={0.1}
+                min={0}
+                max={1.0}
               />
             </Box>
           </Typography>
@@ -60,4 +65,4 @@ const OptionPlayBackRate = () => {
   );
 };
 
-export default OptionPlayBackRate;
+export default OptionControlVideoVol;

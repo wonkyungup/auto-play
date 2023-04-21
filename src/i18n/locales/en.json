@@ -28,6 +28,9 @@
       "title": "Overlay",
       "show": "Show",
       "hide": "Hide"
+    },
+    "videoVol": {
+      "title": "Sound"
     }
   }
 }

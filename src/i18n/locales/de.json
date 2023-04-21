@@ -28,6 +28,9 @@
       "title": "überlagern",
       "show": "zeigen",
       "hide": "verstecken"
+    },
+    "videoVol": {
+      "title": "Klang"
     }
   }
 }

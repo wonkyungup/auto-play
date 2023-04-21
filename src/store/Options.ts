@@ -13,6 +13,9 @@ const initialState: TypeOptions = {
   clearWindowText: {
     state: false,
   },
+  videoVol: {
+    value: 1,
+  },
 };
 
 const optionsReducer = (state = initialState, action: any) => {
@@ -28,6 +31,9 @@ const optionsReducer = (state = initialState, action: any) => {
       break;
     case Defs.REDUX_OPTION_WINDOW_OVERLAY:
       state.clearWindowText.state = action.clearWindowText;
+      break;
+    case Defs.REDUX_OPTION_CONTROL_VIDEO_VOL:
+      state.videoVol.value = action.vol;
       break;
     default:
       break;

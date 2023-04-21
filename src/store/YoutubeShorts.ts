@@ -58,6 +58,9 @@ const ytsReducer = (state = initialState, action: any) => {
         else _overlay.css('display', 'block');
       }
       break;
+    case Defs.REDUX_YTS_CONTROL_VIDEO_VOL:
+      state.innerVideo.volume = action.vol;
+      break;
     default:
       break;
   }
