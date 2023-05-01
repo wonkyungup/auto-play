@@ -14,13 +14,8 @@ The code has been posted on Github.
 If you have any additional or uncomfortable points while using it, please send us a review or e-mail and we will respond.
 
 
-### Version 1.0.4
-ADD: video speed control
-<br />
-ADD: video window overlay Show/Hide
-<br />
-ADD: video volume up/down
-<br />
+### Version 1.0.5
+ADD: video download (to be ready)
 
 ### Questions
 - The program does not work
