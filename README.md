@@ -15,7 +15,9 @@ If you have any additional or uncomfortable points while using it, please send u
 
 
 ### Version 1.0.5
-ADD: video download (to be ready)
+FIX: Option CC enabled/disabled (scheduled)
+ADD: Desc ICON Or Content (scheduled)
+ADD: video download (under test)
 
 ### Questions
 - The program does not work
