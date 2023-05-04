@@ -32,6 +32,9 @@
     "videoVol": {
       "title": "आवाज़"
     }
+  },
+  "downloader": {
+    "title": "डाउनलोड करना"
   }
 }
 

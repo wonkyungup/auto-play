@@ -22,7 +22,7 @@ const Button = ({ rotate, onClick }: TypeButton) => {
           bottom: 9,
           top: 0,
           right: 0,
-          left: 60,
+          left: 95,
           transform: `rotate(${rotate}deg)`,
           color: '#ffffff',
         }}

@@ -9,6 +9,7 @@ import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
 import SystemTheme from './components/SystemTheme';
 import OptionApp from './components/Options/App';
+import DownloaderApp from './components/Downloader';
 import { store } from './store';
 
 const eventsListener = new EventsListener();
@@ -43,6 +44,7 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
       ReactDOM.render(
         <SystemTheme>
           <ToggleSwitch />
+          <DownloaderApp />
           <OptionApp />
         </SystemTheme>,
         document.getElementById('auto-youtube-shorts-scroll-down'),

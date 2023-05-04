@@ -32,6 +32,9 @@
     "videoVol": {
       "title": "소리"
     }
+  },
+  "downloader": {
+    "title": "다운로드"
   }
 }
 

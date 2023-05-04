@@ -32,5 +32,8 @@
     "videoVol": {
       "title": "Sound"
     }
+  },
+  "downloader": {
+    "title": "download"
   }
 }

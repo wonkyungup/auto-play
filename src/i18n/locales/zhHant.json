@@ -32,6 +32,9 @@
     "videoVol": {
       "title": "聲音"
     }
+  },
+  "downloader": {
+    "title": "下載"
   }
 }
 

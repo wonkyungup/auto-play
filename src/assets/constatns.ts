@@ -27,6 +27,10 @@ export interface TypeYTS {
   innerPlayerControl: any;
 }
 
+export interface TypeDownloader {
+  url: string;
+}
+
 export default class Defs {
   static URL_YOUTUBE_SHORTS = 'https://www.youtube.com/shorts';
   static URL_GITHUB =
@@ -50,4 +54,5 @@ export default class Defs {
   static REDUX_YTS_PLAY_BACK_RATE = 'YTS/PBR'; // PBR = Play Back Rate
   static REDUX_YTS_WINDOW_OVERLAY = 'YTS/CLEAN_WINDOW_TEXT';
   static REDUX_YTS_CONTROL_VIDEO_VOL = 'YTS/CONTROL_VIDEO_VOL';
+  static REDUX_DOWNLOADER = 'DOWNLOADER/VIDEO';
 }
