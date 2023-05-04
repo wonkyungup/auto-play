@@ -15,9 +15,14 @@ If you have any additional or uncomfortable points while using it, please send u
 
 
 ### Version 1.0.5
+FIX: Sound Muted Option Icon Change (scheduled)
+<br />
 FIX: Option CC enabled/disabled (scheduled)
+<br />
 ADD: Desc ICON Or Content (scheduled)
+<br />
 ADD: video download (under test)
+<br />
 
 ### Questions
 - The program does not work
