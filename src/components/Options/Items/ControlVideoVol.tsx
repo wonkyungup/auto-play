@@ -8,6 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
 import VolumeMuteIcon from '@mui/icons-material/VolumeMute';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -39,9 +40,16 @@ const OptionControlVideoVol = () => {
       <List dense>
         <ListItem>
           <ListItemIcon>
-            {value <= 0 && <VolumeMuteIcon fontSize="large" />}
-            {value <= 0.5 && value > 0 && <VolumeDownIcon fontSize="large" />}
-            {value > 0.5 && <VolumeUpIcon fontSize="large" />}
+            {innerVideo.muted && <VolumeOffIcon fontSize="large" />}
+            {!innerVideo.muted && value <= 0 && (
+              <VolumeMuteIcon fontSize="large" />
+            )}
+            {!innerVideo.muted && value <= 0.5 && value > 0 && (
+              <VolumeDownIcon fontSize="large" />
+            )}
+            {!innerVideo.muted && value > 0.5 && (
+              <VolumeUpIcon fontSize="large" />
+            )}
           </ListItemIcon>
           <ListItemText>{t('options:videoVol:title')}</ListItemText>
         </ListItem>
