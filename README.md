@@ -15,7 +15,7 @@ If you have any additional or uncomfortable points while using it, please send u
 
 
 ### Version 1.0.5
-FIX: Sound Muted Option Icon Change (scheduled)
+FIX: Sound Muted Option Icon Change
 <br />
 FIX: Option CC enabled/disabled (scheduled)
 <br />
