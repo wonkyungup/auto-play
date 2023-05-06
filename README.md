@@ -17,7 +17,7 @@ If you have any additional or uncomfortable points while using it, please send u
 ### Version 1.0.5
 FIX: Sound Muted Option Icon Change
 <br />
-FIX: Option CC remove enabled (scheduled)
+FIX: remove Option CC (scheduled)
 <br />
 ADD: Desc ICON Or Content (scheduled)
 <br />
