@@ -16,7 +16,7 @@
     },
     "errorResponse": {
       "title": "에러 조치 사항",
-      "text-1": "Youtube에서 Short 접속시, 새로고침(F5)을 한번 해주셔야 사용 가능합니다.",
+      "text-1": "Youtube > Short 접속시, 새로고침(F5)을 한번 해주셔야 사용 가능합니다.",
       "text-2": "에러 발생시, 페이지 새로고침(F5) 해주시면 정상적으로 사용 가능 합니다."
     },
     "explanation": {

@@ -29,12 +29,12 @@ const Introduction = () => {
           <br />❌ New Tab ➡ Youtube ➡ Shorts {t('popup:exec:connect')}
           <br />⭕ New Tab ➡{' '}
           <Link href={Defs.URL_YOUTUBE_SHORTS} target="_blank">
-            Youtube-Shorts 접속
+            Youtube-Shorts {t('popup:exec:connect')}
           </Link>
           <br />
           <br />
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body1" color="text.secondary">
           🎤 {t('popup:use:title')}
           <br />
           💁 {t('popup:use:text-1')}
@@ -45,7 +45,7 @@ const Introduction = () => {
           <br />
           <br />
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body1" color="text.secondary">
           🔴 {t('popup:errorResponse:title')}
           <br />
           💁 {t('popup:errorResponse:text-1')}
@@ -54,7 +54,7 @@ const Introduction = () => {
           <br />
           <br />
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body1" color="text.secondary">
           🌈 {t('popup:explanation:title')}
           <br />
           🙇 {t('popup:explanation:text-1')}
