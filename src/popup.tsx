@@ -17,32 +17,48 @@ const Introduction = () => {
     <Card sx={{ minWidth: 420, userSelect: 'none' }} variant="outlined">
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {t('popup:title')}
+          {t('popup:introduction:title')}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          {t('popup:body1P1')}
+          {t('popup:introduction:subtitle')}
+          <br />
+          <br />
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          🎤 {t('popup:exec:title')}
+          <br />❌ New Tab ➡ Youtube ➡ Shorts {t('popup:exec:connect')}
+          <br />⭕ New Tab ➡{' '}
           <Link href={Defs.URL_YOUTUBE_SHORTS} target="_blank">
-            Youtube Shorts
+            Youtube-Shorts {t('popup:exec:connect')}
           </Link>
           <br />
           <br />
-          🚀 {t('popup:body1P2')}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body1" color="text.secondary">
+          🎤 {t('popup:use:title')}
+          <br />
+          💁 {t('popup:use:text-1')}
+          <br />
+          💁 {t('popup:use:text-2')}
+          <br />
+          💁 {t('popup:use:text-3')}
           <br />
           <br />
-          {t('popup:body2P1')}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          🔴 {t('popup:errorResponse:title')}
+          <br />
+          💁 {t('popup:errorResponse:text-1')}
+          <br />
+          💁 {t('popup:errorResponse:text-2')}
           <br />
           <br />
-          😀 {t('popup:body2P2')}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          🌈 {t('popup:explanation:title')}
           <br />
-          😀 {t('popup:body2P3')}
-          <br />
-          😀 {t('popup:body2P4')}
-          <br />
-          <br />
-          ❤️ {t('popup:body2P5')}
-          <br />⭐ {t('popup:body2P6')}
+          🙇 {t('popup:explanation:text-1')}
+          <br />⭐ {t('popup:explanation:text-2')}
           <Link href={Defs.URL_GITHUB} target="_blank">
             Github
           </Link>

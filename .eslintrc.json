@@ -24,5 +24,8 @@
   },
   "globals": {
     "NodeJS": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
 }

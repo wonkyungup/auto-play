@@ -1,14 +1,29 @@
 {
   "popup": {
-    "title": "Automatische Youtube-Shorts nach unten scrollen",
-    "body1P1": "Um diese Erweiterung zu verwenden, müssen Sie Folgendes öffnen:",
-    "body1P2": "Am oberen Rand des Videos wird ein Schalter erstellt.",
-    "body2P1": "Diese Erweiterung ermöglicht es YouTube Shorts, automatisch nach unten zu scrollen.",
-    "body2P2": "Die automatische Wiedergabe beginnt, wenn der Schalter eingeschaltet wird.",
-    "body2P3": "Autoplay wird abgebrochen, wenn der Schalter ausgeschaltet wird.",
-    "body2P4": "Schalter können aufgrund gelegentlicher Fehler nicht erstellt werden. Eine vorübergehende Problemumgehung besteht darin, die Seite zu aktualisieren.",
-    "body2P5": "Bitte drücken Sie den Stern, wenn Sie reinkommen. Danke",
-    "body2P6": "Projekthomepage und Quellcode:"
+    "introduction": {
+      "title": "Automatische Youtube-Shorts nach unten scrollen",
+      "subtitle": "Diese Erweiterung ermöglicht es YouTube Shorts, automatisch nach unten zu scrollen."
+    },
+    "exec": {
+      "title": "wie man läuft",
+      "connect": "verbinden"
+    },
+    "use": {
+      "title": "Wie benutzt man",
+      "text-1": "Am oberen Rand des Videos werden ein Schalter und eine Optionsschaltfläche erstellt.",
+      "text-2": "Die automatische Wiedergabe beginnt, wenn der Schalter eingeschaltet wird.",
+      "text-3": "Autoplay wird abgebrochen, wenn der Schalter ausgeschaltet wird."
+    },
+    "errorResponse": {
+      "title": "Fehleraktionen",
+      "text-1": "Wenn Sie auf Youtube > Short zugreifen, müssen Sie einmal aktualisieren (F5), um es zu verwenden.",
+      "text-2": "Wenn ein Fehler auftritt, aktualisieren Sie die Seite (F5), um sie normal zu verwenden."
+    },
+    "explanation": {
+      "title": "Spende",
+      "text-1": "Wenn Sie reinkommen und auf den Stern drücken, wird das eine große Hilfe sein. Danke",
+      "text-2": "Projekthomepage und Quellcode: "
+    }
   },
   "tooltip": {
     "disableAutoPlay": "Deaktiviere Autoplay",

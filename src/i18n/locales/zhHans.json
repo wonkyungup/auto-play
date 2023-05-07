@@ -1,14 +1,29 @@
 {
   "popup": {
-    "title": "向下滚动自动 Youtube 短裤",
-    "body1P1": "要使用此扩展程序，您需要打开：",
-    "body1P2": "视频顶部创建了一个开关。",
-    "body2P1": "此扩展允许 YouTube Shorts 自动向下滚动。",
-    "body2P2": "开关打开时自动播放开始。",
-    "body2P3": "当开关关闭时自动播放被取消。",
-    "body2P4": "由于偶发错误，无法创建开关。 临时解决方法是刷新页面。",
-    "body2P5": "进来时请按星号。 谢谢",
-    "body2P6": "项目主页及源码："
+    "introduction": {
+      "title": "向下滚动自动 Youtube 短裤",
+      "subtitle": "此扩展允许 YouTube Shorts 自动向下滚动。"
+    },
+    "exec": {
+      "title": "如何运行",
+      "connect": "连接"
+    },
+    "use": {
+      "title": "如何使用",
+      "text-1": "视频顶部创建了一个开关和选项按钮。",
+      "text-2": "开关打开时自动播放开始。",
+      "text-3": "当开关关闭时自动播放被取消。"
+    },
+    "errorResponse": {
+      "title": "错误操作",
+      "text-1": "访问 Youtube > Short 时，需要刷新 (F5) 一次才能使用。",
+      "text-2": "如果出现错误，刷新页面（F5）即可正常使用。"
+    },
+    "explanation": {
+      "title": "捐款",
+      "text-1": "如果你进来按星星，那将是一个很大的帮助。谢谢",
+      "text-2": "项目主页及源码： "
+    }
   },
   "tooltip": {
     "disableAutoPlay": "禁用自动播放",
