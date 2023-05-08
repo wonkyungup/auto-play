@@ -36,32 +36,27 @@ const Introduction = () => {
         </Typography>
         <Typography variant="body1" color="text.secondary">
           🎤 {t('popup:use:title')}
-          <br />
-          💁 {t('popup:use:text-1')}
-          <br />
-          💁 {t('popup:use:text-2')}
-          <br />
-          💁 {t('popup:use:text-3')}
+          <br />➡ {t('popup:use:text-1')}
+          <br />➡ {t('popup:use:text-2')}
+          <br />➡ {t('popup:use:text-3')}
           <br />
           <br />
         </Typography>
         <Typography variant="body1" color="text.secondary">
           🔴 {t('popup:errorResponse:title')}
-          <br />
-          💁 {t('popup:errorResponse:text-1')}
-          <br />
-          💁 {t('popup:errorResponse:text-2')}
+          <br />➡ {t('popup:errorResponse:text-1')}
+          <br />➡ {t('popup:errorResponse:text-2')}
           <br />
           <br />
         </Typography>
         <Typography variant="body1" color="text.secondary">
           🌈 {t('popup:explanation:title')}
           <br />
-          🙇 {t('popup:explanation:text-1')}
-          <br />⭐ {t('popup:explanation:text-2')}
+          🙇
           <Link href={Defs.URL_GITHUB} target="_blank">
-            Github
+            {t('popup:explanation:comein')}
           </Link>
+          {t('popup:explanation:text-1')}
           <br />
         </Typography>
       </CardContent>

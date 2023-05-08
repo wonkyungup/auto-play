@@ -16,13 +16,13 @@
     },
     "errorResponse": {
       "title": "Error Actions",
-      "text-1": "When accessing Youtube > Short, you need to refresh (F5) once to use it.",
+      "text-1": "When accessing Youtube ➡ Short, you need to refresh (F5) once to use it.",
       "text-2": "If an error occurs, refresh the page (F5) to use it normally."
     },
     "explanation": {
       "title": "Donation",
-      "text-1": "If you come in and press the star, it will be a great help. thank you",
-      "text-2": "Project home page and source code: "
+      "comein": " Come in",
+      "text-1": " If you press ⭐, it will be a great help. thank you"
     }
   },
   "tooltip": {
