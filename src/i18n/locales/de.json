@@ -16,13 +16,13 @@
     },
     "errorResponse": {
       "title": "Fehleraktionen",
-      "text-1": "Wenn Sie auf Youtube > Short zugreifen, müssen Sie einmal aktualisieren (F5), um es zu verwenden.",
+      "text-1": "Wenn Sie auf Youtube ➡ Short zugreifen, müssen Sie einmal aktualisieren (F5), um es zu verwenden.",
       "text-2": "Wenn ein Fehler auftritt, aktualisieren Sie die Seite (F5), um sie normal zu verwenden."
     },
     "explanation": {
       "title": "Spende",
-      "text-1": "Wenn Sie reinkommen und auf den Stern drücken, wird das eine große Hilfe sein. Danke",
-      "text-2": "Projekthomepage und Quellcode: "
+      "comein": " Komm herein",
+      "text-1": " Wenn Sie ⭐ drücken, ist dies eine große Hilfe. Danke"
     }
   },
   "tooltip": {

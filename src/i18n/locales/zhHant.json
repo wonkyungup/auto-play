@@ -16,13 +16,13 @@
     },
     "errorResponse": {
       "title": "錯誤操作",
-      "text-1": "訪問 Youtube > Short 時，需要刷新 (F5) 一次才能使用。",
+      "text-1": "訪問 Youtube ➡ Short 時，需要刷新 (F5) 一次才能使用。",
       "text-2": "如果出現錯誤，刷新頁面（F5）即可正常使用。"
     },
     "explanation": {
       "title": "捐款",
-      "text-1": "如果你進來按星星，那將是一個很大的幫助。謝謝",
-      "text-2": "項目主頁及源碼： "
+      "comein": " 進來",
+      "text-1": " 如果你按⭐，這將是一個很大的幫助。 謝謝"
     }
   },
   "tooltip": {
