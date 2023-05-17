@@ -1,7 +1,15 @@
-import Defs, { TypeYTS } from '../assets/constatns';
+import { createSlice, current } from '@reduxjs/toolkit';
+import Defs from '../assets/constatns';
 import Utils from '../assets/utils';
 import $ from 'jquery';
 import Browser from 'webextension-polyfill';
+
+interface TypeYTS {
+  innerContainer: Element | null;
+  innerList: any[];
+  innerVideo: any;
+  innerPlayerControl: any;
+}
 
 const initialState: TypeYTS = {
   innerContainer: null,
@@ -10,62 +18,69 @@ const initialState: TypeYTS = {
   innerPlayerControl: null,
 };
 
-const ytsReducer = (state = initialState, action: any) => {
-  switch (action.type) {
-    case Defs.REDUX_YTS_WAIT_FOR_VIDEO:
-      state.innerVideo = action.innerVideo;
-      state.innerContainer = action.innerContainer;
-      state.innerList = action.innerList;
-      state.innerPlayerControl = action.innerPlayerControl;
-      break;
-    case Defs.REDUX_YTS_NEXT_INNER:
-      const index = state.innerList.indexOf(state.innerContainer);
-      if (index > 0) {
-        return state.innerList[index + 1];
-      }
-      break;
-    case Defs.REDUX_YTS_LOOP_VIDEO:
+const ytsSlice = createSlice({
+  name: 'yts',
+  initialState,
+  reducers: {
+    onAwaitYtsForVideo: (state, action) => {
+      state.innerVideo = action.payload.innerVideo;
+      state.innerContainer = action.payload.innerContainer;
+      state.innerList = action.payload.innerList;
+      state.innerPlayerControl = action.payload.innerPlayerControl;
+    },
+    onYtsLoopVideo: (state) => {
       state.innerVideo?.setAttribute('loop', String(true));
-      break;
-    case Defs.REDUX_YTS_NEXT_VIDEO:
-      state.innerVideo?.removeAttribute('loop');
-      state.innerVideo.onended = async () => {
-        const element = await ytsReducer(state, {
-          type: Defs.REDUX_YTS_NEXT_INNER,
+    },
+    onYtsNextVideo: (state) => {
+      const yts = current(state);
+
+      yts.innerVideo?.removeAttribute('loop');
+      yts.innerVideo.onended = async () => {
+        const afterIndex: number = yts.innerList.indexOf(yts.innerContainer);
+        yts.innerList[afterIndex + 1].scrollIntoView({
+          block: 'end',
+          behavior: 'smooth',
         });
-        element.scrollIntoView({ block: 'end', behavior: 'smooth' });
+
         await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
       };
-      break;
-    case Defs.REDUX_YTS_CC:
+    },
+    onYtsCC: (state, action) => {
       Utils.waitForElement('#ytp-caption-window-container').then((cc) => {
-        const isCC = action.cc;
+        const isCC = action.payload;
         if (cc) {
           if (isCC) $(cc).show();
           else $(cc).hide();
         }
       });
-      break;
-    case Defs.REDUX_YTS_PLAY_BACK_RATE:
-      state.innerVideo.playbackRate = action.speed;
-      break;
-    case Defs.REDUX_YTS_WINDOW_OVERLAY:
+    },
+    onYtsPlayBackRate: (state, action) => {
+      state.innerVideo.playbackRate = action.payload;
+    },
+    onYtsWinOverlay: (state, action) => {
       const { innerContainer } = state;
+
       if (innerContainer) {
         const _overlay = $(innerContainer).find('.overlay');
 
-        if (action.clearWindowText) _overlay.css('display', 'none');
+        if (action.payload) _overlay.css('display', 'none');
         else _overlay.css('display', 'block');
       }
-      break;
-    case Defs.REDUX_YTS_CONTROL_VIDEO_VOL:
-      state.innerVideo.volume = action.vol;
-      break;
-    default:
-      break;
-  }
+    },
+    onYtsControlVideoVol: (state, action) => {
+      state.innerVideo.volume = action.payload;
+    },
+  },
+});
 
-  return state;
-};
+export const {
+  onAwaitYtsForVideo,
+  onYtsLoopVideo,
+  onYtsNextVideo,
+  onYtsControlVideoVol,
+  onYtsWinOverlay,
+  onYtsPlayBackRate,
+  onYtsCC,
+} = ytsSlice.actions;
 
-export { ytsReducer };
+export default ytsSlice.reducer;

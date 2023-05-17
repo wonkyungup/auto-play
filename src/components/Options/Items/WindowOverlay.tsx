@@ -7,7 +7,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import LayersClearIcon from '@mui/icons-material/LayersClear';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { store } from '../../../store';
+import store from '../../../store';
 import Defs from '../../../assets/constatns';
 
 const OptionWindowOverlay = () => {

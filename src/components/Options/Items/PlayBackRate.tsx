@@ -9,7 +9,7 @@ import TimesOneMobiledataIcon from '@mui/icons-material/TimesOneMobiledata';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { store } from '../../../store';
+import store from '../../../store';
 import Defs from '../../../assets/constatns';
 
 const OptionPlayBackRate = () => {

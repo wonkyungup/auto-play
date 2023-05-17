@@ -1,14 +1,15 @@
-import { createStore, combineReducers } from 'redux';
-import { toggleSwitchReducer } from './ToggleSwitch';
-import { optionsReducer } from './Options';
-import { ytsReducer } from './YoutubeShorts';
+import { configureStore } from '@reduxjs/toolkit';
+import toggleSwitchReducer from './ToggleSwitch';
+import optionsReducer from './Options';
+import ytsReducer from './YoutubeShorts';
 
-const rootReducer = combineReducers({
-  toggleSwitch: toggleSwitchReducer,
-  options: optionsReducer,
-  yts: ytsReducer,
+const store = configureStore({
+  reducer: {
+    toggleSwitch: toggleSwitchReducer,
+    options: optionsReducer,
+    yts: ytsReducer,
+  },
 });
 
-const store = createStore(rootReducer);
-
-export { store };
+export type RootState = ReturnType<typeof store.getState>;
+export default store;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Defs from '../../assets/constatns';
-import { store } from '../../store';
+import store from '../../store';
 import Button from './Base/Button';
 import Content from './Base/Content';
 import ClosedCaption from './Items/ClosedCaption';

@@ -7,7 +7,7 @@ import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption';
 import ClosedCaptionDisabledIcon from '@mui/icons-material/ClosedCaptionDisabled';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { store } from '../../../store';
+import store from '../../../store';
 import Defs from '../../../assets/constatns';
 
 const OptionCC = () => {
