@@ -9,27 +9,21 @@ import TimesOneMobiledataIcon from '@mui/icons-material/TimesOneMobiledata';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import store from '../../../store';
-import Defs from '../../../assets/constatns';
+import { RootState } from '../../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOptionPlaybackRate } from '../../../store/Options';
+import { onYtsPlayBackRate } from '../../../store/YoutubeShorts';
 
 const OptionPlayBackRate = () => {
-  const { playBackRate } = store.getState().options;
+  const dispatch = useDispatch();
+  const playBackRate = useSelector(
+    (state: RootState) => state.options.playBackRate,
+  );
   const { t } = useTranslation();
-  const [value, setValue] = React.useState(playBackRate.speed);
-  const onHandler = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number);
-    store.dispatch({
-      type: Defs.REDUX_OPTION_PLAY_BACK_RATE,
-      speed: newValue,
-    });
-  };
 
   React.useEffect(() => {
-    store.dispatch({
-      type: Defs.REDUX_YTS_PLAY_BACK_RATE,
-      speed: value,
-    });
-  }, [value]);
+    dispatch(onYtsPlayBackRate(playBackRate));
+  }, [playBackRate]);
 
   return (
     <MenuItem sx={{ padding: 0 }}>
@@ -46,8 +40,10 @@ const OptionPlayBackRate = () => {
               <Slider
                 size="small"
                 aria-label="play-back-rate"
-                defaultValue={value}
-                onChange={onHandler}
+                defaultValue={playBackRate}
+                onChange={(event: Event, newValue: number | number[]) =>
+                  dispatch(setOptionPlaybackRate(newValue as number))
+                }
                 step={0.25}
                 min={0.25}
                 max={2.0}

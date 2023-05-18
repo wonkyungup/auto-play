@@ -1,69 +1,49 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface TypeOptions {
-  base: {
-    rotate: number;
-  };
-  closedCaption: {
-    state: boolean;
-  };
-  playBackRate: {
-    speed: number;
-  };
-  clearWindowText: {
-    state: boolean;
-  };
-  videoVol: {
-    value: number;
-  };
+  rotate: number;
+  ccState: boolean;
+  playBackRate: number;
+  overlayState: boolean;
+  volume: number;
 }
 
 const initialState: TypeOptions = {
-  base: {
-    rotate: 0,
-  },
-  closedCaption: {
-    state: true,
-  },
-  playBackRate: {
-    speed: 1.0,
-  },
-  clearWindowText: {
-    state: false,
-  },
-  videoVol: {
-    value: 1,
-  },
+  rotate: 0,
+  ccState: true,
+  playBackRate: 1.0,
+  overlayState: false,
+  volume: 1,
 };
 
 const optionSlice = createSlice({
   name: 'options',
   initialState,
   reducers: {
-    setRotate: (state, action: PayloadAction<number>) => {
-      state.base.rotate = action.payload;
+    setOptionRotate: (state, action: PayloadAction<number>) => {
+      state.rotate = action.payload;
     },
-    setClosedCaption: (state, action: PayloadAction<boolean>) => {
-      state.closedCaption.state = action.payload;
+    setOptionCC: (state) => {
+      state.ccState = !state.ccState;
     },
-    setPlaybackRate: (state, action: PayloadAction<number>) => {
-      state.playBackRate.speed = action.payload;
+    setOptionPlaybackRate: (state, action: PayloadAction<number>) => {
+      state.playBackRate = action.payload;
     },
-    setClearWindowText: (state, action: PayloadAction<boolean>) => {
-      state.clearWindowText.state = action.payload;
+    setOptionOverlay: (state) => {
+      state.overlayState = !state.overlayState;
     },
-    setVideoVolume: (state, action: PayloadAction<number>) => {
-      state.videoVol.value = action.payload;
+    setOptionVolume: (state, action: PayloadAction<number>) => {
+      state.volume = action.payload;
     },
   },
 });
 
 export const {
-  setRotate,
-  setClosedCaption,
-  setPlaybackRate,
-  setVideoVolume,
-  setClearWindowText,
+  setOptionRotate,
+  setOptionCC,
+  setOptionPlaybackRate,
+  setOptionOverlay,
+  setOptionVolume,
 } = optionSlice.actions;
 
 export default optionSlice.reducer;

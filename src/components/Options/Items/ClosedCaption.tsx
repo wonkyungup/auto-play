@@ -6,38 +6,29 @@ import Typography from '@mui/material/Typography';
 import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption';
 import ClosedCaptionDisabledIcon from '@mui/icons-material/ClosedCaptionDisabled';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
-import store from '../../../store';
-import Defs from '../../../assets/constatns';
+import { RootState } from '../../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOptionCC } from '../../../store/Options';
+import { onYtsCC } from '../../../store/YoutubeShorts';
 
 const OptionCC = () => {
-  const { closedCaption } = store.getState().options;
+  const dispatch = useDispatch();
+  const ccState = useSelector((state: RootState) => state.options.ccState);
   const { t } = useTranslation();
-  const [state, setState] = useState(closedCaption.state);
-  const onClickHandler = () => {
-    setState(!state);
-    store.dispatch({
-      type: Defs.REDUX_OPTIONS_CC,
-      cc: !state,
-    });
-  };
 
   React.useEffect(() => {
-    store.dispatch({
-      type: Defs.REDUX_YTS_CC,
-      cc: state,
-    });
-  }, [state]);
+    dispatch(onYtsCC(ccState));
+  }, [ccState]);
 
   return (
-    <MenuItem onClick={onClickHandler}>
+    <MenuItem onClick={() => dispatch(setOptionCC())}>
       <ListItemIcon>
-        {!state && <ClosedCaptionDisabledIcon fontSize="large" />}
-        {state && <ClosedCaptionIcon fontSize="large" />}
+        {!ccState && <ClosedCaptionDisabledIcon fontSize="large" />}
+        {ccState && <ClosedCaptionIcon fontSize="large" />}
       </ListItemIcon>
       <ListItemText>{t('options:cc:title')}</ListItemText>
       <Typography variant="body2" color="text.secondary">
-        {!state ? t('options:cc:disabled') : t('options:cc:enabled')}
+        {!ccState ? t('options:cc:disabled') : t('options:cc:enabled')}
       </Typography>
     </MenuItem>
   );

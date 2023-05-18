@@ -12,44 +12,32 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import store from '../../../store';
-import Defs from '../../../assets/constatns';
+import { RootState } from '../../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOptionVolume } from '../../../store/Options';
+import { onYtsVolume } from '../../../store/YoutubeShorts';
 
 const OptionControlVideoVol = () => {
-  const { innerVideo } = store.getState().yts;
-  const { videoVol } = store.getState().options;
+  const dispatch = useDispatch();
+  const video = useSelector((state: RootState) => state.yts.innerVideo);
+  const volume = useSelector((state: RootState) => state.options.volume);
   const { t } = useTranslation();
-  const [value, setValue] = React.useState(videoVol.value);
-  const onHandler = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number);
-    store.dispatch({
-      type: Defs.REDUX_OPTION_CONTROL_VIDEO_VOL,
-      vol: newValue,
-    });
-  };
 
   React.useEffect(() => {
-    store.dispatch({
-      type: Defs.REDUX_YTS_CONTROL_VIDEO_VOL,
-      vol: value,
-    });
-  }, [value]);
+    dispatch(onYtsVolume(volume));
+  }, [volume]);
 
   return (
-    <MenuItem sx={{ padding: 0 }} disabled={innerVideo.muted}>
+    <MenuItem sx={{ padding: 0 }} disabled={video.muted}>
       <List dense>
         <ListItem>
           <ListItemIcon>
-            {innerVideo.muted && <VolumeOffIcon fontSize="large" />}
-            {!innerVideo.muted && value <= 0 && (
-              <VolumeMuteIcon fontSize="large" />
-            )}
-            {!innerVideo.muted && value <= 0.5 && value > 0 && (
+            {video.muted && <VolumeOffIcon fontSize="large" />}
+            {!video.muted && volume <= 0 && <VolumeMuteIcon fontSize="large" />}
+            {!video.muted && volume <= 0.5 && volume > 0 && (
               <VolumeDownIcon fontSize="large" />
             )}
-            {!innerVideo.muted && value > 0.5 && (
-              <VolumeUpIcon fontSize="large" />
-            )}
+            {!video.muted && volume > 0.5 && <VolumeUpIcon fontSize="large" />}
           </ListItemIcon>
           <ListItemText>{t('options:videoVol:title')}</ListItemText>
         </ListItem>
@@ -59,8 +47,10 @@ const OptionControlVideoVol = () => {
               <Slider
                 size="small"
                 aria-label="controls-video-vol"
-                defaultValue={value}
-                onChange={onHandler}
+                defaultValue={volume}
+                onChange={(event: Event, newValue: number | number[]) =>
+                  dispatch(setOptionVolume(newValue as number))
+                }
                 step={0.1}
                 min={0}
                 max={1.0}

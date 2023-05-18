@@ -51,7 +51,7 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
           <Provider store={store}>
             <SystemTheme>
               <ToggleSwitch />
-              {/*<OptionApp />*/}
+              <OptionApp />
             </SystemTheme>
           </Provider>,
           document.getElementById('auto-youtube-shorts-scroll-down'),

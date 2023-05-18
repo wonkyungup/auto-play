@@ -57,7 +57,7 @@ const ytsSlice = createSlice({
     onYtsPlayBackRate: (state, action) => {
       state.innerVideo.playbackRate = action.payload;
     },
-    onYtsWinOverlay: (state, action) => {
+    onYtsOverlay: (state, action) => {
       const { innerContainer } = state;
 
       if (innerContainer) {
@@ -67,7 +67,7 @@ const ytsSlice = createSlice({
         else _overlay.css('display', 'block');
       }
     },
-    onYtsControlVideoVol: (state, action) => {
+    onYtsVolume: (state, action) => {
       state.innerVideo.volume = action.payload;
     },
   },
@@ -77,8 +77,8 @@ export const {
   onAwaitYtsForVideo,
   onYtsLoopVideo,
   onYtsNextVideo,
-  onYtsControlVideoVol,
-  onYtsWinOverlay,
+  onYtsVolume,
+  onYtsOverlay,
   onYtsPlayBackRate,
   onYtsCC,
 } = ytsSlice.actions;
