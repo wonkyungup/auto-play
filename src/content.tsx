@@ -9,7 +9,9 @@ import EventsListener from './assets/eventsListener';
 import ToggleSwitch from './components/ToggleSwitch';
 import SystemTheme from './components/SystemTheme';
 import OptionApp from './components/Options/App';
-import { store } from './store';
+import { Provider } from 'react-redux';
+import store, { RootState } from './store';
+import { onAwaitYtsForVideo } from './store/YoutubeShorts';
 
 const eventsListener = new EventsListener();
 const youtubeShorts = new YoutubeShortsBase();
@@ -22,31 +24,39 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
     case Defs.EVENT_PAGE_UPDATE:
       const { _innerContainer, _innerList, _innerPlayerControl, _innerVideo } =
         await youtubeShorts.waitForVideoContainer();
-      store.dispatch({
-        type: Defs.REDUX_YTS_WAIT_FOR_VIDEO,
-        innerContainer: _innerContainer,
-        innerList: _innerList,
-        innerPlayerControl: _innerPlayerControl,
-        innerVideo: _innerVideo,
-      });
+
+      store.dispatch(
+        onAwaitYtsForVideo({
+          innerContainer: _innerContainer,
+          innerList: _innerList,
+          innerPlayerControl: _innerPlayerControl,
+          innerVideo: _innerVideo,
+        }),
+      );
 
       if ($('#auto-youtube-shorts-scroll-down').length > 0) {
         $('#auto-youtube-shorts-scroll-down').remove();
       }
 
-      $(store.getState().yts.innerPlayerControl)
-        .children('yt-icon-button:eq(1)')
-        .before(
-          '<div id="auto-youtube-shorts-scroll-down" style="display: inline-block;position: relative;" ></div>',
-        );
+      const state: RootState = store.getState();
 
-      ReactDOM.render(
-        <SystemTheme>
-          <ToggleSwitch />
-          <OptionApp />
-        </SystemTheme>,
-        document.getElementById('auto-youtube-shorts-scroll-down'),
-      );
+      if (state) {
+        $(state.yts.innerPlayerControl)
+          .children('yt-icon-button:eq(1)')
+          .before(
+            '<div id="auto-youtube-shorts-scroll-down" style="display: inline-block;position: relative;" ></div>',
+          );
+
+        ReactDOM.render(
+          <Provider store={store}>
+            <SystemTheme>
+              <ToggleSwitch />
+              <OptionApp />
+            </SystemTheme>
+          </Provider>,
+          document.getElementById('auto-youtube-shorts-scroll-down'),
+        );
+      }
       break;
     default:
       break;

@@ -6,38 +6,31 @@ import Typography from '@mui/material/Typography';
 import LayersIcon from '@mui/icons-material/Layers';
 import LayersClearIcon from '@mui/icons-material/LayersClear';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
-import { store } from '../../../store';
-import Defs from '../../../assets/constatns';
+import { RootState } from '../../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOptionOverlay } from '../../../store/Options';
+import { onYtsOverlay } from '../../../store/YoutubeShorts';
 
 const OptionWindowOverlay = () => {
-  const { clearWindowText } = store.getState().options;
+  const dispatch = useDispatch();
+  const overlayState = useSelector(
+    (state: RootState) => state.options.overlayState,
+  );
   const { t } = useTranslation();
-  const [state, setState] = useState(clearWindowText.state);
-  const onClickHandler = () => {
-    setState(!state);
-    store.dispatch({
-      type: Defs.REDUX_OPTION_WINDOW_OVERLAY,
-      clearWindowText: !state,
-    });
-  };
 
   React.useEffect(() => {
-    store.dispatch({
-      type: Defs.REDUX_YTS_WINDOW_OVERLAY,
-      clearWindowText: state,
-    });
-  }, [state]);
+    dispatch(onYtsOverlay(overlayState));
+  }, [overlayState]);
 
   return (
-    <MenuItem onClick={onClickHandler}>
+    <MenuItem onClick={() => dispatch(setOptionOverlay())}>
       <ListItemIcon>
-        {state && <LayersClearIcon fontSize="large" />}
-        {!state && <LayersIcon fontSize="large" />}
+        {overlayState && <LayersClearIcon fontSize="large" />}
+        {!overlayState && <LayersIcon fontSize="large" />}
       </ListItemIcon>
       <ListItemText>{t('options:windowOverlay:title')}</ListItemText>
       <Typography variant="body2" color="text.secondary">
-        {!state
+        {!overlayState
           ? t('options:windowOverlay:show')
           : t('options:windowOverlay:hide')}
       </Typography>

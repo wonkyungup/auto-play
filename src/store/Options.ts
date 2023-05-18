@@ -1,45 +1,49 @@
-import Defs, { TypeOptions } from '../assets/constatns';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface TypeOptions {
+  rotate: number;
+  ccState: boolean;
+  playBackRate: number;
+  overlayState: boolean;
+  volume: number;
+}
 
 const initialState: TypeOptions = {
-  base: {
-    rotate: 0,
-  },
-  closedCaption: {
-    state: true,
-  },
-  playBackRate: {
-    speed: 1.0,
-  },
-  clearWindowText: {
-    state: false,
-  },
-  videoVol: {
-    value: 1,
-  },
+  rotate: 0,
+  ccState: true,
+  playBackRate: 1.0,
+  overlayState: false,
+  volume: 1,
 };
 
-const optionsReducer = (state = initialState, action: any) => {
-  switch (action.type) {
-    case Defs.REDUX_OPTIONS_ROTATE:
-      state.base.rotate = action.rotate;
-      break;
-    case Defs.REDUX_OPTIONS_CC:
-      state.closedCaption.state = action.cc;
-      break;
-    case Defs.REDUX_OPTION_PLAY_BACK_RATE:
-      state.playBackRate.speed = action.speed;
-      break;
-    case Defs.REDUX_OPTION_WINDOW_OVERLAY:
-      state.clearWindowText.state = action.clearWindowText;
-      break;
-    case Defs.REDUX_OPTION_CONTROL_VIDEO_VOL:
-      state.videoVol.value = action.vol;
-      break;
-    default:
-      break;
-  }
+const optionSlice = createSlice({
+  name: 'options',
+  initialState,
+  reducers: {
+    setOptionRotate: (state, action: PayloadAction<number>) => {
+      state.rotate = action.payload;
+    },
+    setOptionCC: (state) => {
+      state.ccState = !state.ccState;
+    },
+    setOptionPlaybackRate: (state, action: PayloadAction<number>) => {
+      state.playBackRate = action.payload;
+    },
+    setOptionOverlay: (state) => {
+      state.overlayState = !state.overlayState;
+    },
+    setOptionVolume: (state, action: PayloadAction<number>) => {
+      state.volume = action.payload;
+    },
+  },
+});
 
-  return state;
-};
+export const {
+  setOptionRotate,
+  setOptionCC,
+  setOptionPlaybackRate,
+  setOptionOverlay,
+  setOptionVolume,
+} = optionSlice.actions;
 
-export { optionsReducer };
+export default optionSlice.reducer;

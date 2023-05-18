@@ -1,19 +1,22 @@
-import Defs, { TypeToggleSwitch } from '../assets/constatns';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface TypeToggleSwitch {
+  status: boolean;
+}
 
 const initialState: TypeToggleSwitch = {
   status: false,
 };
 
-const toggleSwitchReducer = (state = initialState, action: any) => {
-  switch (action.type) {
-    case Defs.REDUX_TOGGLE_SWITCH_CHANGE:
-      state.status = action.value;
-      break;
-    default:
-      break;
-  }
+const toggleSwitchSlice = createSlice({
+  name: 'toggleSwitch',
+  initialState,
+  reducers: {
+    setAutoPlay: (state, action: PayloadAction<boolean>) => {
+      state.status = action.payload;
+    },
+  },
+});
 
-  return state;
-};
-
-export { toggleSwitchReducer };
+export const { setAutoPlay } = toggleSwitchSlice.actions;
+export default toggleSwitchSlice.reducer;
