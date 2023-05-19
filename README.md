@@ -19,11 +19,10 @@ If you have any additional or uncomfortable points while using it, please send u
  - ADD: tsconfig.json, webpack.config.ts paths
 
 ### Release
-<br />
+
 ```
 Version 1.0.6
-<br />
-- ???
+  - ???
 ```
 
 ### Questions
