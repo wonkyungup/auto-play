@@ -23,6 +23,15 @@ If you have any additional or uncomfortable points while using it, please send u
 ```
 Version 1.0.6
   - ???
+
+Version 1.0.5
+  - FIX: Sound Muted Option Icon Change
+  - MOD: popup content
+
+Version 1.0.4
+  - ADD: video speed control
+  - ADD: video window overlay Show/Hide
+  - ADD: video volume up/down  
 ```
 
 ### Questions
