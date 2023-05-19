@@ -1,5 +1,5 @@
 import Browser from 'webextension-polyfill';
-import Defs from './assets/constatns';
+import Defs from '@/assets/constatns';
 
 Browser.runtime.onMessage.addListener(async ({ event }, sender) => {
   try {

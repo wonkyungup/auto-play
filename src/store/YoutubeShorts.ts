@@ -1,6 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit';
-import Defs from '../assets/constatns';
-import Utils from '../assets/utils';
+import Defs from '@/assets/constatns';
+import Utils from '@/assets/utils';
 import $ from 'jquery';
 import Browser from 'webextension-polyfill';
 
