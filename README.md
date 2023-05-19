@@ -18,9 +18,13 @@ If you have any additional or uncomfortable points while using it, please send u
  - MOD: State Manage from redux to redux-toolkit
  - ADD: tsconfig.json, webpack.config.ts paths
 
-### Version 1.0.6
-- ???
+### Release
 <br />
+```
+Version 1.0.6
+<br />
+- ???
+```
 
 ### Questions
 - The program does not work
