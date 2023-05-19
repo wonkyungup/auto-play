@@ -15,8 +15,10 @@ If you have any additional or uncomfortable points while using it, please send u
 
 
 ### Dev
+```
  - MOD: State Manage from redux to redux-toolkit
  - ADD: tsconfig.json, webpack.config.ts paths
+```
 
 ### Release
 
