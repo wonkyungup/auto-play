@@ -12,10 +12,10 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { RootState } from '../../../store';
+import { RootState } from '@/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOptionVolume } from '../../../store/Options';
-import { onYtsVolume } from '../../../store/YoutubeShorts';
+import { setOptionVolume } from '@/store/Options';
+import { onYtsVolume } from '@/store/YoutubeShorts';
 
 const OptionControlVideoVol = () => {
   const dispatch = useDispatch();

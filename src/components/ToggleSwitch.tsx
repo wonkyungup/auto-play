@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store';
-import { onYtsLoopVideo, onYtsNextVideo } from '../store/YoutubeShorts';
-import { setAutoPlay } from '../store/ToggleSwitch';
+import { RootState } from '@/store';
+import { onYtsLoopVideo, onYtsNextVideo } from '@/store/YoutubeShorts';
+import { setAutoPlay } from '@/store/ToggleSwitch';
 
 const ToggleSwitch = () => {
   const { t } = useTranslation();

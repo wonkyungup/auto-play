@@ -6,15 +6,15 @@ import ClosedCaption from './Items/ClosedCaption';
 import PlayBackRate from './Items/PlayBackRate';
 import WindowOverlay from './Items/WindowOverlay';
 import ControlVideoVol from './Items/ControlVideoVol';
-import { RootState } from '../../store';
+import { RootState } from '@/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOptionRotate } from '../../store/Options';
+import { setOptionRotate } from '@/store/Options';
 import {
   onYtsCC,
   onYtsPlayBackRate,
   onYtsOverlay,
   onYtsVolume,
-} from '../../store/YoutubeShorts';
+} from '@/store/YoutubeShorts';
 
 const OptionApp = () => {
   const dispatch = useDispatch();

@@ -9,10 +9,10 @@ import TimesOneMobiledataIcon from '@mui/icons-material/TimesOneMobiledata';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { RootState } from '../../../store';
+import { RootState } from '@/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOptionPlaybackRate } from '../../../store/Options';
-import { onYtsPlayBackRate } from '../../../store/YoutubeShorts';
+import { setOptionPlaybackRate } from '@/store/Options';
+import { onYtsPlayBackRate } from '@/store/YoutubeShorts';
 
 const OptionPlayBackRate = () => {
   const dispatch = useDispatch();

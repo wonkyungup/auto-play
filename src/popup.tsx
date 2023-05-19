@@ -1,13 +1,13 @@
-import './i18n';
+import '@/i18n';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import SystemTheme from './components/SystemTheme';
+import SystemTheme from '@/components/SystemTheme';
 import { useTranslation } from 'react-i18next';
-import Defs from './assets/constatns';
+import Defs from '@/assets/constatns';
 import CssBaseline from '@mui/material/CssBaseline';
 
 const Introduction = () => {

@@ -61,6 +61,7 @@ const config = {
     extensions: ['.js', '.jsx', '.tsx', '.ts'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   devServer: {

@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 import ClosedCaptionIcon from '@mui/icons-material/ClosedCaption';
 import ClosedCaptionDisabledIcon from '@mui/icons-material/ClosedCaptionDisabled';
 import { useTranslation } from 'react-i18next';
-import { RootState } from '../../../store';
+import { RootState } from '@/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOptionCC } from '../../../store/Options';
-import { onYtsCC } from '../../../store/YoutubeShorts';
+import { setOptionCC } from '@/store/Options';
+import { onYtsCC } from '@/store/YoutubeShorts';
 
 const OptionCC = () => {
   const dispatch = useDispatch();

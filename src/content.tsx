@@ -1,17 +1,17 @@
-import './i18n';
+import '@/i18n';
 import $ from 'jquery';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Browser from 'webextension-polyfill';
-import Defs from './assets/constatns';
-import YoutubeShortsBase from './assets/youtubeShortsBase';
-import EventsListener from './assets/eventsListener';
-import ToggleSwitch from './components/ToggleSwitch';
-import SystemTheme from './components/SystemTheme';
-import OptionApp from './components/Options/App';
+import Defs from '@/assets/constatns';
+import YoutubeShortsBase from '@/assets/youtubeShortsBase';
+import EventsListener from '@/assets/eventsListener';
+import ToggleSwitch from '@/components/ToggleSwitch';
+import SystemTheme from '@/components/SystemTheme';
+import OptionApp from '@/components/Options/App';
 import { Provider } from 'react-redux';
-import store, { RootState } from './store';
-import { onAwaitYtsForVideo } from './store/YoutubeShorts';
+import store, { RootState } from '@/store';
+import { onAwaitYtsForVideo } from '@/store/YoutubeShorts';
 
 const eventsListener = new EventsListener();
 const youtubeShorts = new YoutubeShortsBase();

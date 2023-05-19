@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 import LayersIcon from '@mui/icons-material/Layers';
 import LayersClearIcon from '@mui/icons-material/LayersClear';
 import { useTranslation } from 'react-i18next';
-import { RootState } from '../../../store';
+import { RootState } from '@/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOptionOverlay } from '../../../store/Options';
-import { onYtsOverlay } from '../../../store/YoutubeShorts';
+import { setOptionOverlay } from '@/store/Options';
+import { onYtsOverlay } from '@/store/YoutubeShorts';
 
 const OptionWindowOverlay = () => {
   const dispatch = useDispatch();
