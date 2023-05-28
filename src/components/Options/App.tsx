@@ -10,7 +10,6 @@ import { RootState } from '@/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOptionRotate } from '@/store/Options';
 import {
-  onYtsCC,
   onYtsPlayBackRate,
   onYtsOverlay,
   onYtsVolume,
@@ -19,12 +18,11 @@ import {
 const OptionApp = () => {
   const dispatch = useDispatch();
   const [cardOpen, setCardOpen] = useState(false);
-  const { rotate, ccState, playBackRate, overlayState, volume } = useSelector(
+  const { rotate, playBackRate, overlayState, volume } = useSelector(
     (state: RootState) => state.options,
   );
 
   React.useEffect(() => {
-    dispatch(onYtsCC(ccState));
     dispatch(onYtsPlayBackRate(playBackRate));
     dispatch(onYtsOverlay(overlayState));
     dispatch(onYtsVolume(volume));
