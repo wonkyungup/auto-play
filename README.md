@@ -27,8 +27,6 @@ If you have any additional or uncomfortable points while using it, please send u
 ### Release
 
 ```
-Version 1.0.6
-  - video CC Fixed
 
 Version 1.0.5
   - FIX: Sound Muted Option Icon Change
