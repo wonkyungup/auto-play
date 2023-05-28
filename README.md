@@ -18,16 +18,17 @@ If you have any additional or uncomfortable points while using it, please send u
 ```
  - MOD: State Manage from redux to redux-toolkit
  - ADD: tsconfig.json, webpack.config.ts paths
- - FiX: video CC Fixed (05/28 ready)
+ - FiX: video CC Fixed
  - ADD: video Download LINK (05/28 ready)
  - FIX: Display Option Menu Resize(05/29 ready)
+ - FIX: video Sound Sync
 ```
 
 ### Release
 
 ```
 Version 1.0.6
-  - ??
+  - video CC Fixed
 
 Version 1.0.5
   - FIX: Sound Muted Option Icon Change
