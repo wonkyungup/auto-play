@@ -1,14 +1,15 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import Defs from '@/assets/constatns';
-import Utils from '@/assets/utils';
 import $ from 'jquery';
 import Browser from 'webextension-polyfill';
+import Utils from '@/assets/utils';
 
 interface TypeYTS {
   innerContainer: Element | null;
   innerList: any[];
   innerVideo: any;
   innerPlayerControl: any;
+  isMenuActive: boolean;
 }
 
 const initialState: TypeYTS = {
@@ -16,6 +17,7 @@ const initialState: TypeYTS = {
   innerList: [],
   innerVideo: null,
   innerPlayerControl: null,
+  isMenuActive: false,
 };
 
 const ytsSlice = createSlice({
@@ -45,12 +47,26 @@ const ytsSlice = createSlice({
         await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
       };
     },
-    onYtsCC: (state, action) => {
-      Utils.waitForElement('#ytp-caption-window-container').then((cc) => {
-        const isCC = action.payload;
-        if (cc) {
-          if (isCC) $(cc).show();
-          else $(cc).hide();
+    onYtsCC: (state) => {
+      if (!state.isMenuActive) {
+        const menu: HTMLElement = document.querySelector(
+          '#button-shape yt-touch-feedback-shape div.yt-spec-touch-feedback-shape__fill',
+        ) as HTMLElement;
+
+        if (menu !== null) {
+          menu.click();
+          menu.click();
+
+          state.isMenuActive = true;
+        }
+      }
+
+      Utils.waitForElement(
+        '#items ytd-menu-navigation-item-renderer:nth-child(2) tp-yt-paper-item',
+      ).then((ccElement) => {
+        const btn: HTMLElement = ccElement as HTMLElement;
+        if (btn !== null) {
+          btn.click();
         }
       });
     },

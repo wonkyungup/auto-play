@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface TypeOptions {
   rotate: number;
-  ccState: boolean;
   playBackRate: number;
   overlayState: boolean;
   volume: number;
@@ -10,7 +9,6 @@ interface TypeOptions {
 
 const initialState: TypeOptions = {
   rotate: 0,
-  ccState: true,
   playBackRate: 1.0,
   overlayState: false,
   volume: 1,
@@ -22,9 +20,6 @@ const optionSlice = createSlice({
   reducers: {
     setOptionRotate: (state, action: PayloadAction<number>) => {
       state.rotate = action.payload;
-    },
-    setOptionCC: (state) => {
-      state.ccState = !state.ccState;
     },
     setOptionPlaybackRate: (state, action: PayloadAction<number>) => {
       state.playBackRate = action.payload;
@@ -40,7 +35,6 @@ const optionSlice = createSlice({
 
 export const {
   setOptionRotate,
-  setOptionCC,
   setOptionPlaybackRate,
   setOptionOverlay,
   setOptionVolume,
