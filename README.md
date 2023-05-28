@@ -19,10 +19,9 @@ If you have any additional or uncomfortable points while using it, please send u
  - MOD: State Manage from redux to redux-toolkit
  - ADD: tsconfig.json, webpack.config.ts paths
  - FiX: video CC Fixed
- - MOD: jquery remove(-)
+ - FIX: video Sound Sync (-)
  - ADD: video Download LINK (-)
  - FIX: Display Option Menu Resize (-)
- - FIX: video Sound Sync (-)
 ```
 
 ### Release
