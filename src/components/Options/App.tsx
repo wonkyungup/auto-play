@@ -38,7 +38,7 @@ const OptionApp = () => {
       {cardOpen && (
         <Content
           onMouseLeave={() => {
-            setCardOpen(!cardOpen);
+            // setCardOpen(!cardOpen);
           }}
         >
           <ClosedCaption />
