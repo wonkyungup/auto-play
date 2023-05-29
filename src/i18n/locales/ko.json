@@ -28,7 +28,8 @@
   "tooltip": {
     "disableAutoPlay": "자동재생 사용 중지",
     "enableAutoPlay": "자동재생 사용 설정",
-    "setting": "설정"
+    "setting": "설정",
+    "downloadLinkOpen": "다운로드 링크 열기"
   },
   "options": {
     "cc": {
