@@ -16,9 +16,9 @@ const Content = ({ onMouseLeave, children }: TypeContent) => {
         position: 'absolute',
         pointerEvents: 'all',
         width: 200,
-        left: 50,
-        top: 33,
         opacity: 0.9,
+        borderRadius: 2,
+        left: -30,
       }}
     >
       <Paper sx={{ width: 320, maxWidth: '100%' }}>

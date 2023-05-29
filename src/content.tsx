@@ -9,10 +9,10 @@ import EventsListener from '@/assets/eventsListener';
 import ToggleSwitch from '@/components/ToggleSwitch';
 import SystemTheme from '@/components/SystemTheme';
 import OptionApp from '@/components/Options/App';
+import DownloadLink from '@/components/DownloadLink';
 import { Provider } from 'react-redux';
 import store, { RootState } from '@/store';
 import { onAwaitYtsForVideo } from '@/store/YoutubeShorts';
-import DownloadLink from '@/components/DownloadLink';
 
 const eventsListener = new EventsListener();
 const youtubeShorts = new YoutubeShortsBase();
