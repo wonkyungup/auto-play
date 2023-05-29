@@ -28,7 +28,8 @@
   "tooltip": {
     "disableAutoPlay": "自動再生を無効にする",
     "enableAutoPlay": "自動再生を有効にする",
-    "setting": "設定"
+    "setting": "設定",
+    "downloadLinkOpen": "ダウンロードリンクを開く"
   },
   "options": {
     "cc": {

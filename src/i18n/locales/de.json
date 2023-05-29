@@ -28,7 +28,8 @@
   "tooltip": {
     "disableAutoPlay": "Deaktiviere Autoplay",
     "enableAutoPlay": "Autoplay aktivieren",
-    "setting": "Einstellung"
+    "setting": "Einstellung",
+    "downloadLinkOpen": "Download-Link öffnen"
   },
   "options": {
     "cc": {

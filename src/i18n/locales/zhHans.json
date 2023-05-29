@@ -28,7 +28,8 @@
   "tooltip": {
     "disableAutoPlay": "禁用自动播放",
     "enableAutoPlay": "启用自动播放",
-    "setting": "环境"
+    "setting": "环境",
+    "downloadLinkOpen": "打开下载链接"
   },
   "options": {
     "cc": {

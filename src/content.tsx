@@ -12,6 +12,7 @@ import OptionApp from '@/components/Options/App';
 import { Provider } from 'react-redux';
 import store, { RootState } from '@/store';
 import { onAwaitYtsForVideo } from '@/store/YoutubeShorts';
+import DownloadLink from '@/components/DownloadLink';
 
 const eventsListener = new EventsListener();
 const youtubeShorts = new YoutubeShortsBase();
@@ -51,6 +52,7 @@ Browser.runtime.onMessage.addListener(async ({ event }) => {
           <Provider store={store}>
             <SystemTheme>
               <ToggleSwitch />
+              <DownloadLink />
               <OptionApp />
             </SystemTheme>
           </Provider>,

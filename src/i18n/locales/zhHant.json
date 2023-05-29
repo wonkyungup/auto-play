@@ -28,7 +28,8 @@
   "tooltip": {
     "disableAutoPlay": "禁用自動播放",
     "enableAutoPlay": "啟用自動播放",
-    "setting": "環境"
+    "setting": "環境",
+    "downloadLinkOpen": "打開下載鏈接"
   },
   "options": {
     "cc": {

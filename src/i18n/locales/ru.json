@@ -28,7 +28,8 @@
   "tooltip": {
     "disableAutoPlay": "Отключить автовоспроизведение",
     "enableAutoPlay": "Включить автовоспроизведение",
-    "setting": "параметр"
+    "setting": "параметр",
+    "downloadLinkOpen": "Открыть ссылку для скачивания"
   },
   "options": {
     "cc": {
