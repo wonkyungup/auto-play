@@ -20,7 +20,7 @@ If you have any additional or uncomfortable points while using it, please send u
  - ADD: tsconfig.json, webpack.config.ts paths
  - FiX: video CC Fixed
  - ADD: video Download LINK
- - FIX: Display Option Menu Resize (-)
+ - FIX: Display Option Menu Resize
  - ADD: Alert Message (-)
 ```
 
