@@ -16,8 +16,8 @@ If you have any additional or uncomfortable points while using it, please send u
 
 ### Dev
 ```
- - ADD: Alert Message (-)
- - ADD: Keyword Auto Skip (-)
+ - ADD: Alert Message (preparing)
+ - ADD: Keyword Auto Skip (preparing)
 ```
 
 ### Release
