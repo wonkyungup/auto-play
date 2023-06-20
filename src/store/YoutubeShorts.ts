@@ -3,6 +3,7 @@ import Defs from '@/assets/constatns';
 import $ from 'jquery';
 import Browser from 'webextension-polyfill';
 import Utils from '@/assets/utils';
+import axios from 'axios';
 
 interface TypeYTS {
   innerContainer: Element | null;
@@ -86,6 +87,28 @@ const ytsSlice = createSlice({
     onYtsVolume: (state, action) => {
       state.innerVideo.volume = action.payload;
     },
+    onYtsShowDisLike: (state, action) => {
+      const likeState = action.payload;
+
+      if (likeState) {
+        const arrShowLink = window.location.href.split('/');
+        const shortId = arrShowLink[arrShowLink.length - 1];
+
+        axios
+          .get(`https://returnyoutubedislikeapi.com/votes?videoId=${shortId}`)
+          .then(({ data }) => {
+            console.log(`short dislike: ${data.dislikes}`);
+          })
+          .catch((err) => {
+            console.error(err.message);
+            console.log('hide dislike');
+          });
+      } else {
+        console.log('hide dislike');
+      }
+
+      return;
+    },
   },
 });
 
@@ -97,6 +120,7 @@ export const {
   onYtsOverlay,
   onYtsPlayBackRate,
   onYtsCC,
+  onYtsShowDisLike,
 } = ytsSlice.actions;
 
 export default ytsSlice.reducer;
