@@ -5,6 +5,7 @@ interface TypeOptions {
   playBackRate: number;
   overlayState: boolean;
   volume: number;
+  dislikeState: boolean;
 }
 
 const initialState: TypeOptions = {
@@ -12,6 +13,7 @@ const initialState: TypeOptions = {
   playBackRate: 1.0,
   overlayState: false,
   volume: 1,
+  dislikeState: false,
 };
 
 const optionSlice = createSlice({
@@ -30,6 +32,9 @@ const optionSlice = createSlice({
     setOptionVolume: (state, action: PayloadAction<number>) => {
       state.volume = action.payload;
     },
+    setOptionShowDisLike: (state) => {
+      state.dislikeState = !state.dislikeState;
+    },
   },
 });
 
@@ -38,6 +43,7 @@ export const {
   setOptionPlaybackRate,
   setOptionOverlay,
   setOptionVolume,
+  setOptionShowDisLike,
 } = optionSlice.actions;
 
 export default optionSlice.reducer;
