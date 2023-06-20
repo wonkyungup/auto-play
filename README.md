@@ -16,6 +16,7 @@ If you have any additional or uncomfortable points while using it, please send u
 
 ### Dev
 ```
+ - ADD: dislink show
  - ADD: Alert Message (preparing)
  - ADD: Keyword Auto Skip (preparing)
 ```
