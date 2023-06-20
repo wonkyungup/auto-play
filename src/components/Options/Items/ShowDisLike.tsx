@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { RootState } from '@/store';
 import { useDispatch, useSelector } from 'react-redux';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import { setOptionShowDisLike } from '@/store/Options';
 import { onYtsShowDisLike } from '@/store/YoutubeShorts';
+import Typography from '@mui/material/Typography';
 
 const ShowDisLike = () => {
   const dispatch = useDispatch();
@@ -21,20 +21,11 @@ const ShowDisLike = () => {
 
   return (
     <MenuItem onClick={() => dispatch(setOptionShowDisLike())}>
-      {state && (
-        <>
-          <ListItemIcon>{<ThumbDownIcon fontSize="large" />}</ListItemIcon>
-          <ListItemText>보이기</ListItemText>
-        </>
-      )}
-      {!state && (
-        <>
-          <ListItemIcon>
-            {<ThumbDownOffAltIcon fontSize="large" />}
-          </ListItemIcon>
-          <ListItemText>숨기기</ListItemText>
-        </>
-      )}
+      <ListItemIcon>{<ThumbDownIcon fontSize="large" />}</ListItemIcon>
+      <ListItemText>싫어요</ListItemText>
+      <Typography variant="body2" color="text.secondary">
+        확인
+      </Typography>
     </MenuItem>
   );
 };

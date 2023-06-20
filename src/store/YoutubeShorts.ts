@@ -89,22 +89,27 @@ const ytsSlice = createSlice({
     },
     onYtsShowDisLike: (state, action) => {
       const likeState = action.payload;
+      const elementDisLike: Element | null | undefined =
+        state.innerContainer?.querySelector('#dislike-button span');
 
-      if (likeState) {
-        const arrShowLink = window.location.href.split('/');
-        const shortId = arrShowLink[arrShowLink.length - 1];
+      if (elementDisLike) {
+        if (likeState) {
+          const arrShowLink: string[] = window.location.href.split('/');
+          const shortId: string = arrShowLink[arrShowLink.length - 1];
 
-        axios
-          .get(`https://returnyoutubedislikeapi.com/votes?videoId=${shortId}`)
-          .then(({ data }) => {
-            console.log(`short dislike: ${data.dislikes}`);
-          })
-          .catch((err) => {
-            console.error(err.message);
-            console.log('hide dislike');
-          });
-      } else {
-        console.log('hide dislike');
+          // @returnyoutubedislike.com
+          axios
+            .get(`https://returnyoutubedislikeapi.com/votes?videoId=${shortId}`)
+            .then(
+              ({ data }) =>
+                (elementDisLike.innerHTML = data.dislikes.toString()),
+            )
+            .catch((err): void => {
+              if (err) elementDisLike.innerHTML = 'error';
+            });
+        } else {
+          elementDisLike.innerHTML = 'dislike';
+        }
       }
 
       return;
