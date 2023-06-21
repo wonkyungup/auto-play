@@ -97,7 +97,10 @@ const ytsSlice = createSlice({
           const arrShowLink: string[] = window.location.href.split('/');
           const shortId: string = arrShowLink[arrShowLink.length - 1];
 
-          // @returnyoutubedislike.com
+          /*
+            returnyoutubedislike.com
+          */
+
           axios
             .get(`https://returnyoutubedislikeapi.com/votes?videoId=${shortId}`)
             .then(

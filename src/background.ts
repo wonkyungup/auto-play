@@ -9,13 +9,14 @@ Browser.runtime.onMessage.addListener(async ({ event }, sender) => {
           event: Defs.EVENT_PAGE_RELOAD,
         });
       case Defs.EVENT_PAGE_UPDATE:
-        Browser.tabs.onUpdated.addListener(async function listener(
-          tabId,
-          changeInfo,
-          tab,
-        ) {
-          if (changeInfo.status === 'complete' && tab?.url !== undefined) {
-            // Browser.tabs.onUpdated.removeListener(await listener);
+        let captured = false;
+        Browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+          if (
+            !captured &&
+            changeInfo.status === 'complete' &&
+            tab?.url !== undefined
+          ) {
+            captured = true;
             return await Browser.tabs.sendMessage(tabId, {
               event: Defs.EVENT_PAGE_UPDATE,
             });
