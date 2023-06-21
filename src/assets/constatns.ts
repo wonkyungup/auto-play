@@ -7,4 +7,5 @@ export default class Defs {
   static EVENT_PAGE_RELOAD = 'Page Reload';
 
   static STR_WHEEL_END = 'wheelend';
+  static STR_FIX_DISLIKE_VALUE = 'yts-auto-scroll-down-fixed-dislike';
 }

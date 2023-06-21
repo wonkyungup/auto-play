@@ -18,6 +18,7 @@ const eventsListener = new EventsListener();
 const youtubeShorts = new YoutubeShortsBase();
 
 eventsListener.onInitialize();
+youtubeShorts.fixDislikeDefaultValue();
 
 Browser.runtime.onMessage.addListener(async ({ event }) => {
   switch (event) {
