@@ -47,6 +47,10 @@
     },
     "videoVol": {
       "title": "소리"
+    },
+    "dislike": {
+      "title": "싫어요",
+      "show": "보기"
     }
   }
 }

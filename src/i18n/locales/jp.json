@@ -47,6 +47,10 @@
     },
     "videoVol": {
       "title": "音"
+    },
+    "dislike": {
+      "title": "嫌い",
+      "show": "見せる"
     }
   }
 }

@@ -40,7 +40,10 @@ export default class YoutubeShortsBase {
   fixDislikeDefaultValue() {
     const element = document.querySelector('#dislike-button span');
     if (element) {
-      localStorage.setItem(Defs.STR_FIX_DISLIKE_VALUE, element.innerHTML);
+      localStorage.setItem(
+        Defs.STR_FIX_DISLIKE_VALUE,
+        element.innerHTML || 'DisLike',
+      );
     }
   }
 }

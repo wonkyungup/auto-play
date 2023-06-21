@@ -47,6 +47,10 @@
     },
     "videoVol": {
       "title": "Sound"
+    },
+    "dislike": {
+      "title": "Dislike",
+      "show": "show"
     }
   }
 }
