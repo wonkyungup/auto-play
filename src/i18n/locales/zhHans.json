@@ -47,6 +47,10 @@
     },
     "videoVol": {
       "title": "声音"
+    },
+    "dislike": {
+      "title": "不喜欢",
+      "show": "展示"
     }
   }
 }

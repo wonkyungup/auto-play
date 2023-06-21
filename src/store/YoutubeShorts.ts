@@ -111,7 +111,8 @@ const ytsSlice = createSlice({
               if (err) elementDisLike.innerHTML = 'error';
             });
         } else {
-          elementDisLike.innerHTML = 'dislike';
+          const value = localStorage.getItem(Defs.STR_FIX_DISLIKE_VALUE);
+          if (value) elementDisLike.innerHTML = value;
         }
       }
 

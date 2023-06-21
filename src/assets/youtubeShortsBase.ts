@@ -1,5 +1,6 @@
 import Utils from './utils';
 import $ from 'jquery';
+import Defs from './constatns';
 
 export default class YoutubeShortsBase {
   _innerContainer: Element | null;
@@ -34,5 +35,15 @@ export default class YoutubeShortsBase {
     );
 
     return this;
+  }
+
+  fixDislikeDefaultValue() {
+    const element = document.querySelector('#dislike-button span');
+    if (element) {
+      localStorage.setItem(
+        Defs.STR_FIX_DISLIKE_VALUE,
+        element.innerHTML || 'DisLike',
+      );
+    }
   }
 }

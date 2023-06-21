@@ -22,9 +22,9 @@ const ShowDisLike = () => {
   return (
     <MenuItem onClick={() => dispatch(setOptionShowDisLike())}>
       <ListItemIcon>{<ThumbDownIcon fontSize="large" />}</ListItemIcon>
-      <ListItemText>싫어요</ListItemText>
+      <ListItemText>{t('options:dislike:title')}</ListItemText>
       <Typography variant="body2" color="text.secondary">
-        확인
+        {t('options:dislike:show')}
       </Typography>
     </MenuItem>
   );
