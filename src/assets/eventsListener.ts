@@ -2,6 +2,7 @@ import Browser from 'webextension-polyfill';
 import Defs from './constatns';
 import $ from 'jquery';
 import Utils from './utils';
+import watchWheel from 'watch-wheel';
 
 export default class EventsListener {
   onInitialize() {
@@ -26,22 +27,14 @@ export default class EventsListener {
   }
 
   onWheel() {
-    let isScrolling: boolean = false;
-    let timeoutId: number | NodeJS.Timeout | undefined;
-
-    window.addEventListener('wheel', (): void => {
-      if (!isScrolling) {
-        isScrolling = true;
-        if (timeoutId !== undefined) {
-          clearTimeout(timeoutId);
-        }
-        timeoutId = setTimeout(async (): Promise<void> => {
+    const shortContainer = document.getElementById('content');
+    if (shortContainer) {
+      watchWheel(shortContainer, async ({ type }: { type: string }) => {
+        if (type === Defs.STR_WHEEL_END) {
           await Browser.runtime.sendMessage({ event: Defs.EVENT_PAGE_UPDATE });
-          isScrolling = false;
-          timeoutId = undefined;
-        }, 100);
-      }
-    });
+        }
+      });
+    }
   }
 
   onShortUpDownButton() {

@@ -5,4 +5,6 @@ export default class Defs {
 
   static EVENT_PAGE_UPDATE = 'Page Update';
   static EVENT_PAGE_RELOAD = 'Page Reload';
+
+  static STR_WHEEL_END = 'wheelend';
 }
