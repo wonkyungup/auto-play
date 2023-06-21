@@ -17,9 +17,13 @@ If you have any additional or uncomfortable points while using it, please send u
 ### Dev
 ```
  - ADD: dislink show
- - BUG: scroll Event check (to many event)
  - ADD: Alert Message (preparing)
  - ADD: Keyword Auto Skip (preparing)
+```
+
+## Current
+```
+- BUG: scroll Event check, to many event
 ```
 
 ### Release
