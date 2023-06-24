@@ -25,7 +25,7 @@ If you have any additional or uncomfortable points while using it, please send u
 ### Release
 
 ```
-Version 1.0.6
+version 1.0.6
   - FiX: Video CC Fixed
   - FIX: Display Option Menu Resize
   - MOD: State Manage from redux to redux-toolkit
