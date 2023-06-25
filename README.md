@@ -16,21 +16,15 @@ If you have any additional or uncomfortable points while using it, please send u
 
 ### Dev
 ```
- - ADD: dislike show
- - FIX: scroll Event check, to many event
- - ADD: Alert Message (preparing)
  - ADD: Keyword Auto Skip (preparing)
 ```
 
 ### Release
 
 ```
-version 1.0.6
-  - FiX: Video CC Fixed
-  - FIX: Display Option Menu Resize
-  - MOD: State Manage from redux to redux-toolkit
-  - ADD: tsconfig.json, webpack.config.ts paths
-  - ADD: Video Download LINK
+Version 1.0.7
+  - ADD: dislike show
+  - FIX: scroll Event check, to many event
 ```
 
 ### Questions
