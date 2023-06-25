@@ -1,7 +1,10 @@
 ### Version 1.0.6
-ADD: video Download LINK
-FiX: video CC Fixed
+FiX: Video CC Fixed
 FIX: Display Option Menu Resize
+MOD: State Manage from redux to redux-toolkit
+ADD: tsconfig.json, webpack.config.ts paths
+ADD: Video Download LINK
+  
 
 ### Version 1.0.5
 FIX: Sound Muted Option Icon Change
