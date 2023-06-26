@@ -16,7 +16,7 @@ If you have any additional or uncomfortable points while using it, please send u
 
 ### Dev
 ```
- - ADD: Keyword Auto Skip (preparing)
+ - ADD: Keyword Auto Skip (Test....)
 ```
 
 ### Release
