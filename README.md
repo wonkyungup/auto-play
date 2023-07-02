@@ -16,6 +16,7 @@ If you have any additional or uncomfortable points while using it, please send u
 
 ### Dev
 ```
+ - CEHCK: scroll event
  - ADD: Keyword Auto Skip (Test....)
 ```
 
